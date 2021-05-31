@@ -1,0 +1,15 @@
+.card
+{
+    background-color: white;
+    margin: 20px;
+    width:500px;
+    &-1
+        {
+    background-color: teal;
+        }
+    &-2
+    {
+        background-color: orange;
+    }
+}
+

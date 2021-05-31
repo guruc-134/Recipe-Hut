@@ -1,0 +1,12 @@
+.home-page
+{
+    background-color: rgb(151, 117, 72);
+    width: 100%;
+}
+.recipe-cards
+{
+    display: flex;
+    justify-content: space-around;
+    background-color: magenta;
+    flex-wrap: wrap;
+}

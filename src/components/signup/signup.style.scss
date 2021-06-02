@@ -1,0 +1,11 @@
+.sign-up {
+    display: flex;
+    flex-direction: column;  
+    width: 40%;
+    padding: 3rem;
+    background-color: aquamarine;
+    border-radius: 2rem;
+    .title {
+      margin: 10px 0;
+    }
+  }

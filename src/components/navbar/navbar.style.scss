@@ -5,15 +5,19 @@
     justify-content: space-between;
     align-items: center;
     background-color: teal;    
-   &-links{
-       margin-right: 2rem;
+    &-links{
+        margin-right: 2rem;
         &-link
         {
+            border: none;
+            outline: none;
             padding: 10px;
             text-decoration: none;
             text-transform: uppercase;
             color: white;
             font-size: 1.3rem;   
+            background-color: transparent;
+            cursor: pointer;
         }
         &-link:hover
         {

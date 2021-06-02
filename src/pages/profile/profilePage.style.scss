@@ -1,0 +1,10 @@
+.profile
+{
+    justify-content: space-between;
+    width: 100%;
+    &-section
+    {
+        background-color: lightcoral;
+        flex:1;
+    }
+}

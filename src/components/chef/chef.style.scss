@@ -1,23 +1,70 @@
 .chef
 {
-    background-color: pink;
     display: flex;
-
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2rem ;
+    position:sticky;
     &-btn 
     {
+        background-color: rgba(250, 236, 40, 0.877);  
         border: none;
         height:65px;
         outline:none;
         border-radius: 50%;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         &-img
         {
             border-radius: 50%;
         }
     }
+    &-part-1
+    {
+        background-color: aliceblue;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 15px;
+        align-items: center;
+        
+    }
     &-form
     {
         display: none;
+        &-inp
+        {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: .8rem;
+            border: none;
+            outline:none;
+            padding:1em;
+            background-color: rgba(241, 241, 241, 0.842);  
+            border-radius: 12px 0px 0px 12px;
+        }
+        &-btn
+        {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            border: none;
+            font-size: .8rem;
+            font-weight: 600;
+            background-color: rgb(236, 184, 86);
+            color: white;
+            outline:none;
+            padding:1em  ;
+            border-radius: 0px 10px 10px 0px; 
+            transition: all 0.2s ease;
+        }
+    }
+    &-answer
+    {
+        // width: 40%;
+        padding:1em;
+        border-radius: 15px;
+        &-img
+        {
+            border-radius: 50%;
+            padding: 5px;
+        }
     }
 }
 

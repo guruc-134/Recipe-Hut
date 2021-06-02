@@ -5,27 +5,37 @@ const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 'cc548ac21e2642999689cdff7acb3468',
 '8e743479e9f9467795afffbb26844379',
 'c7a232f614b84f2bb1df4d3d7a3bc567 ']
-const bot = ({jokes,setjokes}) => {
+const bot = ({facts,setFacts}) => {
     const baseUrl = 'https://api.spoonacular.com';
     // joke finder completed points one per joke
-    const findJoke = () =>
+    const findFact = () =>
     {
         axios.get(`${baseUrl}/food/trivia/random?apiKey=${APIKEY[3]}`)
         .then(response =>
             {
                 console.log(response.data.text)
-                setjokes(response.data.text) 
+                setFacts(response.data.text) 
             })
+            // document.getElementsByClassName('close-btn').style.display = 'inline'
+    }
+    const handleMsgClose = () =>
+    {
+        document.getElementsByClassName('bot-text').innerText = 'none'
     }
     return (
         <div className='bot'>
-            I am toby
-            <button className='bot-btn' onClick={findJoke}>
-                    @@
+            <div>
+                <button className='close-btn' onClick={handleMsgClose}>
+                    X
+                </button>
+            <p className='bot-text'>
+                {facts}
+            </p>
+            </div>
+            <button className='bot-btn' onClick={findFact}>
+            <img src="https://img.icons8.com/color/48/000000/music-robot.png"/>
             </button>
-            <p>
-                <b> {jokes}</b>
-                </p>
+
         </div>
     )
 }

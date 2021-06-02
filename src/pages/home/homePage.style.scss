@@ -1,7 +1,12 @@
 .home-page
 {
-    background-color: rgb(151, 117, 72);
-    width: 100%;
+    background: linear-gradient(to right top, rgba(236, 233, 19, 0.534), rgba(241, 121, 9, 0.589));
+    width: 85%;
+    border-radius: 20px;
+    margin: auto;
+    min-height:100vh;
+    z-index: 3;
+    position: relative;
 }
 .recipe-cards
 {

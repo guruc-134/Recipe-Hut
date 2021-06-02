@@ -9,6 +9,7 @@ import {
   Link,
   BrowserRouter
 } from "react-router-dom";
+import SearchPage from './pages/search/search-page.component';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
       <Navbar/>
         <Switch>
           <Route exact path ="/profile" component = {ProfilePage}/>
+          <Route exact path ="/search" component = {SearchPage}/>
+
           <Route  path ="/" component = {HomePage}/>
         </Switch>
       </Router>

@@ -12,7 +12,7 @@ function Card({recipe}) {
                 summary[i].innerHTML = recipe.summary;
             }
             }
-    },[recipe])
+    },[])
 
     return (
         <div className='card'>

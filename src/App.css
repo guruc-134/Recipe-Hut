@@ -1,3 +1,11 @@
 .app {
   text-align: center;
+  /* background-image:url('./assets/vegBgimg.jpg');   */
+  background-repeat:repeat;
+  /* font-family: 'Exo 2', sans-serif; */
+/* font-family: 'Monoton', cursive; */
+font-family: 'Open Sans', sans-serif;
+/* font-family: 'Playfair Display', serif; */
+/* font-family: 'Stint Ultra Condensed', cursive; */
 }
+

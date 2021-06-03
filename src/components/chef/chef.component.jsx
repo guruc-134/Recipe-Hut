@@ -17,17 +17,22 @@ function Chef() {
         e.preventDefault();
         var query = question.split(' ').join('+')
         var object = {}
-        console.log(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY[2]}`)
-        axios.get(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY[2]}`)
+        console.log(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY[1]}`)
+        axios.get(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY[1]}`)
         .then(response =>
             {
                 const {answer,image} = response.data;
+                if (answer.length == 0) answer = "no results found for this query"
                 setChefResponse({answer,image})
-                document.querySelector('.chef-answer').style.boxShadow ="0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-                document.querySelector('.chef-answer').style.border ="3px  solid black";
-                document.querySelector('.chef-answer').style.backgroundColor ="rgba(223, 185, 185, 0.733)";
+                if(answer)
+                {
+                    document.querySelector('.chef-answer').style.boxShadow ="0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+                    document.querySelector('.chef-answer').style.border ="3px  solid black";
+                    document.querySelector('.chef-answer').style.backgroundColor ="rgba(223, 185, 185, 0.733)";
+                }
 
             })
+            .catch(err => console.log('some thing is wrong'))
         setQuestion("")
     }
     const handleChefBtn = () =>

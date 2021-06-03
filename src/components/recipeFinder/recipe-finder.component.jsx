@@ -9,9 +9,9 @@ const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 '9a0f78a9a9fb4e1ba5857d871f42f1a8']
 
 function RecipeFinder({setRecipe}){
-    const [query,setQuery] = useState('creamy pasta')
+    const [query,setQuery] = useState('')
     const [diets,setDiets] = useState('vegetarian')
-    const [number,setNumber] = useState(3)
+    const [number,setNumber] = useState(10)
     const baseUrl = 'https://api.spoonacular.com';
 
     // inputs 
@@ -27,22 +27,49 @@ function RecipeFinder({setRecipe}){
 
     const handleRecipes = (responseObjects)=>
     {
+        console.log('handle Recipes input ---',responseObjects)
         var recipeResults = []
-        console.log(responseObjects)
-        responseObjects.map((reponse) =>
+        responseObjects.map((object) =>
             {
-                const object = reponse;
                 var recipeObject = {
                     id:object.id,
                     image:object.image,
                     title:object.title,
-                    summary:object.summary}
-                    if (object.analyzedInstructions[0] )
-                    var steps = object.analyzedInstructions[0].steps.map((stp) => stp.step)
-                    recipeObject  = {...recipeObject,steps}
-                    
-                    recipeResults.push(recipeObject)
+                    summary:object.summary,
+                    found:true
+                }
+                var steps = []
+                var ingredients = []
+                var equipment = []
+                if(object.analyzedInstructions.length == 0)
+                {
+                    recipeObject.found = false;
+                    steps=['Steps are currently unavailable for this dish']
+                    ingredients = [' ']
+                    equipment = [" "]
+                    recipeObject ={...recipeObject,ingredients,equipment,steps}
+                }
+                else if(object.analyzedInstructions[0])
+                {
+                    var grpObj = object.analyzedInstructions[0].steps.map(
+                        (item) =>
+                        {
+                            var  {step,ingredients,equipments} = item
+                            return (
+                                {step,ingredients,equipment}
+                                )
+                            }
+                            )
+                        recipeObject = {...recipeObject,grpObj}
+                }
+                console.log('recipe object',recipeObject)
+                recipeResults.push(recipeObject)
             })
+            if(recipeResults.length == 0)
+            {
+                recipeResults = [{title:'we could not find any results for this query',found:false}]
+                console.log(recipeResults)
+            }
             setRecipe(recipeResults)
     }
 
@@ -50,8 +77,8 @@ function RecipeFinder({setRecipe}){
     const findRecipes = (e) =>
     {
         e.preventDefault();
-        console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[5]}&diets=${diets}&number=${number}`)
-        axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[5]}&diets=${diets}&number=${number}`)
+        console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&diets=${diets}&number=${number}`)
+        axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&diets=${diets}&number=${number}`)
         .then((response) =>
         {
             if(response.data.results)
@@ -59,14 +86,18 @@ function RecipeFinder({setRecipe}){
                 handleRecipes(response.data.results)
             }
         })
+        .catch((err)=>console.log(err))
     };
     return (
         <div className='recipe-finder'>
-            I find recipes
+            <div className='recipe-finder-type-1'>
+
+            <h2> Search for recipes by name</h2>
             <form className= 'form'>
-                <p>enter your query</p>
-                <input onChange={handleInputChange} className='form-input' placeholder='creamy pasta' value = {query}></input>
-                <select onChange = {handleDietChange}>
+                
+                <input onChange={handleInputChange} className='form-input' placeholder='enter the name of the dish' value = {query}></input>
+                <select className = 'form-select' onChange = {handleDietChange}>
+                    <option>-- select your diet --</option>
                     <option>Vegetarian</option>
                     <option>Gluten Free</option>
                     <option>Ketogenic</option>
@@ -78,11 +109,12 @@ function RecipeFinder({setRecipe}){
                     <option>Lacto-Vegetarian</option>
                     <option>Whole30 </option>
                 </select>
-            <button onClick={findRecipes}>
-                findRecipies
+            <button className = 'form-btn' onClick={findRecipes}>
+                search
             </button>
             </form>
         </div>
+    </div>
     )
 }
 

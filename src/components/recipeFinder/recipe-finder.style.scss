@@ -1,11 +1,54 @@
-.form
-{
-    background-color: brown;
+@mixin formInputStyle {
+    border:none;
+    width:20%;
+    outline:none;
+    padding:.5em;
+    margin: 1rem;
+    border-radius: 10px;
+    color:white;
+    background-color: tomato;
+    text-align: center;
 }
+.form-input::-webkit-input-placeholder { /* Edge */
+    color:white;
+    text-align: center;
+  }
+  
+  .form-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:white;
+    text-align: center;
 
+  }
+  
+  .form-input::placeholder {
+    color:white;
+    text-align: center;
+  }
 .recipe-finder
 {
-    background-color:teal;
-    padding:10px;
-    border: 3px solid black;
+    margin:2rem;
+    background-color:palegoldenrod;
+    padding:1rem;
+}
+.form{
+display: flex;
+align-items: center;
+justify-content: center;
+&-input
+{
+    @include formInputStyle();
+}
+&-input > option
+{
+    text-align: center;
+}
+&-select{
+    @include formInputStyle();
+}
+&-btn
+{
+    @include formInputStyle();
+    padding:.8em;
+    width:fit-content;
+}
 }

@@ -4,7 +4,6 @@ import Card from '../../components/displayCard/card.component'
 import './homePage.style.scss'
 import Chef  from '../../components/chef/chef.component.jsx'
 const HomePage = () => {
-    const [facts, setFacts] = useState('')
     const [homeRecipes,setHomeRecipes] = useState([])
     return (
         <div className='home-page'>
@@ -17,10 +16,7 @@ const HomePage = () => {
                     )
                 }
                 </div>
-            <Bot
-                facts={facts}
-                setFacts={setFacts}
-            /> 
+            <Bot/> 
 
         </div>
     )

@@ -1,32 +1,32 @@
-.script
-{
-    width: 100%;
-    &-results
-    {
-        background-color: pink;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-    }
-}
+// .script
+// {
+//     width: 100%;
+//     &-results
+//     {
+//         background-color: pink;
+//         display: flex;
+//         flex-wrap: wrap;
+//         justify-content: space-evenly;
+//     }
+// }
 
-.card
-{
-    background-color: white;
-    padding:1rem;
-    width: 70%;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: row;
-    min-height: fit-content;
-    &-title
-    {
-        font-size:.8rem
-    }
-    &-img
-    {
-        width:350px;
-        border: 2px solid maroon;
-        border-radius: 15px;
-    }
-}
+// .card
+// {
+//     background-color: white;
+//     padding:1rem;
+//     width: 70%;
+//     border-radius: 15px;
+//     display: flex;
+//     flex-direction: row;
+//     min-height: fit-content;
+//     &-title
+//     {
+//         font-size:.8rem
+//     }
+//     &-img
+//     {
+//         width:350px;
+//         border: 2px solid maroon;
+//         border-radius: 15px;
+//     }
+// }

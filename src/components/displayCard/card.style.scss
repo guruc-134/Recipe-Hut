@@ -2,14 +2,54 @@
 {
     background-color: white;
     margin: 20px;
-    width:500px;
+    display:flex;
+    flex-direction: row;
+    width:90%;
+    margin:20px auto;
+    justify-content: space-evenly;
     &-1
         {
     background-color: teal;
+    width:40%;
         }
     &-2
     {
         background-color: orange;
+        width:50%;
+        text-align: left;
+
+        &-steps
+        {
+            &-ingr
+            {
+                display: flex;
+                flex-wrap: wrap;
+                border: 2px solid black;
+                border-radius: 10px;
+                span 
+                {
+                    background-color: tomato;
+                    padding:.5em;
+                    border-radius: 8px;
+                    margin: 6px;
+                }
+            }
+            &-equipment
+            {
+                display: flex;
+                justify-content: space-around;
+                span 
+                {
+                    background-color:seagreen;
+                    padding:.5em;
+                    border-radius: 8px;
+                }
+            }
+            &-step
+            {
+
+            }
+        }
     }
 }
 

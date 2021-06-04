@@ -50,11 +50,6 @@ function Chef() {
             document.querySelector('.chef-answer').style.boxShadow ="none"
             document.querySelector('.chef-answer').style.border ="none"
             document.querySelector('.chef-answer').style.backgroundColor ="transparent";
-
-            
-            
-
-            
         }
     }
 

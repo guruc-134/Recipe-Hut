@@ -1,30 +1,58 @@
 import React, {useState} from 'react'
 import CustomButton from '../../components/customButton/custom-button.component'
 import FormInput from '../../components/form-input/form-input.component';
+import {auth, createUserProfileDocument} from '../../backend/firebase/firebase.utils'
 import './signup.style.scss'
 function Signup() {
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [displayName, setDisplayName] = useState("")
-    const [password, setPassword] = useState("")
-    const [email, setEmail] = useState("")
+    // const [confirmPassword, setConfirmPassword] = useState("")
+    // const [displayName, setDisplayName] = useState("")
+    // const [password, setPassword] = useState("")
+    // const [email, setEmail] = useState("")
+    const [userDetails,setUserDetails] = useState(
+      {
+        displayName:'',
+        email:'',
+        password:'',
+        confirmPassword:''
+      }
+    )
 
     const handleChange = (e) =>
     {
         const {name, value} = e.target;
-        if (name === 'displayName') setDisplayName(value)
-        if (name === 'email') setEmail(value)
-        if (name === 'password') setPassword(value)
-        if (name === 'confirmPassword') setConfirmPassword(value)
+        setUserDetails((previous) => ({...previous,[name]:value}));
     }
 
-    const handleSubmit = (e) =>
+    const handleSubmit = async (e) =>
     {
         e.preventDefault();
-        console.log('signup form submitted')
+        // console.log('signup form submitted')
+        const {displayName,email,password,confirmPassword} = userDetails
+        if ( password !== confirmPassword) {
+          alert('passwords do not match')
+        return}
+
+      try 
+      { 
+        const {user} =  await auth.createUserWithEmailAndPassword(email, password)
+        await createUserProfileDocument(user, {displayName});
+        setUserDetails({
+          displayName:'',
+          email:'',
+          password:'',
+          confirmPassword:''
+        })
+      }
+        catch (error) 
+       {
+         console.log(error)
+       }
     }
     
+    const {displayName,email,password,confirmPassword} = userDetails
     return (
-        <div className='sign-up'>
+      <div className='sign-up'>
+        <h1>welcome {displayName}</h1>
         <h2 className='title'>I do not have a account</h2>
         <span>Sign up with your email and password</span>
         <form className='sign-up-form' onSubmit={handleSubmit}>

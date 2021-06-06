@@ -4,10 +4,7 @@ import FormInput from '../../components/form-input/form-input.component';
 import {auth, createUserProfileDocument} from '../../backend/firebase/firebase.utils'
 import './signup.style.scss'
 function Signup() {
-    // const [confirmPassword, setConfirmPassword] = useState("")
-    // const [displayName, setDisplayName] = useState("")
-    // const [password, setPassword] = useState("")
-    // const [email, setEmail] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
     const [userDetails,setUserDetails] = useState(
       {
         displayName:'',
@@ -46,6 +43,7 @@ function Signup() {
         catch (error) 
        {
          console.log(error)
+         setErrorMessage(error.message)
        }
     }
     
@@ -90,6 +88,7 @@ function Signup() {
           />
           <CustomButton type='submit'>SIGN UP</CustomButton>
         </form>
+        <p className='error-message'> {errorMessage} </p>
       </div>
     )
 }

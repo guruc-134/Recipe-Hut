@@ -20,10 +20,10 @@ function RecipeFinder({setRecipe}){
         setQuery(e.target.value)
         e.target.value = ""
     }
-    const handleDietChange = (e)=>
-    {
-        setDiets(e.target.value)
-    }
+    // const handleDietChange = (e)=>
+    // {
+    //     setDiets(e.target.value)
+    // }
 
     const handleRecipes = (responseObjects)=>
     {
@@ -77,8 +77,8 @@ function RecipeFinder({setRecipe}){
     const findRecipes = (e) =>
     {
         e.preventDefault();
-        console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&diets=${diets}&number=${number}`)
-        axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&diets=${diets}&number=${number}`)
+        console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
+        axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
         .then((response) =>
         {
             if(response.data.results)
@@ -96,7 +96,7 @@ function RecipeFinder({setRecipe}){
             <form className= 'form'>
                 
                 <input onChange={handleInputChange} className='form-input' placeholder='enter the name of the dish' value = {query}></input>
-                <select className = 'form-select' onChange = {handleDietChange}>
+                {/* <select className = 'form-select' onChange = {handleDietChange}>
                     <option>-- select your diet --</option>
                     <option>Vegetarian</option>
                     <option>Gluten Free</option>
@@ -108,7 +108,7 @@ function RecipeFinder({setRecipe}){
                     <option>Vegan </option>
                     <option>Lacto-Vegetarian</option>
                     <option>Whole30 </option>
-                </select>
+                </select> */}
             <button className = 'form-btn' onClick={findRecipes}>
                 search
             </button>

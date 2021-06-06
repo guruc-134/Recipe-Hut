@@ -1,6 +1,8 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
+import '../../backend/SR_VS/sr_vs'
 // import CropFreeIcon from '@material-ui/icons/CropFree';
+import SpeechRecognition from "../../backend/SR_VS/sr_vs";
 import './chef.style.scss'
 const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 'cc548ac21e2642999689cdff7acb3468',
@@ -8,10 +10,12 @@ const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 'c7a232f614b84f2bb1df4d3d7a3bc567',
 '4a5b12ec6f3d4159b4b160e8808f4601',
 '9a0f78a9a9fb4e1ba5857d871f42f1a8']
+
 function Chef() {
     const [chefResponse, setChefResponse] = useState({});
     const [question,setQuestion] = useState("")
     const [chefBtn,setChefBtn] = useState(false)
+
     const handleChefQuestion = (e) =>
     {
         e.preventDefault();
@@ -56,15 +60,13 @@ function Chef() {
     return (
         <div className = 'chef'>
             <div className = 'chef-part-1'>
-            {/* <div className = 'chef-gripper'>
-            <img src="https://img.icons8.com/fluent-systems-regular/28/000000/hand-drag.png"/>
-            </div> */}
             <button className='chef-btn' onClick ={handleChefBtn} >
                 {
                     chefBtn? ( <img className = 'chef-btn-img' src="https://img.icons8.com/office/60/000000/cook-male--v1.png"/>):(<img src="https://img.icons8.com/carbon-copy/60/000000/chef-hat.png"/>)
                 }           
             </button>
             <form className ='chef-form'>
+               <SpeechRecognition setQuestion = {setQuestion} shallStop = {!chefBtn} />
                 <input className ='chef-form-inp' onChange ={e =>setQuestion(e.target.value)} placeholder='nutrition related question' value = {question}/>
                 <button className ='chef-form-btn' type = 'submit' onClick={handleChefQuestion} >ask </button>
             </form>

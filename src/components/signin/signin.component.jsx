@@ -21,14 +21,13 @@ function Signin() {
         try 
         {
             await auth.signInWithEmailAndPassword(email, password);
-            this.setState({ email: '', password: ''});
+            setEmail("")
+            setPassword("")
         }
         catch (error)
         {
             console.log(error)
         }
-        setEmail("")
-        setPassword("")
     }
     return (
         <div className='sign-in'>

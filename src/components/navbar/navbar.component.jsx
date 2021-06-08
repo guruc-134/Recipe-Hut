@@ -14,7 +14,10 @@ const navbar = ({currentUser}) => {
             <div className='navbar-links'>
                 <Link className='navbar-links-link' to = '/home'>Home</Link>
                 <Link className='navbar-links-link' to = '/search'>Search Recipes</Link>
-                <Link className='navbar-links-link' to = '/profile'> Profile</Link>
+                {
+
+                   currentUser? <Link className='navbar-links-link' to = '/profile'> Profile</Link>:null
+                }
                 {
                     currentUser ? (<span className='navbar-links-link' onClick= {()=> auth.signOut()}> Sign out</span>):
                 (<Link className='navbar-links-link' to = '/signin'> 

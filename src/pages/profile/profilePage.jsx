@@ -31,7 +31,7 @@ const ProfilePage = () => {
                     <h3>Name:{user?user.displayName:'login' }</h3>
                     <p> site visit streak : 10 </p>
                     <h3>Email: {user? user.email : 'login' }</h3>
-                    <p> Joined on Date: 
+                    <p> Joined on Date: {user?Date.parse(user.createdAt):'login'}
                                             </p>
                 </div>
                 <div className ='profile-favourites' onClick={getuserDataFromFireStore}>

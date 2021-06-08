@@ -8,6 +8,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 import SearchPage from './pages/search/search-page.component';
 import SigninSignup from './pages/signin-signout/signin-signup.component';
@@ -57,9 +58,17 @@ console.log('my env files',process.env.React_App_API_KEY )
       <Navbar currentUser={currentUser}/>
           <UserContext.Provider value ={providerValue}>
         <Switch>
-          <Route exact path ="/profile" component = {ProfilePage}/>
           <Route exact path ="/search" component = {SearchPage}/>
-          <Route exact path ="/signin" component = {SigninSignup}/>
+          <Route exact path='/profile' render = {() =>!currentUser?
+        (<Redirect to = '/'/>)
+        :
+        (<ProfilePage/>) }
+        />
+          <Route exact path='/signin' render = {() =>currentUser?
+        (<Redirect to = '/'/>)
+        :
+        (<SigninSignup/>) }
+        />
           <Route  path ="/" component = {HomePage}/>
         </Switch>
           </UserContext.Provider>

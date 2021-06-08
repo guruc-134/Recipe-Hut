@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useMemo} from 'react'
 import './App.css';
 import Navbar from './components/navbar/navbar.component';
 import HomePage from './pages/home/homePage';
@@ -11,9 +11,18 @@ import {
 } from "react-router-dom";
 import SearchPage from './pages/search/search-page.component';
 import SigninSignup from './pages/signin-signout/signin-signup.component';
+import { UserContext } from './context/userContext';
+const dotenv = require('dotenv')
 
 function App() {
-  const [currentUser,setCurrentUser] = useState({})
+  dotenv.config()
+console.log('my env files',process.env.React_App_API_KEY )
+
+    const [currentUser,setCurrentUser] = useState({})
+    const providerValue = useMemo( () => (
+      currentUser
+    ),[currentUser])
+
   var unsubscribeFromAuth = null;
   useEffect(() => {
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth =>
@@ -43,15 +52,17 @@ function App() {
   }, []) 
   return (
     <div className="app">
-      { console.log('the current user is',currentUser)}
+      { console.log('apikey',process.env.React_App_API_KEY)}
       <Router>
       <Navbar currentUser={currentUser}/>
+          <UserContext.Provider value ={providerValue}>
         <Switch>
           <Route exact path ="/profile" component = {ProfilePage}/>
           <Route exact path ="/search" component = {SearchPage}/>
           <Route exact path ="/signin" component = {SigninSignup}/>
           <Route  path ="/" component = {HomePage}/>
         </Switch>
+          </UserContext.Provider>
       </Router>
     </div>
   );

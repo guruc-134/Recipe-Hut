@@ -27,7 +27,7 @@ const HomePage = () => {
             .catch(error => console.log('error fetching the data from firebase',error))
     }
     useEffect(() => {
-        getRecipesFromFireStore(0);
+        getRecipesFromFireStore(3);
     }, [])
     return (
         <div className='home-page'>

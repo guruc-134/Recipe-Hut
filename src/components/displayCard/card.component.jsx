@@ -1,8 +1,34 @@
-import React, { useState,useEffect } from 'react'
-
+import React, { useState,useEffect, useContext} from 'react'
+import {firestore} from '../../backend/firebase/firebase.utils'
 import './card.style.scss'
-function Card({recipe}) {
-    // console.log('recipe',recipe)
+import { UserContext } from '../../context/userContext';
+
+function Card({recipe,fromFavs}) {
+    const currentUser  = useContext(UserContext)
+    const [recipeLiked, setRecipeLiked]  = useState(false)
+    
+ const addFav = () =>{
+        const pushedAt = Date()
+        firestore.collection(`/users/${currentUser.id}/favourites`).add({pushedAt, ...recipe})
+        setRecipeLiked(true)
+
+    }
+     const removeFav = () =>
+     {
+         console.log('recipe un faved')
+         setRecipeLiked(false);
+         firestore.doc(`/users/${currentUser.id}/favourites/${recipe.itemStoreid}`).delete()
+         .then(() => {
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+     }
+    const recipeLikedToggle = () =>
+    {
+
+        setRecipeLiked( (previous) =>!previous)
+    }
     useEffect(() => {
         var summary = document.querySelectorAll('.summary')
         if (summary)
@@ -17,6 +43,14 @@ function Card({recipe}) {
     return (
         <div className='card'>
             <div className='card-1'>
+                {
+                !fromFavs?(!recipeLiked?<button className = 'fav-recipe' onClick={addFav}>
+                <img src="https://img.icons8.com/fluent/48/000000/like.png"/>
+                </button>:<button className = 'fav-recipe' >
+                <img src="https://img.icons8.com/fluent/96/000000/like.png"/>
+                </button>):<p onClick ={removeFav}> remove from favourites</p>
+                }
+
                 <h1>{recipe.title}</h1>
                 <img src ={recipe.image}></img>
                 <p className='summary'>
@@ -55,3 +89,5 @@ function Card({recipe}) {
 }
 
 export default Card
+
+

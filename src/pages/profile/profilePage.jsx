@@ -26,31 +26,28 @@ const ProfilePage = () => {
     }
     return (
         <div className='profile'>
-            <h1> Profile Page</h1>
+            <h1 class='heading-primary'> Profile</h1>
+            <div className = 'profile-details'>
                 <div className='profile-person'>
                     <h3>Name:{user?user.displayName:'login' }</h3>
-                    <p> site visit streak : 10 </p>
                     <h3>Email: {user? user.email : 'login' }</h3>
-                    <p> Joined on Date: {user?Date.parse(user.createdAt):'login'}
-                                            </p>
                 </div>
                 <div className ='profile-favourites' onClick={getuserDataFromFireStore}>
                     <h3>favourites</h3>
                     <p> This section contains the names of dishes liked, favourited by the user</p>
                     <div className='fav-items'>
                         {
-                           favs.map((item) => {
-                            return(
-                                item.found?
-                        <Card key = {item.id} recipe = {item} fromFavs = {true} />:null)
-                        })
-                        }
+                            favs.map((item) => {
+                                return(
+                                    item.found?
+                                    <Card key = {item.id} recipe = {item} fromFavs = {true} />:null)
+                                })
+                            }
                     </div>
                 </div>
-                <p>
-                you can also write notes and store them here
-                </p>
+                {/*  optional persons bolgs will be present here with the #id tags so that when we press here in teh a tags wil lead them to that page */}
         </div>
+    </div>
     )
 }
 

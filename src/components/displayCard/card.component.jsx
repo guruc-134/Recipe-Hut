@@ -7,27 +7,27 @@ function Card({recipe,fromFavs}) {
     const currentUser  = useContext(UserContext)
     const [recipeLiked, setRecipeLiked]  = useState(false)
     
- const addFav = () =>{
-        const pushedAt = Date()
+    const addFav = () =>{
+        if (!currentUser)
+        {
+            console.log(' You need to login to add things to your favorites')
+        }
+        else
+        {const pushedAt = Date()
         firestore.collection(`/users/${currentUser.id}/favourites`).add({pushedAt, ...recipe})
-        setRecipeLiked(true)
+        setRecipeLiked(true)}
 
     }
-     const removeFav = () =>
-     {
-         console.log('recipe un faved')
-         setRecipeLiked(false);
-         firestore.doc(`/users/${currentUser.id}/favourites/${recipe.itemStoreid}`).delete()
-         .then(() => {
+    const removeFav = () =>
+    {
+        console.log('recipe un faved')
+        setRecipeLiked(false);
+        firestore.doc(`/users/${currentUser.id}/favourites/${recipe.itemStoreid}`).delete()
+        .then(() => {
             console.log("Document successfully deleted!");
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });
-     }
-    const recipeLikedToggle = () =>
-    {
-
-        setRecipeLiked( (previous) =>!previous)
     }
     useEffect(() => {
         var summary = document.querySelectorAll('.summary')
@@ -38,26 +38,32 @@ function Card({recipe,fromFavs}) {
                 summary[i].innerHTML = recipe.summary;
             }
             }
-    },[])
+    },[recipe.summary ])
 
     return (
-        <div className='card'>
+        // add a read out summary button which uses speech synthesis to 
+        // read the recipe summary present in the card
+         <div className='card'>
             <div className='card-1'>
-                {
-                !fromFavs?(!recipeLiked?<button className = 'fav-recipe' onClick={addFav}>
-                <img src="https://img.icons8.com/fluent/48/000000/like.png"/>
-                </button>:<button className = 'fav-recipe' >
-                <img src="https://img.icons8.com/fluent/96/000000/like.png"/>
-                </button>):<p onClick ={removeFav}> remove from favourites</p>
-                }
+                <div>
+                   { currentUser?(
+                        !fromFavs?(!recipeLiked?<button className = 'fav-recipe' onClick={addFav}>
+                    <img alt='like' src="https://img.icons8.com/fluent/48/000000/like.png"/>
+                    </button>:<button className = 'fav-recipe' >
+                    <img alt='like' src="https://img.icons8.com/fluent/96/000000/like.png"/>
+                    </button>):<p onClick ={removeFav}> remove from favourites</p>
+                    ) : null }
 
-                <h1>{recipe.title}</h1>
-                <img src ={recipe.image}></img>
+                    <h1>{recipe.title}</h1>
+                <img class = 'recipe-image' alt='recipe-logo' src ={recipe.image}></img>
+                </div>
+                <div>
                 <p className='summary'>
                     {/* {recipe.summary} */}
                 </p>
+                </div>
             </div>
-            <div className='card-2'>
+            {/* <div className='card-2'>
                { recipe.grpObj ?
                 (recipe.grpObj.map((item,index) =>
                 {
@@ -73,17 +79,12 @@ function Card({recipe,fromFavs}) {
                                     </p>
                                     </div>
                                     ): null}
-                                    {/* <p className ="card-2-steps-equipment">
-                                    {
-                                        item.equipment.map((util) => <span key={`${recipe.id}+${index}+equip-${util.id}-${util.name}`}> {util.name}</span>)
-                                    }
-                                </p> */}
                                 <p className ="card-2-steps-step">{item.step}</p>
                                 </div>)
                             })) : ( console.log(recipe))
                             
                 }
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -3,7 +3,9 @@ import './App.css';
 import Navbar from './components/navbar/navbar.component';
 import HomePage from './pages/home/homePage';
 import ProfilePage from './pages/profile/profilePage';
-import {auth, createUserProfileDocument, firestore} from './backend/firebase/firebase.utils';
+import CommunityPage from './pages/community/communityPage';
+
+import {auth, createUserProfileDocument} from './backend/firebase/firebase.utils';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,11 +15,10 @@ import {
 import SearchPage from './pages/search/search-page.component';
 import SigninSignup from './pages/signin-signout/signin-signup.component';
 import { UserContext } from './context/userContext';
-const dotenv = require('dotenv')
-
+// const dotenv = require('dotenv')
+// dotenv.config()
+console.log('my env files',process.env.REACT_APP_NAME)
 function App() {
-  dotenv.config()
-console.log('my env files',process.env.React_App_API_KEY )
 
     const [currentUser,setCurrentUser] = useState({})
     const providerValue = useMemo( () => (
@@ -26,6 +27,7 @@ console.log('my env files',process.env.React_App_API_KEY )
 
   var unsubscribeFromAuth = null;
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
     unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth =>
       {
         if(userAuth)
@@ -53,7 +55,7 @@ console.log('my env files',process.env.React_App_API_KEY )
   }, []) 
   return (
     <div className="app">
-      { console.log('apikey',process.env.React_App_API_KEY)}
+      {/* { console.log('apikey',process.env.React_App_API_KEY)} */}
       <Router>
       <Navbar currentUser={currentUser}/>
           <UserContext.Provider value ={providerValue}>
@@ -63,6 +65,11 @@ console.log('my env files',process.env.React_App_API_KEY )
         (<Redirect to = '/'/>)
         :
         (<ProfilePage/>) }
+        />
+         <Route exact path='/community' render = {() =>!currentUser?
+        (<Redirect to = '/'/>)
+        :
+        (<CommunityPage/>) }
         />
           <Route exact path='/signin' render = {() =>currentUser?
         (<Redirect to = '/'/>)

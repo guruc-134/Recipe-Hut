@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React  from 'react'
 
 function SpeechRecognition({setQuestion, shallStop}) {
     var recognizing;
-    var btn = document.querySelector('speech-recognition')
     var mic ='https://img.icons8.com/material/24/000000/microphone--v1.png'
     const sr = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new sr()
@@ -42,7 +41,7 @@ function SpeechRecognition({setQuestion, shallStop}) {
 return (
     <div className= 'speech-recognition' onClick={toggleStartStop}>
         <p className = 'speech-recognition-prompt'>{ "click to speak"}</p>
-        <img src={mic}/>
+        <img src={mic} alt = 'microphone' />
     </div>
 )
 }

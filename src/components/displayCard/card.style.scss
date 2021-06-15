@@ -7,12 +7,19 @@
     width:90%;
     margin:20px auto;
     justify-content: space-evenly;
+    position: relative;
     &-1
-        {
+    {
     background-color: teal;
-    width:40%;
+    .recipe-image
+    {
+        width:40%;
+    }
     .fav-recipe
     {
+        position: absolute;
+        left:10px;
+        top:10px;
         border:none;
         outline:none;
         background-color: transparent;
@@ -24,7 +31,6 @@
     &-2
     {
         background-color: orange;
-        width:50%;
         text-align: left;
 
         &-steps
@@ -53,10 +59,6 @@
                     padding:.5em;
                     border-radius: 8px;
                 }
-            }
-            &-step
-            {
-
             }
         }
     }

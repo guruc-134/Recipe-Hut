@@ -1,7 +1,6 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState} from 'react'
 import axios from 'axios';
 import '../../backend/SR_VS/sr_vs'
-// import CropFreeIcon from '@material-ui/icons/CropFree';
 import SpeechRecognition from "../../backend/SR_VS/sr_vs";
 import './chef.style.scss'
 const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
@@ -20,13 +19,12 @@ function Chef() {
     {
         e.preventDefault();
         var query = question.split(' ').join('+')
-        var object = {}
-        console.log(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY[1]}`)
+        // console.log(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY[1]}`)
         axios.get(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY[1]}`)
         .then(response =>
             {
-                const {answer,image} = response.data;
-                if (answer.length == 0) answer = "no results found for this query"
+                var {answer,image} = response.data;
+                if (answer.length === 0) answer = "no results found for this query"
                 setChefResponse({answer,image})
                 if(answer)
                 {
@@ -62,7 +60,7 @@ function Chef() {
             <div className = 'chef-part-1'>
             <button className='chef-btn' onClick ={handleChefBtn} >
                 {
-                    chefBtn? ( <img className = 'chef-btn-img' src="https://img.icons8.com/office/60/000000/cook-male--v1.png"/>):(<img src="https://img.icons8.com/carbon-copy/60/000000/chef-hat.png"/>)
+                    chefBtn? ( <img alt='chef-btn' className = 'chef-btn-img' src="https://img.icons8.com/office/60/000000/cook-male--v1.png"/>):(<img alt='chef-btn' src="https://img.icons8.com/carbon-copy/60/000000/chef-hat.png"/>)
                 }           
             </button>
             <form className ='chef-form'>
@@ -72,7 +70,7 @@ function Chef() {
             </form>
             </div>
             <div className='chef-answer'>
-                <img className = 'chef-answer-img' src ={chefResponse.image}/>
+                <img alt='chef-answer' className = 'chef-answer-img' src ={chefResponse.image}/>
                 <p className='chef-answer-txt'>{chefResponse.answer}</p>
             </div>
         </div>

@@ -3,6 +3,8 @@ import './profilePage.style.scss'
 import {firestore} from '../../backend/firebase/firebase.utils';
 import { UserContext } from '../../context/userContext';
 import Card from '../../components/displayCard/card.component';
+import {auth} from '../../backend/firebase/firebase.utils'
+
 const ProfilePage = () => {
     const user = useContext(UserContext)
     const [favs,setFavs] = useState([])
@@ -12,9 +14,10 @@ const ProfilePage = () => {
         firestore.collection(`/users/${user.id}/favourites`).get()
         .then((snapshot) =>
         {
+            // eslint-disable-next-line array-callback-return
             snapshot.docs.map( item =>
                 {
-                    store.add({["itemStoreid"]:item.id, ...item.data()})
+                    store.add({"itemStoreid":item.id, ...item.data()})
                     
                 })
                 var storeArr = [...store]
@@ -26,7 +29,7 @@ const ProfilePage = () => {
     }
     return (
         <div className='profile'>
-            <h1 class='heading-primary'> Profile</h1>
+            <h1 className='heading-primary'> Profile</h1>
             <div className = 'profile-details'>
                 <div className='profile-person'>
                     <h3>Name:{user?user.displayName:'login' }</h3>
@@ -45,7 +48,10 @@ const ProfilePage = () => {
                             }
                     </div>
                 </div>
-                {/*  optional persons bolgs will be present here with the #id tags so that when we press here in teh a tags wil lead them to that page */}
+                <span className='navbar-links-link' onClick= {()=> auth.signOut()}> Sign out</span>
+                
+                {/*  optional persons bolgs will be present here with the #id tags 
+                so that when we press here in teh a tags wil lead them to that page */}
         </div>
     </div>
     )

@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import Bot from '../../components/Finders/bot/bot.component';
 import Card from '../../components/displayCard/card.component'
 import './homePage.style.scss'
-import Chef  from '../../components/chef/chef.component.jsx'
+import Chef  from '../../components/Finders/chef/chef.component.jsx'
 import  {firestore} from '../../backend/firebase/firebase.utils';
 // import axios from 'axios'
 // import '../../backend/spoonacular/recipes'
@@ -28,6 +28,7 @@ const HomePage = () => {
     }
     useEffect(() => {
         getRecipesFromFireStore(3);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <div className='home-page'>

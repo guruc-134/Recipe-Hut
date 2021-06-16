@@ -21,7 +21,7 @@ const navbar = ({currentUser}) => {
                 currentUser? <Link className='navbar-links-link' to = '/community'> Community</Link>:null
                 }
                 {
-                    currentUser ? (<span className='navbar-links-link' onClick= {()=> auth.signOut()}> Sign out</span>):
+                    currentUser ? (null):
                 (<Link className='navbar-links-link' to = '/signin'> 
                 Sign in
                 </Link>)

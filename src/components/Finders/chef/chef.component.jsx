@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import axios from 'axios';
-import '../../backend/SR_VS/sr_vs'
-import SpeechRecognition from "../../backend/SR_VS/sr_vs";
+import '../../../backend/SR_VS/sr_vs'
+import SpeechRecognition from "../../../backend/SR_VS/sr_vs";
 import './chef.style.scss'
 const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 'cc548ac21e2642999689cdff7acb3468',

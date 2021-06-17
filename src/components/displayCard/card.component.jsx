@@ -55,7 +55,7 @@ function Card({recipe,fromFavs}) {
                     ) : null }
 
                     <h1>{recipe.title}</h1>
-                <img class = 'recipe-image' alt='recipe-logo' src ={recipe.image}></img>
+                <img className = 'recipe-image' alt='recipe-logo' src ={recipe.image}></img>
                 </div>
                 <div>
                 <p className='summary'>

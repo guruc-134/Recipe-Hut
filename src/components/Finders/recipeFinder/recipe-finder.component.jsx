@@ -1,6 +1,9 @@
-import React, { useState} from 'react'
+import React, { useState, useContext} from 'react'
 import './recipe-finder.style.scss'
+import {firestore} from '../../../backend/firebase/firebase.utils'
 import axios from 'axios'
+import { UserContext } from '../../../context/userContext';
+
 const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 'cc548ac21e2642999689cdff7acb3468',
 '8e743479e9f9467795afffbb26844379',
@@ -10,6 +13,7 @@ const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 
 function RecipeFinder({setRecipe}){
     const [query,setQuery] = useState('')
+    const user = useContext(UserContext)
     const [number,setNumber] = useState(10)
     const baseUrl = 'https://api.spoonacular.com';
     // setNumber(10)
@@ -71,6 +75,8 @@ function RecipeFinder({setRecipe}){
     const findRecipes = (e) =>
     {
         e.preventDefault();
+        const searchedOn = Date()
+        firestore.collection(`/users/${user.id}/searchHistory`).add({query:query,searchedOn:searchedOn})
         console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
         axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
         .then((response) =>

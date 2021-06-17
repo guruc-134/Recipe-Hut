@@ -8,6 +8,23 @@ import {auth} from '../../backend/firebase/firebase.utils'
 const ProfilePage = () => {
     const user = useContext(UserContext)
     const [favs,setFavs] = useState([])
+    const [history,setHistory] = useState([])
+    const getSearchHistory = () =>
+    {
+        const arr = []
+        firestore.collection(`/users/${user.id}/searchHistory`).get()
+        .then((snapshot) =>
+        {
+            // eslint-disable-next-line array-callback-return
+            snapshot.docs.map( item =>
+                {
+                    arr.push({id:item.id, ...item.data()})
+                    
+                })
+                
+                setHistory(arr)
+        })
+    }
     const getuserDataFromFireStore = () =>
     {
         var store = new Set()
@@ -45,6 +62,19 @@ const ProfilePage = () => {
                                     item.found?
                                     <Card key = {item.id} recipe = {item} fromFavs = {true} />:null)
                                 })
+                            }
+                    </div>
+                </div>
+                <div className = 'searchHistory' onClick = {getSearchHistory}>
+                <h3>History</h3>
+                    <div className='history-items'>
+                        {
+                            history.map((item) =>
+                            <div key ={item.id}>
+                                {console.log(item)}
+                                <p>{item.query}</p>
+                                <p>searched on {item.searchedOn}</p>
+                            </div>)
                             }
                     </div>
                 </div>

@@ -21,7 +21,7 @@ function CommunityPage() {
                 {
                     blogList.docs.map( item =>
                         {
-                            array.push(item.data())
+                            array.push({id:item.id, ...item.data()})
                         })
                         array.reverse()
                         setPageBlogs(array)
@@ -104,7 +104,8 @@ function CommunityPage() {
                 <div className = 'blog-displayer'>
                     {
                         pageBlogs?(pageBlogs.map( blog=> 
-                            <div>
+                            <div key = {blog.id}>
+                                {console.log(blog)} 
                                 <h2>{blog.header}</h2>
                                 <img src = {blog.files} alt = 'blogPIc'/>
                                 <p>{blog.content}</p>

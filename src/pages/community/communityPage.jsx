@@ -54,7 +54,22 @@ function CommunityPage() {
         getBlogsFromFireBase()
 
     }
-    const handleChange =(e)=>
+    const convertToBase64 = (image) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(image);
+    
+        return new Promise((resolve, reject) => {
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            }
+    
+            fileReader.onerror = () => {
+                reject(fileReader.error);
+            }
+        })
+    }
+    
+    const handleChange = async (e)=>
     {
         const {name,value,files}  = e.target
 
@@ -62,7 +77,7 @@ function CommunityPage() {
         if (name === 'blogContent') setBlogContent(value)
         else if (name === 'blogFile') 
         {
-            var Img_file = URL.createObjectURL(files[0])
+            var Img_file = await convertToBase64(files[0])
             setBlogFile(Img_file)
         }   
     }
@@ -105,9 +120,9 @@ function CommunityPage() {
                     {
                         pageBlogs?(pageBlogs.map( blog=> 
                             <div key = {blog.id}>
-                                {/* {console.log(blog)}  */}
+                                {console.log(blog)} 
                                 <h2>{blog.header}</h2>
-                                <img src = {blog.files} alt = 'blogPIc'/>
+                               { blog.files?<img src = {blog.files} alt = 'blogPIc'/>:null}
                                 <p>{blog.content}</p>
                                 <b><p>posted by : {blog.postedBy.displayName}</p></b>
                             </div>

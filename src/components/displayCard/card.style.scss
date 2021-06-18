@@ -1,5 +1,12 @@
 .card
 {
+    a
+    {
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+        color: black;
+    }
     background-color: white;
     margin: 20px;
     display:flex;

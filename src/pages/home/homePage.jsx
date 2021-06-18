@@ -11,7 +11,7 @@ import ReactPaginate from 'react-paginate';
 const HomePage = () => {
     const [homeRecipes,setHomeRecipes] = useState([])
     const [pageNumber, setPageNumber] = useState(0)
-    const   itemsPerPage = 20
+    const   itemsPerPage = 12
     const pagesVisited = pageNumber * itemsPerPage
 
     // function  for pagination
@@ -33,7 +33,7 @@ const HomePage = () => {
             var  doc = snapShot.docs[index]
                     var dd = doc.data()
                     array.push(dd.recipeResults)
-                    console.log(array.length)
+                    // console.log(array.length)
                     setHomeRecipes(shuffle(array[array.length-1]))
                 
             })

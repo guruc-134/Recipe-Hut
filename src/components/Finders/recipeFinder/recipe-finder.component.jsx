@@ -14,7 +14,7 @@ const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 function RecipeFinder({setRecipe}){
     const [query,setQuery] = useState('')
     const user = useContext(UserContext)
-    const [number,setNumber] = useState(10)
+    const [number,setNumber] = useState(30)
     const baseUrl = 'https://api.spoonacular.com';
     // setNumber(10)
     // inputs 
@@ -26,7 +26,7 @@ function RecipeFinder({setRecipe}){
 
     const handleRecipes = (responseObjects)=>
     {
-        console.log('handle Recipes input ---',responseObjects)
+        // console.log('handle Recipes input ---',responseObjects)
         var recipeResults = []
         responseObjects.map((object) =>
             {
@@ -60,13 +60,13 @@ function RecipeFinder({setRecipe}){
                             )
                         recipeObject = {...recipeObject,grpObj}
                 }
-                console.log('recipe object',recipeObject)
+                // console.log('recipe object',recipeObject)
                 recipeResults.push(recipeObject)
             })
             if(recipeResults.length === 0)
             {
                 recipeResults = [{title:'we could not find any results for this query',found:false}]
-                console.log(recipeResults)
+                // console.log(recipeResults)
             }
             setRecipe(recipeResults)
     }
@@ -77,7 +77,7 @@ function RecipeFinder({setRecipe}){
         e.preventDefault();
         const searchedOn = Date()
         firestore.collection(`/users/${user.id}/searchHistory`).add({query:query,searchedOn:searchedOn})
-        console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
+        // console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
         axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
         .then((response) =>
         {

@@ -9,7 +9,7 @@ import './search-page.style.scss';
 function SearchPage() {
     const [recipe, setRecipe] = useState([]);
     const [pageNumber, setPageNumber] = useState(0)
-    const   itemsPerPage = 20
+    const   itemsPerPage = 12
     const pagesVisited = pageNumber * itemsPerPage
     var pageCount = Math.ceil(recipe.length / itemsPerPage)
     const displayItems = recipe.slice(pagesVisited, pagesVisited + itemsPerPage)

@@ -105,7 +105,7 @@ function CommunityPage() {
                     {
                         pageBlogs?(pageBlogs.map( blog=> 
                             <div key = {blog.id}>
-                                {console.log(blog)} 
+                                {/* {console.log(blog)}  */}
                                 <h2>{blog.header}</h2>
                                 <img src = {blog.files} alt = 'blogPIc'/>
                                 <p>{blog.content}</p>

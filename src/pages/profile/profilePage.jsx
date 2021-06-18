@@ -71,7 +71,7 @@ const ProfilePage = () => {
                         {
                             history.map((item) =>
                             <div key ={item.id}>
-                                {console.log(item)}
+                                {/* {console.log(item)} */}
                                 <p>{item.query}</p>
                                 <p>searched on {item.searchedOn}</p>
                             </div>)

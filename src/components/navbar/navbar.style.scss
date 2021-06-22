@@ -3,9 +3,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    background-color: teal;    
+    background-color: rgba(31, 73, 59, 0.473);
     &-links{
+        margin-top:2rem;
         margin-right: 2rem;
         &-link
         {
@@ -13,9 +13,8 @@
             outline: none;
             padding: 10px;
             text-decoration: none;
-            text-transform: uppercase;
             color: white;
-            font-size: 1.3rem;   
+            font-size: 2rem;   
             background-color: transparent;
             cursor: pointer;
         }
@@ -24,10 +23,14 @@
             scale: 1.2;
         }
     }
+    &-header{
+        &-logo{
+            width:10rem;
+        }
+    }
 }
 .header
 {
-    text-align: center;
     font-size: 1.5rem;
-    margin: auto;
+    margin-left:10px;
 }

@@ -1,8 +1,25 @@
 .bot{
+    // min-width: fit-content;
+    width: 40%;
     display: flex;
     justify-content: flex-end;
     text-align: right;
-    margin-top: 80%;
+    bottom:10px;
+    position:fixed;
+    right: 10px;
+    &-response{
+        border: 1px solid black;
+        border-radius: 10px;
+        display: none;
+    }
+    &-div{
+        min-width: fit-content;
+        max-width: 40%;
+        padding:1em;
+        border-radius: 10px;
+        display: none;
+        background-color: white;
+    }
     &-btn
     {
         width:80px;
@@ -20,7 +37,7 @@
         font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         font-weight: 400;
         border-radius:10px;
-        padding: 1em;
+        padding: .8em;
         text-align: center;
         width: 60%;
     }
@@ -30,7 +47,6 @@
 {
     display: inline;
     border:none;
+    margin:1rem;
     outline:none;
-    border-radius:50%;
-            background-color: rgba(128, 241, 241, 0.699);
 }

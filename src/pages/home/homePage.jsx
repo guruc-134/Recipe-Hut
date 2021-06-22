@@ -40,7 +40,7 @@ const HomePage = () => {
             .catch(error => console.log('error fetching the data from firebase',error))
     }
     useEffect(() => {
-        getRecipesFromFireStore(3);
+        // getRecipesFromFireStore(3);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     var pageCount = Math.ceil(homeRecipes.length / itemsPerPage)
@@ -50,8 +50,6 @@ const HomePage = () => {
     }
     return (
         <div className='home-page'>
-            <h1> Home Page</h1>
-            <Chef/>
             <div className='recipe-cards'>
             {
                 homeRecipes?

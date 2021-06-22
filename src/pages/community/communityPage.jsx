@@ -1,6 +1,7 @@
 import React , {useState, useContext, useEffect} from 'react'
 import firebase , {firestore} from '../../backend/firebase/firebase.utils';
 import { UserContext } from '../../context/userContext';
+import ReactDOM from "react-dom";
 function CommunityPage() {
     const user = useContext(UserContext)
     const [pageBlogs, setPageBlogs] = useState("")
@@ -27,6 +28,17 @@ function CommunityPage() {
                         setPageBlogs(array)
                 })
     }
+
+    const resetStates  = () =>
+    {
+        //  preventing rerendering after each state change
+        ReactDOM.unstable_batchedUpdates( () =>
+        {
+            setBlogContent("")
+            setPostHeader("")
+            setBlogFile("")
+        })
+    }
     const submitPost = (e) =>
     {
         // console.log(blogFile[0])
@@ -48,9 +60,7 @@ function CommunityPage() {
         today = dd + '-' + mm + '-' + yyyy;
         console.log(today)
         firestore.collection('blogs').doc(today).collection('daily_blogs').add(blogObject)
-        setBlogContent("")
-        setPostHeader("")
-        setBlogFile("")
+        resetStates()
         getBlogsFromFireBase()
 
     }

@@ -4,6 +4,7 @@ import Navbar from './components/navbar/navbar.component';
 import HomePage from './pages/home/homePage';
 import ProfilePage from './pages/profile/profilePage';
 import CommunityPage from './pages/community/communityPage';
+import RecipePage from './pages/recipePage/recipePage';
 
 import {auth, createUserProfileDocument} from './backend/firebase/firebase.utils';
 import {
@@ -76,7 +77,9 @@ function App() {
         :
         (<SigninSignup/>) }
         />
-          <Route  path ="/" component = {HomePage}/>
+          <Route   path ="/recipe" component = {RecipePage}/>
+          <Route  path ="/home" component = {HomePage}/>
+
         </Switch>
           </UserContext.Provider>
       </Router>

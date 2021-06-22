@@ -30,9 +30,11 @@
     }
     &-form
     {
-        display: none;
+        display: flex;
+        justify-content: left;
         &-inp
         {
+            margin-left: 10px;;
             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-size: .8rem;
             border: none;
@@ -57,8 +59,11 @@
     }
     &-answer
     {
-        // width: 40%;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
         padding:1em;
+        display: none;
         border-radius: 15px;
         &-img
         {

@@ -64,13 +64,13 @@ function Chef() {
                 }           
             </button>
             <form className ='chef-form'>
-               <SpeechRecognition setQuestion = {setQuestion} shallStop = {!chefBtn} />
+            <SpeechRecognition setQuestion = {setQuestion} shallStop = {!chefBtn} />
                 <input className ='chef-form-inp' onChange ={e =>setQuestion(e.target.value)} placeholder='nutrition related question' value = {question}/>
                 <button className ='chef-form-btn' type = 'submit' onClick={handleChefQuestion} >ask </button>
             </form>
             </div>
             <div className='chef-answer'>
-                <img alt='chef-answer' className = 'chef-answer-img' src ={chefResponse.image}/>
+            { chefResponse.image?<img alt='chef-answer' className = 'chef-answer-img' src ={chefResponse.image}/>:null}
                 <p className='chef-answer-txt'>{chefResponse.answer}</p>
             </div>
         </div>

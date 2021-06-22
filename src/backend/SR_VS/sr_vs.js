@@ -1,8 +1,7 @@
 import React  from 'react'
 
-function SpeechRecognition({setQuestion, shallStop}) {
+function SpeechRecognition({setQuestion}) {
     var recognizing;
-    var mic ='https://img.icons8.com/material/24/000000/microphone--v1.png'
     const sr = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new sr()
     recognition.continuous = true;
@@ -19,29 +18,26 @@ function SpeechRecognition({setQuestion, shallStop}) {
     }
     function reset() {
         recognizing = false;
-        mic =  "https://img.icons8.com/material/24/000000/microphone--v1.png"
-    }
-    
-    if (shallStop)
-    {
-        recognition.stop()
-        reset()
+        var mic = document.querySelector(".mic")
+        if(mic) mic.src="https://img.icons8.com/material/24/000000/microphone--v1.png"
     }
     function toggleStartStop() {
+        document.querySelector(".speech-recognition").style.textDecoration="strikethrough"
         if (recognizing) {
             recognition.stop();
             reset();
         } else {
             recognition.start();
             recognizing = true;
-            mic = "https://img.icons8.com/material-sharp/24/000000/block-microphone.png"
+            var mic = document.querySelector(".mic")
+            if(mic) mic.src="https://img.icons8.com/material-sharp/24/000000/block-microphone.png"
         }
     }
     
 return (
     <div className= 'speech-recognition' onClick={toggleStartStop}>
-        <p className = 'speech-recognition-prompt'>{ "click to speak"}</p>
-        <img src={mic} alt = 'microphone' />
+        <img className = "mic" src="https://img.icons8.com/material/24/000000/microphone--v1.png" alt = 'microphone' />
+        <p className = 'speech-recognition-prompt'></p>
     </div>
 )
 }

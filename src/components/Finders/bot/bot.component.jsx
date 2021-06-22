@@ -1,5 +1,6 @@
 import SpeechRecognition from "../../../backend/SR_VS/sr_vs";
 import React ,{useState} from 'react'
+import {firestore} from '../../../backend/firebase/firebase.utils'
 import ReactDOM from "react-dom";
 import axios from 'axios'
 import './bot.style.scss'
@@ -14,6 +15,7 @@ function Bot() {
     const [diffY, setDiffY] = useState(0) 
     const [dragging, setDragging] = useState(false)
     const [styles,setStyles] = useState({})
+    const [factsStore, setFactsStore] = useState([])
     const [facts, setFacts] = useState('')
     const baseUrl = 'https://api.spoonacular.com';
     const [chefResponse, setChefResponse] = useState({});
@@ -46,18 +48,24 @@ function Bot() {
     }
     const findFact = () =>
     {
-        var botResponse = document.querySelector(".bot-response")
+        if(factsStore.length === 0)
+        {var botResponse = document.querySelector(".bot-response")
         if(botResponse){
             botResponse.style.display = "block"
             botResponse.style.border = "1px solid black"
         }
-        axios.get(`${baseUrl}/food/trivia/random?apiKey=${APIKEY[3]}`)
+        firestore.collection('facts').doc('docs').collection('factsList').get()
         .then(response =>
             {
-                console.log(response.data.text)
-                setFacts(response.data.text) 
-            })
-            // document.getElementsByClassName('bot-text').style.backgroundColor = 'pink';
+                var Arr = []
+                response.docs.map(item =>{
+                    Arr.push(item.data().fact)
+                })
+                setFactsStore(Arr)
+                setFacts(Arr[-1])
+            })}
+        if(factsStore)
+        setFacts(factsStore[Math.floor(Math.random()*(factsStore.length))]) 
     }
     const openBotDiv = ()=>{
         var botDiv = document.querySelector(".bot-div")

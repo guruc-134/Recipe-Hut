@@ -5,7 +5,9 @@ import HomePage from './pages/home/homePage';
 import ProfilePage from './pages/profile/profilePage';
 import CommunityPage from './pages/community/communityPage';
 import RecipePage from './pages/recipePage/recipePage';
+import Write from './pages/write/write.page';
 
+import './sass/formInputs.scss'
 import {auth, createUserProfileDocument} from './backend/firebase/firebase.utils';
 import {
   BrowserRouter as Router,
@@ -61,6 +63,11 @@ function App() {
       <Navbar currentUser={currentUser}/>
           <UserContext.Provider value ={providerValue}>
         <Switch>
+        <Route path ='/community/write' render = {() =>!currentUser?
+      (<Redirect to = '/'/>)
+      :
+      (<Write/>) }
+      />
           <Route exact path ="/search" component = {SearchPage}/>
           <Route exact path='/profile' render = {() =>!currentUser?
         (<Redirect to = '/'/>)
@@ -77,9 +84,8 @@ function App() {
         :
         (<SigninSignup/>) }
         />
-          <Route   path ="/recipe" component = {RecipePage}/>
-          <Route  path ="/home" component = {HomePage}/>
-
+          <Route path ="/recipe" component = {RecipePage}/>
+          <Route  path ="/" component = {HomePage}/>
         </Switch>
           </UserContext.Provider>
       </Router>

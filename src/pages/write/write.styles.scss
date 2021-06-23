@@ -1,0 +1,83 @@
+.write-blog{
+    text-align: center;
+    background:white;
+    .link{
+        color:black;
+        text-decoration: none;
+        font-size: 1.8rem;
+        margin-right: 90%;
+    }
+    form{
+        .input-heading{
+            padding:1em;
+            width:80%;
+            outline: none;
+            border: none;
+            height:3rem;
+            font-size: 2.2rem;
+        }
+        .input-content{
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+            &::-webkit-scrollbar-track {
+                background: #f1f1f1; 
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #888; 
+            }
+            &::-webkit-scrollbar-thumb:hover {
+                background: #555; 
+            }
+        }
+        textarea{
+            background-color: rgb(243, 243, 243);
+            padding:1em;
+            width:90%;
+            outline: none;
+            border: none;
+            height:70vh;
+            font-size: 1.5rem;
+            border-radius: 10px;
+            resize: none;
+        }
+    }
+}
+.previewImage{
+    width:150px;
+    border-radius: 10px;
+    border:2px solid black;
+}
+.droparea {
+    height: 150px;
+    width: 250px;
+    border: 1px dashed gray;
+    border-radius: 10px;
+    color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+    margin: 1rem auto;
+  }
+  .hover {
+    color: #fff;
+    border: 1px dashed #fff;
+  }
+  .valid {
+    color: #fff;
+    background-color: green;
+    border: 1px solid green;
+  }
+  .invalid {
+      background-color: red;
+    color: #fff;
+    border: 1px solid red;
+  }
+  .fileContainer{
+      width:60%;
+      margin: 1rem auto;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+  }

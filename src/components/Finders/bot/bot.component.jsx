@@ -123,7 +123,7 @@ function Bot() {
     return (
         <div className='bot' style={styles} onMouseDown={_dragStart} onMouseMove={_dragging} onMouseUp={_dragEnd}>
             <div className='bot-btn' onClick={openBotDiv} >
-                <img src="https://img.icons8.com/color/48/000000/music-robot.png" alt = 'toby' />
+            <i class="ri-blaze-fill"></i>
             </div>
             <div className='bot-div'>
                 <span class="bot-div-close" onClick ={closeBotDiv}>X</span>

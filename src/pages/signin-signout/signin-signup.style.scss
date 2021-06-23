@@ -1,8 +1,22 @@
 .signin-signup {
   width:95%;
-    display: flex;
-    flex-wrap: wrap;
     padding: 2rem;
-    justify-content: space-between;
     margin: 30px auto;
+    text-align: center;
+    &-nav{
+      width:40%;
+      margin: 10px auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
   }
+.signin-div{
+  text-align: center;
+  width: 80%;
+}
+.signup-div{
+  text-align: center;
+  width: 80%;
+  display:none;
+}

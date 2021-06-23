@@ -20,7 +20,7 @@ const navbar = ({currentUser}) => {
                 {
                     currentUser ? (null):
                 (<Link className='navbar-links-link' to = '/signin'> 
-                Sign in
+                <i class="ri-login-box-line"></i>
                 </Link>)
                 }
 

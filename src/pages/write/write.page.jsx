@@ -13,7 +13,6 @@ function Write() {
 
     const [blogHeader, setPostHeader] = useState("")
     const [blogContent, setBlogContent] = useState("")
-    const [pageBlogs, setPageBlogs] = useState([])
     const [blogFile, setBlogFile] = useState("")
     const resetStates  = () =>
     {
@@ -27,27 +26,27 @@ function Write() {
     }
     const submitPost = (e) =>
     {
-        // console.log(blogFile[0])
+        e.preventDefault();
         if (blogContent === "" || blogContent === undefined || blogFile === "")
         {
             console.log('not a valid input')
         }
-        e.preventDefault();
+        var today =new Date()
+        var dd = String(today.getDate()).padStart(2, '0') -1;
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy +'-' + mm +'-' + dd;
+        console.log(today)
         var blogObject = {
             header:blogHeader,
             content:blogContent,
             files:blogFile,
-            postedBy:user
+            postedBy:user,
+            date:today
         }
-        var today = new Date()
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        today = dd + '-' + mm + '-' + yyyy;
-        console.log(today)
-        firestore.collection('blogs').doc(today).collection('daily_blogs').add(blogObject)
+        firestore.collection('blogs').doc('daily_blogs').collection(today).add(blogObject)
         resetStates()
-        setPageBlogs( previous => previous.push(blogContent))
+        // setPageBlogs( previous => previous.push(blogContent))
     }
     const convertToBase64 = (image) => {
         const fileReader = new FileReader();
@@ -122,10 +121,24 @@ function Write() {
             <Link to="/community" class="link"> <i class="ri-arrow-left-circle-fill"></i> </Link>  
                 <form onSubmit={submitPost}>
                     <div>
-                        <input class='input-heading' name='heading' type='text' value={blogHeader} onChange={handleChange} placeholder='Blog heading'></input>
+                        <input 
+                        minlength ='5'
+                        maxlength = '100'
+                        required class='input-heading'
+                        name='heading' type='text' 
+                        value={blogHeader} onChange={handleChange} 
+                        placeholder='Blog heading'></input>
                     </div>
                     <div>
-                        <textarea class='input-content' name='blogContent' type='text' placeholder='paragraph' onChange={handleChange} value={blogContent}></textarea>
+                        <textarea 
+                        required 
+                        class='input-content'
+                        name='blogContent' 
+                        type='text' placeholder='paragraph' 
+                        onChange={handleChange} 
+                        minlength ='10'
+                        maxlength = '1500'
+                        value={blogContent}></textarea>
                     </div>
                     <div className='fileContainer'>
                         <div>

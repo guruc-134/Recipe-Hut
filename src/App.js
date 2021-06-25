@@ -84,7 +84,7 @@ function App() {
         :
         (<SigninSignup/>) }
         />
-          <Route path ="/recipe" component = {RecipePage}/>
+          <Route path ="/recipe/:recipeId" component = {RecipePage}/>
           <Route  path ="/" component = {HomePage}/>
         </Switch>
           </UserContext.Provider>

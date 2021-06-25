@@ -2,8 +2,10 @@ import React, { useState,useEffect, useContext} from 'react'
 import {firestore} from '../../backend/firebase/firebase.utils'
 import './card.style.scss'
 import { UserContext } from '../../context/userContext';
+import {Link} from 'react-router-dom'
+import RecipePage from '../../pages/recipePage/recipePage';
 
-function Card({recipe,fromFavs}) {
+function Card({recipe,fromFavs,docId='search', index='rEciPeIndso0134'}) {
     const currentUser  = useContext(UserContext)
     const [recipeLiked, setRecipeLiked]  = useState(false)
     
@@ -43,10 +45,23 @@ function Card({recipe,fromFavs}) {
     return (
         // add a read out summary button which uses speech synthesis to 
         // read the recipe summary present in the card
-         <div className='card'>
+        // <div>
+        //     <RecipePage recipe={recipe} docId={docId}></RecipePage>
+        // </div>
+        <div className='card'>
             <div className='card-1'>
                 <div>
-                   { currentUser?(
+            <Link 
+            to={
+                {
+                pathname:`/recipe/${docId}-${recipe.id}-${index}`,
+                recipe:{...recipe}
+                }
+                }
+            > see full sreen</Link>
+
+                {console.log('this is a recipe obj',recipe,docId,recipe.id)}
+                { currentUser?(
                         !fromFavs?(!recipeLiked?<button className = 'fav-recipe' onClick={addFav}>
                     <img alt='like' src="https://img.icons8.com/fluent/48/000000/like.png"/>
                     </button>:<button className = 'fav-recipe' >
@@ -63,7 +78,7 @@ function Card({recipe,fromFavs}) {
                 </p>
                 </div>
             </div>
-            {/* <div className='card-2'>
+            <div className='card-2'>
                { recipe.grpObj ?
                 (recipe.grpObj.map((item,index) =>
                 {
@@ -84,7 +99,7 @@ function Card({recipe,fromFavs}) {
                             })) : ( console.log(recipe))
                             
                 }
-            </div> */}
+            </div>
         </div>
     )
 }

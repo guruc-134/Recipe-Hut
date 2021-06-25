@@ -36,7 +36,8 @@
 //                 var grpObj = object.analyzedInstructions[0].steps.map(
 //                     (item) =>
 //                     {
-//                         var  {step,ingredients,equipments} = item
+//                         console.log(item)
+//                         var  {step,ingredients,equipment} = item
 //                         return (
 //                             {step,ingredients,equipment}
 //                             )
@@ -49,12 +50,12 @@
 //                 recipeResults.push(recipeObject)
 //             // pushing the elements to the firebase
 //         })
-//         if(recipeResults.length == 0)
+//         if(recipeResults.length === 0)
 //         {
 //             recipeResults = [{title:'we could not find any results for this query',found:false}]
 //         }
 //         console.log(recipeResults)
-//         firestore.collection('home-PageRecipes').add(
+//         firestore.collection('home-PageRecipes123').add(
 //                     {recipeResults}
 //                     )
 //                     console.log('pushed succesfully')
@@ -79,9 +80,9 @@
 
 
 // //  pushing the recipes to the firestore
-// for(let i = 0; i<6;i++)
+// for(let i = 0; i<1;i++)
 // {
-//     findRecipes(i*100,100);
+//     findRecipes(i*1,10);
 // }
 // export  {findRecipes};
 // var store = new Set()

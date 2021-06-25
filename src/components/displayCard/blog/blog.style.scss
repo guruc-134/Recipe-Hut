@@ -1,0 +1,57 @@
+.blog-card{
+    background-color: rgba(241, 241, 199, 0.521);
+    width:60%;
+    margin: 1rem auto;
+    border-radius: 20px;
+    .blog-author{
+        background-color: pink;
+        font-weight: 400;
+        font-size: 1rem;
+        color:rgb(124, 122, 122);
+        text-align: right;
+        margin:1rem;
+    }
+    .blog-content{
+        width: 100%;
+        background-color: teal;
+        // overflow: hidden;
+        #blog-title{
+            height: auto;
+            width: 100%;
+            background-color: pink;
+        }
+        white-space: pre-wrap;
+        text-align: left;
+        padding:1em;
+        // min-height: 200px;
+        &-l{
+            width:100%;
+            padding-top:1em;    
+            display: flex;
+            background-color: maroon;
+            justify-content: space-between;
+            flex-direction: row;
+            &-img{
+                flex:0.4;
+                img{
+                    width:100%;
+                    min-height: 50%;
+                    max-height: 80%;
+                    border: 1px solid black;
+                    border-radius: 10px;
+                }
+            }
+            &-header{
+                background-color: purple;
+                padding-left: 1em;
+                margin-left: 1em;
+                flex:0.6;
+                text-align: left;
+            }
+
+        }
+    }
+    .read-more{
+        color:rgb(124, 122, 122);
+    }
+}

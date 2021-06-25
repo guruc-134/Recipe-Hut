@@ -4,7 +4,6 @@ import {firestore} from '../../../backend/firebase/firebase.utils'
 import ReactDOM from "react-dom";
 import axios from 'axios'
 import './bot.style.scss'
-import Chef from '../chef/chef.component'
 const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 'cc548ac21e2642999689cdff7acb3468',
 '8e743479e9f9467795afffbb26844379',
@@ -17,11 +16,9 @@ function Bot() {
     const [styles,setStyles] = useState({})
     const [factsStore, setFactsStore] = useState([])
     const [facts, setFacts] = useState('')
-    const baseUrl = 'https://api.spoonacular.com';
     const [chefResponse, setChefResponse] = useState({});
     const [question,setQuestion] = useState("")
     const [chefBtn,setChefBtn] = useState(false)
-    // joke finder completed points one per joke
 
     const _dragStart= (e) => {
         ReactDOM.unstable_batchedUpdates(() => {
@@ -42,7 +39,6 @@ function Bot() {
             );
         }
     }
-
     const _dragEnd = () =>{
         setDragging(false)
     }
@@ -123,10 +119,10 @@ function Bot() {
     return (
         <div className='bot' style={styles} onMouseDown={_dragStart} onMouseMove={_dragging} onMouseUp={_dragEnd}>
             <div className='bot-btn' onClick={openBotDiv} >
-            <i class="ri-blaze-fill"></i>
+            <i className="ri-blaze-fill"></i>
             </div>
             <div className='bot-div'>
-                <span class="bot-div-close" onClick ={closeBotDiv}>X</span>
+                <span className="bot-div-close" onClick ={closeBotDiv}>X</span>
                 <div className ='bot-response'>
                     {facts?(<span className='close-btn' onClick={handleMsgClose}>
                         X
@@ -136,7 +132,7 @@ function Bot() {
                     </p>
                 </div>
                 <div onClick={findFact}>
-                    <i class="ri-repeat-2-line"></i>
+                    <i className="ri-repeat-2-line"></i>
                 </div>
                 <form className ='chef-form'>
                 <SpeechRecognition setQuestion = {setQuestion} shallStop = {!chefBtn} />
@@ -144,7 +140,7 @@ function Bot() {
                     <button className ='chef-form-btn' type = 'submit' onClick={handleChefQuestion} >ask </button>
                 </form>
                 <div className='chef-answer'>
-                    <span class='chef-answer-close' onClick={handleChefAnswerClose}>X</span>
+                    <span className='chef-answer-close' onClick={handleChefAnswerClose}>X</span>
                     <div>
                 { chefResponse.image?<img alt='chef-answer' className = 'chef-answer-img' src ={chefResponse.image}/>:null}
                     </div>

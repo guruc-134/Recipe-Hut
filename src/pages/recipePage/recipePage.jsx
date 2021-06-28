@@ -1,7 +1,8 @@
 import React ,{useEffect, useState} from 'react'
 import  {firestore} from '../../backend/firebase/firebase.utils';
 import './recipePage.styles.scss';
-import axios from 'axios'
+import axios from 'axios';
+import {Link} from 'react-router-dom'
 const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 'cc548ac21e2642999689cdff7acb3468',
 '8e743479e9f9467795afffbb26844379',
@@ -9,6 +10,7 @@ const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 '4a5b12ec6f3d4159b4b160e8808f4601',
 '9a0f78a9a9fb4e1ba5857d871f42f1a8']
 const baseUrl = 'https://api.spoonacular.com';
+
 function RecipePage(props) {
     const [recipe,setRecipe] = useState("")
     const extractDetails = () =>{
@@ -62,8 +64,10 @@ function RecipePage(props) {
     },[])
     return (
         <div className='recipePage'>
-            {console.log(props.location,props.location.pathname)}
-            {/* <Link to=""></Link> */}
+            {console.log(props,props.location.pathname)}
+            <div className ='back-btn'> 
+            <Link to="/recipe"><i className="fa fa-arrow-circle-left" aria-hidden="true"></i></Link>
+            </div>
             {
             recipe?
             <div>
@@ -79,7 +83,7 @@ function RecipePage(props) {
                 </div>
                 <h3> Recipe</h3>
                 <div className='recipe'>
-                    {
+                    {recipe.grpObj?
                     recipe.grpObj.map(item=>{
                         return (
                         <div className='steps'>
@@ -96,15 +100,13 @@ function RecipePage(props) {
                             <hr></hr>
                         </div>
                         ) 
-                    })
-                    
-                    
+                    }):<p>no information about this recipe</p>
                     }
                 </div>
             </div>
-            :<h1> The recipe is not available</h1>
+            :(
+            <setup_svg className='setup-svg'/>)
             }
-
         </div>
     )
 }

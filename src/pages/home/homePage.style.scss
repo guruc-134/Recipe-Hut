@@ -6,11 +6,17 @@
     min-height:100vh;
     z-index: 3;
     position: relative;
+    .recipe-cards
+    {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }
-.recipe-cards
-{
-    display: flex;
-    justify-content: space-around;
-    background-color: magenta;
-    flex-wrap: wrap;
+
+@media only screen and (max-width: 600px) {
+.home-page{
+    width: 100%;
+}
 }

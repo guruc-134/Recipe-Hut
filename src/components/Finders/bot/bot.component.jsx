@@ -66,6 +66,7 @@ function Bot() {
     const openBotDiv = ()=>{
         var botDiv = document.querySelector(".bot-div")
         if(botDiv) botDiv.style.display="inline-block"
+        
         var botBtn = document.querySelector('.bot-btn')
         if(botBtn) botBtn.style.display = "none"
     }

@@ -75,8 +75,10 @@ function RecipeFinder({setRecipe}){
     const findRecipes = (e) =>
     {
         e.preventDefault();
-        const searchedOn = Date()
-        firestore.collection(`/users/${user.id}/searchHistory`).add({query:query,searchedOn:searchedOn})
+        if(user){
+            const searchedOn = Date()
+            firestore.collection(`/users/${user.id}/searchHistory`).add({query:query,searchedOn:searchedOn})
+        }
         // console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
         axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
         .then((response) =>
@@ -100,7 +102,7 @@ function RecipeFinder({setRecipe}){
                 placeholder='enter the name of the dish'
                 value = {query}></input>
             <button className = 'form-btn' onClick={findRecipes}>
-                search
+            <i class="fas fa-search"></i>
             </button>
             </form>
         </div>

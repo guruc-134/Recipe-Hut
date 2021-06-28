@@ -16,7 +16,6 @@ const HomePage = () => {
     const [index,setIndex] = useState(3)
     const   itemsPerPage = 12;
     const pagesVisited = pageNumber * itemsPerPage
-
     // function  for pagination
     const displayItems = homeRecipes.slice(pagesVisited, pagesVisited + itemsPerPage)
     .map( item =>
@@ -68,9 +67,10 @@ const HomePage = () => {
             <div className='recipe-cards'>
             {
                 homeRecipes?
-                displayItems: null
+                displayItems: <h3> Bringing recipes</h3>
             } 
             </div>
+        { homeRecipes.length>1?
             <ReactPaginate
                 previousLabel = {"previous"}
                 nextLabel = {"next"}
@@ -81,8 +81,8 @@ const HomePage = () => {
                 nextLinkClassName = {"nextBtn"}
                 disabledClassName = {"paginationDisabled"}
                 activeClassName  = {"paginationActive"}
-
-            />
+            />:null
+            }
             <Bot/> 
         </div>
     )

@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import CustomButton from '../../components/customButton/custom-button.component'
 import FormInput from '../../components/form-input/form-input.component';
 import {auth, createUserProfileDocument} from '../../backend/firebase/firebase.utils'
 import './signup.style.scss'
@@ -86,7 +85,7 @@ function Signup() {
             label='Confirm Password'
             required
           />
-          <CustomButton type='submit'>SIGN UP</CustomButton>
+          <button class='sign-up-btn' type='submit'>SIGN UP</button>
         </form>
         <p className='error-message'> {errorMessage} </p>
       </div>

@@ -1,0 +1,26 @@
+.bouncing-icons{
+    position:absolute;
+    display: inline;
+    bottom:0px;
+    margin:1rem auto;
+    &-up{
+        animation: bounce-up  8s infinite;
+    }
+    &-down{
+        animation: bounce-down  8s infinite;
+    }
+}
+@keyframes bounce-up {
+    0%   {bottom: 0px;}
+    25%  {bottom: 200px;}
+    50%  {bottom: 100px;}
+    75%  {bottom: 200px;}
+    100% {bottom: 0px;}
+}
+@keyframes bounce-down {
+    0%   {bottom: 0px;}
+    25%  {bottom: 200px;}
+    50%  {bottom: 100px;}
+    75%  {bottom: 200px;}
+    100% {bottom: 0px;}
+}

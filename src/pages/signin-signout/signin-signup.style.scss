@@ -1,22 +1,67 @@
-.signin-signup {
-  width:95%;
-    padding: 2rem;
-    margin: 30px auto;
+.signin-signup
+{
+    width:95%;
+    margin:auto;
+    margin-top:2rem ;
+    min-height: 80vh;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     &-nav{
       width:40%;
-      margin: 10px auto;
+      margin: 0 auto;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
+      font-size: 1rem;
     }
-  }
+    transition: all 1s ease;
+}
 .signin-div{
   text-align: center;
   width: 80%;
+  display: none;
+  transition: all 2s ease-in-out;
 }
 .signup-div{
   text-align: center;
   width: 80%;
   display:none;
+  transition: all 2s ease-in-out;
+
+}
+.login-page{
+  width: 60%;
+  margin: auto;
+  &-logo{
+    width:80%;
+    height: 60%;
+    margin: 1rem auto;
+  }
+}
+
+
+@media only screen and (max-width: 800px)
+{
+.signin-signup
+  {
+    width:90%;
+    margin:5% auto
+}
+.signup-div{
+width: 90%;
+}
+.signin-div{
+  width:90%
+}
+.login-page{
+  width: 100%;
+  margin: 0 auto;
+  &-logo{
+    width:80%;
+    height: 60%;
+    margin: 1rem auto;
+  }
+}
 }

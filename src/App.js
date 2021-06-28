@@ -1,5 +1,8 @@
 import React, { useState,useEffect, useMemo} from 'react'
 import './App.css';
+import './sass/svg.styles.scss';
+import './sass/bouncingAnimation.scss';
+
 import Navbar from './components/navbar/navbar.component';
 import HomePage from './pages/home/homePage';
 import ProfilePage from './pages/profile/profilePage';

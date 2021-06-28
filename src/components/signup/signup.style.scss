@@ -3,10 +3,41 @@
     flex-direction: column;  
     width: 60%;
     margin :2rem auto;
-    padding: 3rem;
-    background-color: aquamarine;
+    padding: 2rem;
     border-radius: 2rem;
+    // glass
+    color: #fff;
+    color: black;
+    margin: 40px auto;
+    background-color: rgba(255, 255, 255, 0.637);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 32px;
+    backdrop-filter: blur(1px);
     .title {
       margin: 10px 0;
+      font-size: 1.4rem;
     }
+    &-btn{
+      color:white;
+      padding: 0.6em;
+      border-radius: 5px;
+      min-width: 30%;
+      outline: none;
+      border: none;
+      box-shadow: 0 2px 12px 0 rgba(31, 58, 18, 0.37);
+
+  background-color: black;
+  &:hover{
+    background-color: rgba(87, 233, 131, 0.863);
+    color: black;
+}
+}
+  }
+
+  @media only screen and (max-width: 800px)
+  {
+  .sign-up{
+      width:60%
+  }
   }

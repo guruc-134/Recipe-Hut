@@ -44,61 +44,36 @@ function Card({recipe,fromFavs,docId='search', index='rEciPeIndso0134'}) {
 
     return (
         // add a read out summary button which uses speech synthesis to 
-        // read the recipe summary present in the card
-        // <div>
-        //     <RecipePage recipe={recipe} docId={docId}></RecipePage>
-        // </div>
         <div className='card'>
             <div className='card-1'>
+                {/* {console.log('this is a recipe obj',recipe,docId,recipe.id)} */}
                 <div>
-            <Link 
-            to={
-                {
-                pathname:`/recipe/${docId}-${recipe.id}-${index}`,
-                recipe:{...recipe}
-                }
-                }
-            > see full sreen</Link>
-
-                {console.log('this is a recipe obj',recipe,docId,recipe.id)}
-                { currentUser?(
-                        !fromFavs?(!recipeLiked?<button className = 'fav-recipe' onClick={addFav}>
-                    <img alt='like' src="https://img.icons8.com/fluent/48/000000/like.png"/>
-                    </button>:<button className = 'fav-recipe' >
-                    <img alt='like' src="https://img.icons8.com/fluent/96/000000/like.png"/>
-                    </button>):<p onClick ={removeFav}> remove from favourites</p>
-                    ) : null }
-
-                    <h1>{recipe.title}</h1>
-                <img className = 'recipe-image' alt='recipe-logo' src ={recipe.image}></img>
-                </div>
-                <div>
-                <p className='summary'>
-                    {/* {recipe.summary} */}
-                </p>
+                    <img className = 'recipe-image' alt='recipe-logo' src ={recipe.image}></img>
                 </div>
             </div>
             <div className='card-2'>
-               { recipe.grpObj ?
-                (recipe.grpObj.map((item,index) =>
-                {
-                    return(
-                        <div className ="card-2-steps" key={`${recipe.id}+${index}`} >
-                        { item.ingredients.length>0?
-                            (<div>
-                                <h4> Ingredients:</h4>
-                                <p className ="card-2-steps-ingr">
-                                    {
-                                        item.ingredients.map((ing) =><span key={`${recipe.id}+${index}+ingr-${ing.id}-${ing.name}`}>{ing.name}</span>)
-                                    }
-                                    </p>
-                                    </div>
-                                    ): null}
-                                <p className ="card-2-steps-step">{item.step}</p>
-                                </div>)
-                            })) : ( console.log(recipe))
-                            
-                }
+                <h1>{recipe.title}</h1>
+            <p className='summary'>
+                {/* {recipe.summary} */}
+            </p>
+            <Link className='expand-recipe'
+                    to={
+                        {
+                            pathname:`/recipe/${docId}-${recipe.id}-${index}`,
+                            recipe:{...recipe}
+                        }
+                    }>
+                    read more ...
+                </Link>
+            </div>
+            <div className='card-buttons'>
+                { currentUser?(
+                    !fromFavs?(!recipeLiked?<button className = 'fav-recipe' onClick={addFav}>
+                   <i className="fa fa-heart small" aria-hidden="true"></i>
+                    </button>:<button className = 'fav-recipe' >
+                    <i className="fa fa-heart large" aria-hidden="true"></i>
+                    </button>):<p onClick ={removeFav}> <i className="far fa-trash-alt"></i></p>
+                    ) : null }
             </div>
         </div>
     )

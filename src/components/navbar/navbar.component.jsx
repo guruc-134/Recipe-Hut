@@ -1,13 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {auth} from '../../backend/firebase/firebase.utils'
-import './navbar.style.scss'
+import './navbar.style.scss';
 const navbar = ({currentUser}) => {
     return (
         <div className='navbar'>
-            <div className='header'>
+            {/* <div className='header'>
                 <Link className='navbar-links-link' to = '/home'><img className="navbar-header-logo" src={`${process.env.PUBLIC_URL}/logo_RH.png`} alt="page_logo"></img></Link>                
-            </div>
+            </div> */}
             <div className='navbar-links'>
                 <Link className='navbar-links-link' to = '/home'><i className="ri-home-3-line navbar-links-link"></i></Link>
                 <Link className='navbar-links-link' to = '/search'><i className="ri-search-line navbar-links-link"></i></Link>

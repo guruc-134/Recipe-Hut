@@ -52,16 +52,15 @@ function Signin() {
             required
         />
         <div className = 'buttons'>
-        <CustomButton  type='submit'>
-                Sign in
-        </CustomButton>
-        <CustomButton  onClick = {signInWithGoogle} isGoogleSignin>
-            Sigin with google
-        </CustomButton>
+        <button  type='submit'>
+            Sign in
+        </button>
+        <button  onClick = {signInWithGoogle}>
+        <img  src="https://image.flaticon.com/icons/png/512/281/281764.png" alt="google"/>
+        </button>
         </div>
         </form>
     </div>  
     )
 }
-
 export default Signin

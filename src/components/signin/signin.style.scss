@@ -6,7 +6,16 @@
     border-radius: 30px;
     margin: 2rem auto;
     padding:40px;
+
     width:50%;
+    // glass
+    color: black;
+    margin: 40px auto;
+    background-color: rgba(255, 255, 255, 0.438);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
     .title
     {
         margin: 10px 0;
@@ -15,7 +24,59 @@
     {
         display:flex;
         justify-content: space-between;
+        button{
+            color:white;
+            padding: 0.3em;
+            border-radius: 5px;
+            min-width: 30%;
+            &:first-child{
+                font-size: 1.2rem;
+                background-color:black;
+                box-shadow: 0 2px 12px 0 rgba(31, 58, 18, 0.37);
+
+            }
+            &:last-child{
+                img{
+                    width: 1.4rem;
+                }
+                    background:white;
+                box-shadow: 0 2px 12px 0 rgba(31, 58, 18, 0.37);
+                
+            }
+            outline: none;
+            border: none;
+        }
     }
 }
 
+@media only screen and (max-width: 800px)
+{
+    .sign-in{
+        font-size: 1.4rem;
+        width: 80%;
+        backdrop-filter: blur(0px);
+        form{
+            font-size: 1.3rem;
+        }
+    }
+    
+.buttons{
+    display:flex;
+    flex-direction: column;
+    width: 60%;
+    margin:0 auto;
+    button{
+        padding: .5em;
+        margin: .4rem;
+    }
+}
+}
 
+
+@media only screen and (min-width: 1400px)
+{
+  .signin{
+    width: 100%;
+    align-items: center;
+  }
+}

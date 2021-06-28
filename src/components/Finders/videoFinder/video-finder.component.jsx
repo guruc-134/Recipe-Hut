@@ -8,16 +8,17 @@ const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 '4a5b12ec6f3d4159b4b160e8808f4601',
 '9a0f78a9a9fb4e1ba5857d871f42f1a8']
 
-function VideoFinder() {
+function VideoFinder({setRecipe}) {
     const [vidQuery ,setVidQuery] = useState("")
-    const [number,setNumber] = useState(3)
-    const [vidResponse,setVidResponse] = useState([])
+    const [number,setNumber] = useState(12)
+    // const [vidResponse,setVidResponse] = useState([])
     const handleVideoRequest = (e) =>
     {
         e.preventDefault();
         axios.get(`https://api.spoonacular.com/food/videos/search?query=${vidQuery}&number=${number}&apiKey=${APIKEY[3]}`)   
         .then((response) =>
         {
+            // console.log(response)
             var responseResults = []
             response.data.videos.map((video) =>
             {
@@ -26,29 +27,16 @@ function VideoFinder() {
                 responseResults.push({object})
             })
 
-            setVidResponse(responseResults)
+            setRecipe(responseResults)
         })
     }
     return (
         <div className='video-finder'>
-            I am video finder 
-            <form className='video-form'>
-                <input onChange={e=>setVidQuery(e.target.value)} className='input' placeholder='search for any cooking videos' value ={vidQuery}/>
-                <button type = 'submit' onClick={handleVideoRequest} >ask </button>
+            <h2> search for recipe -videos</h2>
+            <form className='form' className='video-form'>
+                <input className ='form-input' onChange={e=>setVidQuery(e.target.value)} placeholder='search for any cooking videos' value ={vidQuery}/>
+                <button  className ='form-btn' type = 'submit' onClick={handleVideoRequest} ><i class="fas fa-search"></i> </button>
             </form>
-            <div className='video-response'>
-                video response
-                {console.log(vidResponse)}
-                {
-                    vidResponse.map((item)=>
-                    (                    
-                    <div key={item.youTubeId} className='video-response-item'>
-                            <h3>{item.shortTitle}</h3>
-                            <img src = {item.thumbnail} />
-                            
-                    </div>))
-                }
-            </div>
         </div>
     )
 }

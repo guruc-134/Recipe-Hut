@@ -1,13 +1,26 @@
-.profile-details
-{
-    display: flex;
-    flex-direction: column;
-    text-align: left !important;
-    width: 100%;
-    background-color: rgb(189, 45, 45);
-    &-section
-    {
-        flex:1;
-    }
-}
+.profile{
 
+    background-color: pink; 
+    min-height: 80vh;
+    // display: flex;
+    margin: 1rem auto;
+    &-favourites
+    {
+        h3{
+            text-decoration: underline;
+            text-transform: capitalize;
+        }
+        background-color: blue;
+        margin-right: 2rem;
+        margin: 1rem auto;
+        .fav-items{
+            display: flex;
+            width: 60%;
+            margin: 1rem auto;
+            flex-direction: column;
+            height: 70vh;
+            overflow-y: scroll;
+        }
+    }
+
+}

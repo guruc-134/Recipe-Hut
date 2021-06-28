@@ -1,4 +1,55 @@
+@mixin formInputStyle {
+    border:none;
+    min-width : 100px;
+    width:50%;
+    outline:none;
+    padding:.6em;
+    margin: 1rem;
+    border-radius: 10px;
+    color:rgb(0, 0, 0);
+    background-color:rgb(255, 255, 255);
+    text-align: center;
+}
+.form-input::-webkit-input-placeholder 
+{
+    color:rgba(119, 106, 106, 0.733);
+    text-align: center;
+}
+.form-input:-ms-input-placeholder {
+    color:rgba(119, 106, 106, 0.733);
+    text-align: center;
+}  
+.form-input::placeholder {
+    color:rgba(119, 106, 106, 0.733);
+    text-align: center;
+}
 .video-finder
 {
-    background-color: brown;
+    margin:2rem auto;
+    width: 80%;
+    background: rgba( 255, 255, 255, 0.20 );
+    box-shadow: 0 4px 22px 0 rgba(31, 58, 18, 0.37);
+    backdrop-filter: blur( 5.0px );
+    -webkit-backdrop-filter: blur( 5.0px );
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding:1rem;
+}
+.form{
+width:100%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+&-input
+{
+    @include formInputStyle();
+}
+&-btn
+{
+    @include formInputStyle();
+    padding:.6em;
+    width:fit-content;
+}
 }

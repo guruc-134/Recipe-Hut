@@ -1,54 +1,55 @@
 @mixin formInputStyle {
     border:none;
-    width:20%;
+    min-width : 100px;
+    width:50%;
     outline:none;
-    padding:.5em;
+    padding:.6em;
     margin: 1rem;
     border-radius: 10px;
-    color:white;
-    background-color: tomato;
+    color:rgb(0, 0, 0);
+    background-color:rgb(255, 255, 255);
     text-align: center;
 }
-.form-input::-webkit-input-placeholder { /* Edge */
-    color:white;
+.form-input::-webkit-input-placeholder 
+{
+    color:rgba(119, 106, 106, 0.733);
     text-align: center;
-  }
-  
-  .form-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color:white;
+}
+.form-input:-ms-input-placeholder {
+    color:rgba(119, 106, 106, 0.733);
     text-align: center;
-
-  }
-  
-  .form-input::placeholder {
-    color:white;
+}  
+.form-input::placeholder {
+    color:rgba(119, 106, 106, 0.733);
     text-align: center;
-  }
+}
 .recipe-finder
 {
-    margin:2rem;
-    background-color:palegoldenrod;
+    margin:2rem auto;
+    width: 80%;
+    background: rgba( 255, 255, 255, 0.20 );
+    box-shadow: 0 4px 22px 0 rgba(31, 58, 18, 0.37);
+    backdrop-filter: blur( 5.0px );
+    -webkit-backdrop-filter: blur( 5.0px );
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     padding:1rem;
 }
 .form{
+width:100%;
 display: flex;
+flex-direction: row;
+flex-wrap: wrap;
 align-items: center;
 justify-content: center;
 &-input
 {
     @include formInputStyle();
 }
-&-input > option
-{
-    text-align: center;
-}
-&-select{
-    @include formInputStyle();
-}
 &-btn
 {
     @include formInputStyle();
-    padding:.8em;
+    padding:.6em;
     width:fit-content;
 }
 }

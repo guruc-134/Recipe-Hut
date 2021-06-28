@@ -60,7 +60,7 @@ const ProfilePage = () => {
                             favs.map((item) => {
                                 return(
                                     item.found?
-                                    <Card key = {item.id} recipe = {item} fromFavs = {true} />:null)
+                                    <Card className='fav-card' key = {item.id} recipe = {item} fromFavs = {true} />:null)
                                 })
                             }
                     </div>

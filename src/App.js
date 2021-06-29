@@ -67,12 +67,12 @@ function App() {
           <UserContext.Provider value ={providerValue}>
         <Switch>
         <Route path ='/community/write' render = {() =>!currentUser?
-      (<Redirect to = '/'/>)
-      :
-      (<Write/>) }
-      />
+        (<Redirect to = '/'/>)
+        :
+        (<Write/>) }
+        />
           <Route exact path ="/search" component = {SearchPage}/>
-          <Route exact path='/profile' render = {() =>!currentUser?
+          <Route exact path='/profile/:userId' render = {() =>!currentUser?
         (<Redirect to = '/'/>)
         :
         (<ProfilePage/>) }
@@ -87,7 +87,7 @@ function App() {
         :
         (<SigninSignup/>) }
         />
-          <Route path ="/recipe/:recipeId" component = {RecipePage}/>
+          <Route path ="/:from/:recipeId" component = {RecipePage}/>
           <Route  path ="/" component = {HomePage}/>
         </Switch>
           </UserContext.Provider>

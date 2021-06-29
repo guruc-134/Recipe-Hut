@@ -11,7 +11,7 @@ const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
 '4a5b12ec6f3d4159b4b160e8808f4601',
 '9a0f78a9a9fb4e1ba5857d871f42f1a8']
 
-function RecipeFinder({setRecipe}){
+function RecipeFinder({setRecipe,setIsVideo}){
     const [query,setQuery] = useState('')
     const user = useContext(UserContext)
     const [number,setNumber] = useState(30)
@@ -23,7 +23,13 @@ function RecipeFinder({setRecipe}){
         setQuery(e.target.value)
         e.target.value = ""
     }
-
+    const obtainDate = (date) =>{
+        var dd = String(date.getDate()).padStart(2, '0');
+        var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = date.getFullYear();
+        date = `${dd}-${mm}-${yyyy}`
+        return date
+    }
     const handleRecipes = (responseObjects)=>
     {
         // console.log('handle Recipes input ---',responseObjects)
@@ -69,6 +75,7 @@ function RecipeFinder({setRecipe}){
                 // console.log(recipeResults)
             }
             setRecipe(recipeResults)
+            setIsVideo(false)
     }
 
     //  API calling
@@ -76,8 +83,9 @@ function RecipeFinder({setRecipe}){
     {
         e.preventDefault();
         if(user){
-            const searchedOn = Date()
-            firestore.collection(`/users/${user.id}/searchHistory`).add({query:query,searchedOn:searchedOn})
+            const searchedOn = obtainDate(new Date())
+            const timeStamp = new Date()
+            firestore.collection(`/users/${user.id}/searchHistory`).add({timeStamp:timeStamp,query:query,searchedOn:searchedOn,icon:"ri-input-method-fill"})
         }
         // console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
         axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)

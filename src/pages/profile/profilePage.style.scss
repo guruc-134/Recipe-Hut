@@ -1,26 +1,189 @@
 .profile{
-
-    background-color: pink; 
-    min-height: 80vh;
-    // display: flex;
-    margin: 1rem auto;
-    &-favourites
-    {
-        h3{
-            text-decoration: underline;
-            text-transform: capitalize;
+    .user-tag,.admin-tag{
+        background: rgba(255, 255, 255, 0.315);
+        position: absolute;
+        top:1rem;
+        left: 1rem;;
+        -webkit-backdrop-filter: blur( 3px );
+        padding: .3em;
+        border-radius: 10px;
+        -webkit-box-shadow: 0 0 10px rgb(117, 117, 110);
+        -moz-box-shadow: 0 0 10px rgb(0,0,0);;
+        transition: all .3s ease;
+        &:hover{
+            transform: scale(1.1);
         }
-        background-color: blue;
-        margin-right: 2rem;
-        margin: 1rem auto;
-        .fav-items{
-            display: flex;
-            width: 60%;
-            margin: 1rem auto;
-            flex-direction: column;
-            height: 70vh;
-            overflow-y: scroll;
+    }
+    .admin-tag{
+        background: rgba(30, 208, 231, 0.671);
+    }
+
+    h1{
+        text-decoration: underline;
+        text-transform: capitalize;
+    }
+    min-height: 80vh;
+    width: 90%;
+    margin: 2rem auto;
+    position: relative;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.315);
+    -webkit-backdrop-filter: blur( 3px );
+    -webkit-box-shadow: 0 0 10px rgb(0,0,0);
+    -moz-box-shadow: 0 0 10px rgb(0,0,0);
+    &-details{
+        width:80%;
+        margin:1rem auto;
+        text-align: left;
+        h3{
+            padding:.5rem;
+            span{
+                text-decoration: underline;
+                text-transform: capitalize;
+            }
         }
     }
 
+    &-favourites
+    {
+        width:80%;
+        margin: 1rem auto;
+        h3
+        {
+            font-size: 1.4rem;
+            i{
+                color:rgba(238, 44, 44, 0.753);
+                font-size: 1.3rem;
+                padding:1em;
+            }
+            text-decoration: underline;
+            text-transform: capitalize;
+        }
+
+        .fav-items{
+            position: relative;
+            .fav-card{
+                width: 30%;
+                margin:2rem;
+            }
+            .hide{
+                font-size: 1.2rem;
+                position: absolute;
+                right:0px
+            }
+            display: flex;
+            width: 100%;
+            margin: 1rem auto;
+            flex-direction: row;
+            flex-wrap: wrap;
+            max-height: 70vh;
+            overflow-y: scroll;
+           &::-webkit-scrollbar {
+                width: 6px;
+                height:6px;
+            }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.473);
+                -webkit-backdrop-filter: blur( 3px );
+                border-radius: 10px;
+                border: 1px solid rgba(255, 255, 255, 0.596);
+              }
+             &::-webkit-scrollbar-track {
+                background: transparent
+              }
+        }
+        
+    }
+        .searchHistory{
+        padding:1rem 0 1rem 0;
+
+            width:80%;
+            margin: 1rem auto;
+            h3
+            {
+                font-size: 1.4rem;
+                i{
+                    color:rgba(44, 160, 238, 0.753);
+                    font-size: 1.3rem;
+                    padding:1em;
+                }
+                text-decoration: underline;
+                text-transform: capitalize;
+            }
+            .history-items{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                
+                    position: relative;
+                    .hide{
+                        font-size: 1.2rem;
+                        position: absolute;
+                        right:0px
+                    }
+                    display: flex;
+                    width: 80%;
+                    margin: 1rem auto;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    max-height: 40vh;
+                    overflow-y: scroll;
+                   &::-webkit-scrollbar {
+                        width: 6px;
+                        height:6px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        border-radius: 10px;
+                        background: rgba(255, 255, 255, 0.473);
+                        -webkit-backdrop-filter: blur( 3px );
+                        border-radius: 10px;
+                        border: 1px solid rgba(255, 255, 255, 0.596);
+                      }
+                     &::-webkit-scrollbar-track {
+                        background: transparent
+                      }
+                
+                div{
+                    
+                    p{
+                        border-radius: 10px;
+                        background: rgba(255, 255, 255, 0.473);
+                        -webkit-backdrop-filter: blur( 3px );
+                        border-radius: 10px;
+                        border: 1px solid rgba(255, 255, 255, 0.596);
+                        margin:1rem;
+                        padding:.3em;
+                        span{
+                            padding:.2em;
+                        }
+                        .icon{
+                            font-size: 1.3rem;
+                        }
+                        .query{
+                            text-transform: capitalize;
+                        }
+                        .searchedOn{
+                            font-size: .8rem;
+                            color: rgb(68, 65, 65);
+                        }
+                        transition: all .3s ease;
+                    }
+                    p:hover{
+                        transform: scale(1.05);
+                    }
+                }
+            }
+        }
+
+
+        .signOut{
+            position: absolute;
+            padding: 1em;
+            top:2rem;
+            right:1rem;
+            text-align:right;
+            font-size: 1.2rem
+        }
 }

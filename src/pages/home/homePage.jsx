@@ -22,7 +22,7 @@ const HomePage = () => {
         {
             return(
                 item.ele?
-                <Card key = {item.ele.id} recipe = {item.ele} docId ={docId} index={item.ind}/>:null
+                <Card from ={'recipe'} key = {item.ele.id} recipe = {item.ele} docId ={docId} index={item.ind}/>:null
                 );
         })  
     

@@ -19,9 +19,10 @@ import '../../sass/pagination.styles.scss'
 import './search-page.style.scss';
 function SearchPage() {
     const [recipe, setRecipe] = useState([]);
-
+    const [isVideo,setIsVideo] = useState(false)
     const [pageNumber, setPageNumber] = useState(0)
     const   itemsPerPage = 10
+    var slide = 0
     const pagesVisited = pageNumber * itemsPerPage
     var pageCount = Math.ceil(recipe.length / itemsPerPage)
     //  recipe search result cards
@@ -29,7 +30,7 @@ function SearchPage() {
     .map( item =>
         (
         item.found?
-        <Card key = {item.id} recipe = {item}/>:null))
+        <Card from={'search'} key = {item.id} recipe = {item}/>:null))
 
     const changePage = ({selected}) =>
     {
@@ -50,47 +51,44 @@ function SearchPage() {
             <div class="slider">
                 {/*  put tool tip */}
                 <div className='tags'>
-                <a href="#name" onClick={slide = 0}><i class="ri-input-method-fill"></i></a>
-                <a href="#video" onClick={slide =1}><i class="ri-youtube-fill"></i></a>
-                <a href="#ingredients"><i className="fas fa-utensils"></i></a>
+                <a href="#name" ><i class="ri-input-method-fill"></i></a>
+                <a href="#video"><i class="ri-youtube-fill"></i></a>
+                {/* <a href="#ingredients"><i className="fas fa-utensils"></i></a> */}
                 </div>
 
                 <div class="slides">
                     <div id="name">    
                     <RecipeFinder recipe={recipe}
                     setRecipe={setRecipe}
+                    setIsVideo = {setIsVideo}
                     />
                     </div>
                     <div id="video">
-                        <VideoFinder setRecipe = {setRecipe}/>
+                        <VideoFinder setRecipe = {setRecipe} setIsVideo = {setIsVideo}/>
                     </div>
-                    <div id="ingredients">
+                    {/* <div id="ingredients">
                         coming soon !
-                    </div>
+                    </div> */}
                 </div>
-                {slide === 0?
-                        <div>
-    
-                            <div className='recipe-cards-displayer'>
-                            {
-                                displayItems
-                            }
-                            </div>
-                        </div>:null
-                    }
+                </div>
+                {recipe.length>0?
+                <div>
                     {
-                            !slide ===1?
-                            <div>
-
-                        
+                    !isVideo?
+                    <div className='recipe-cards-displayer'>
+                        {
+                        displayItems
+                        }
+                    </div>:null}
+                    {
+                    isVideo?
                         <div className='video-cards-displayer'>
                             {
                                 displayVideoItems
                             }
-                        </div>
-                            </div> : null
-                        }
-                </div>
+                    </div> :null
+                    }
+                </div>:null}
             </div>
                 {/* <div className='bouncing-icons bouncing-icons-up'>
                 <Burger className='svg burger'/>

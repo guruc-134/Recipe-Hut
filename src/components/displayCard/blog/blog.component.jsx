@@ -1,7 +1,12 @@
 import React, { useState,useEffect, useContext} from 'react'
 import './blog.style.scss'
+import {Link} from 'react-router-dom'
+import { UserContext } from '../../../context/userContext';
+
+
 function BlogCard({blog}) {
     const [readMsg, setReadMsg] = useState("read more")
+    const user = useContext(UserContext)
     const readMore = () =>{
         if(readMsg === "read less")
             setReadMsg("read more")
@@ -17,8 +22,19 @@ function BlogCard({blog}) {
                     { blog.files?<img src = {blog.files} alt = 'blogPIc'/>:<div>no image provided by the user</div>}
                     </div>
                     <div className='blog-content-l-header'>
-                        {console.log(blog.postedBy)}
+                        {/* {console.log(blog.postedBy)} */}
                         <p className = 'blog-author'>posted by : {blog.postedBy.displayName}</p>
+                        <Link
+                            to={
+                                {
+                                    pathname:`/profile/user-${blog.postedBy.id}`,
+                                    state:{
+                                        fromNavbar:false
+                                    }
+                                }
+                            }>
+                        Click here
+                            </Link>
                         <p className = 'blog-author'>-on : {blog.date}</p>
                     </div>    
                 </div>

@@ -5,7 +5,7 @@ import { UserContext } from '../../context/userContext';
 import {Link} from 'react-router-dom'
 import RecipePage from '../../pages/recipePage/recipePage';
 
-function Card({recipe,fromFavs,docId='search', index='rEciPeIndso0134'}) {
+function Card({recipe,from,fromFavs,docId='search', index='rEciPeIndso0134'}) {
     const currentUser  = useContext(UserContext)
     const [recipeLiked, setRecipeLiked]  = useState(false)
     
@@ -59,7 +59,7 @@ function Card({recipe,fromFavs,docId='search', index='rEciPeIndso0134'}) {
             <Link className='expand-recipe'
                     to={
                         {
-                            pathname:`/recipe/${docId}-${recipe.id}-${index}`,
+                            pathname:`/${from}/${docId}-${recipe.id}-${index}`,
                             recipe:{...recipe}
                         }
                     }>

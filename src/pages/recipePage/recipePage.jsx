@@ -14,6 +14,7 @@ const baseUrl = 'https://api.spoonacular.com';
 function RecipePage(props) {
     const [recipe,setRecipe] = useState("")
     const extractDetails = () =>{
+        console.log(props)
         console.log(props.match.params.recipeId)   
         const [docId,recipeId,index] = props.match.params.recipeId.split('-')
         return {'docId':docId,'recipeId':recipeId,'index':index}
@@ -48,7 +49,6 @@ function RecipePage(props) {
 
             firestore.collection('home-PageRecipes').doc(docId).get()
             .then( response =>{
-                console.log(response.data().recipeResults[index])
                 setRecipe(response.data().recipeResults[index])
             })
         }
@@ -64,14 +64,12 @@ function RecipePage(props) {
     },[])
     return (
         <div className='recipePage'>
-            {console.log(props,props.location.pathname)}
             <div className ='back-btn'> 
             <Link to="/recipe"><i className="fa fa-arrow-circle-left" aria-hidden="true"></i></Link>
             </div>
             {
             recipe?
             <div>
-                {console.log(recipe)}
                 <div className='headerDiv'>
                 <h1>{recipe.title}</h1>
                 <img src = {recipe.image} alt='recipeImg'></img>

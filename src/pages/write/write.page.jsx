@@ -2,9 +2,7 @@ import React , {useState, useContext, useEffect} from 'react'
 import   {firestore} from '../../backend/firebase/firebase.utils';
 import ReactDOM from "react-dom";
 import { UserContext } from '../../context/userContext';
-import FormInput from '../../components/form-input/form-input.component';
 import './write.styles.scss'
-import CustomButton from '../../components/customButton/custom-button.component';
 import {Link} from 'react-router-dom'
 
 
@@ -32,17 +30,18 @@ function Write() {
             console.log('not a valid input')
         }
         var today =new Date()
-        var dd = String(today.getDate()).padStart(2, '0') -1;
+        var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
         today = yyyy +'-' + mm +'-' + dd;
+        var todayDisplay = dd+'-' + mm + '-' + yyyy
         console.log(today)
         var blogObject = {
             header:blogHeader,
             content:blogContent,
             files:blogFile,
             postedBy:user,
-            date:today
+            date:todayDisplay
         }
         firestore.collection('blogs').doc('daily_blogs').collection(today).add(blogObject)
         resetStates()
@@ -159,7 +158,7 @@ function Write() {
 
                         </div>
                     </div>
-                    <CustomButton type='submit' children="Post"></CustomButton>
+                    <button type='submit' children="Post"></button>
                 </form>
             </div>
         </div>

@@ -4,6 +4,7 @@
         position: absolute;
         top:1rem;
         left: 1rem;;
+        font-weight: 800;
         -webkit-backdrop-filter: blur( 3px );
         padding: .3em;
         border-radius: 10px;
@@ -15,7 +16,8 @@
         }
     }
     .admin-tag{
-        background: rgba(30, 208, 231, 0.671);
+        background: rgba(30, 100, 231, 0.671);
+        color: white;
     }
 
     h1{

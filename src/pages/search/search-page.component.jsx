@@ -3,7 +3,7 @@ import Card from '../../components/displayCard/card.component';
 import RecipeByIngredient from '../../components/Finders/recipeByIngredent-finder/recipeByIngredient.component';
 import RecipeFinder from '../../components/Finders/recipeFinder/recipe-finder.component'
 import VideoFinder from '../../components/Finders/videoFinder/video-finder.component'
-
+import ReactTooltip from "react-tooltip";
 import VideoCard from '../../components/displayCard/video/VideoCard.component';
 import ReactPaginate from 'react-paginate';
 import '../../sass/pagination.styles.scss'
@@ -51,8 +51,8 @@ function SearchPage() {
             <div class="slider">
                 {/*  put tool tip */}
                 <div className='tags'>
-                <a href="#name" ><i class="ri-input-method-fill"></i></a>
-                <a href="#video"><i class="ri-youtube-fill"></i></a>
+                <a  href="#name" ><i data-tip data-for="name" class="ri-input-method-fill"></i></a>
+                <a href="#video"><i  data-tip data-for="video" class="ri-youtube-fill"></i></a>
                 {/* <a href="#ingredients"><i className="fas fa-utensils"></i></a> */}
                 </div>
 
@@ -109,6 +109,13 @@ function SearchPage() {
                 <Ramen className= 'svg ramen'/>
                 </div> */}
 
+                {/* tooltips */}
+                <ReactTooltip id="name" place="top" effect="solid" >
+                    get recipe articles
+                </ReactTooltip>
+                <ReactTooltip id="video" place="top" effect="solid">
+                    get recipe videos from youtube
+                </ReactTooltip>
                 {
                     pageCount >1 ?
                     <ReactPaginate

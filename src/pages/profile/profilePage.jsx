@@ -5,6 +5,7 @@ import {firestore} from '../../backend/firebase/firebase.utils';
 import { UserContext } from '../../context/userContext';
 import Card from '../../components/displayCard/card.component';
 import {auth} from '../../backend/firebase/firebase.utils'
+import ReactTooltip from "react-tooltip";
 
 const ProfilePage = (params) => {
     const user = useContext(UserContext)
@@ -23,7 +24,16 @@ const ProfilePage = (params) => {
     }
 
     const getUserInfo = () =>{
+        if(location.state !== undefined)
         setFromNav(location.state.fromNavbar)
+        else{
+            if(incomingUser && user)
+          {  var ans = incomingUser.id === user.id
+            setFromNav(ans)}
+            else{
+                setFromNav(false)
+            }
+        }
         extractDetails()
     }
     const getSearchHistory = () =>
@@ -102,6 +112,7 @@ const ProfilePage = (params) => {
                 <div className = 'profile-details'>
                     {
                         incomingUser?<div>
+                            <p>public profile view</p>
                         <span className={`${incomingUser.isAdmin?"admin-tag":"user-tag"}`}>{incomingUser.isAdmin?"Admin":"User"}</span>
                         <h3><span>Name:</span>{incomingUser.displayName}</h3>
                         <h3><span>Display Name:</span> Cherry</h3>
@@ -124,13 +135,13 @@ const ProfilePage = (params) => {
                 </div>
                 <div className ='profile-favourites' onClick={getuserDataFromFireStore}>
                     <h3 className='favs-heading'>
-                        <i  onClick ={showFavItems} className="fas fa-heart"></i>
+                        <i data-tip data-for="see-favs" onClick ={showFavItems} className="fas fa-heart"></i>
                         favourites                  
                         <i onClick ={showFavItems}  className="fas fa-heart"></i>
                         </h3>
                     {favs.length>0? 
                     <div className='fav-items'>
-                        <i  onClick ={hideFavItems}className="hide fas fa-window-close"></i>
+                        <i  onClick ={hideFavItems} data-tip data-for="hide-favs" className="hide fas fa-window-close"></i>
                         {
                             favs.map((item) => {
                                 return(
@@ -144,11 +155,11 @@ const ProfilePage = (params) => {
 
                 <div className = 'searchHistory' onClick = {getSearchHistory}>
                     <h3>
-                    <i onClick={showHistoryItems}className="fas fa-history"></i>History
+                    <i data-tip data-for="see-history" onClick={showHistoryItems}className="fas fa-history"></i>History
                     <i onClick={showHistoryItems}className="fas fa-history"></i>
                     </h3>
                     {history.length>0? <div className='history-items'>
-                        <i  onClick ={hideHistoryItems}className="hide fas fa-window-close"></i>
+                        <i data-tip data-for="hide-history" onClick ={hideHistoryItems}className="hide fas fa-window-close"></i>
                         {
                             history.map((item) =>
                             <div key ={item.id}>
@@ -169,7 +180,18 @@ const ProfilePage = (params) => {
                 </div>
                 </div>):null
             }
-                
+                <ReactTooltip id="see-favs" place="bottom" effect="solid" >
+                    view
+                </ReactTooltip>
+                <ReactTooltip id="hide-favs" place="bottom" effect="solid" >
+                    hide
+                </ReactTooltip>
+                <ReactTooltip id="hide-history" place="bottom" effect="solid" >
+                    hide
+                </ReactTooltip>
+                <ReactTooltip id="see-history" place="bottom" effect="solid" >
+                    view
+                </ReactTooltip>
                 {/*  optional persons bolgs will be present here with the #id tags 
                 so that when we press here in teh a tags wil lead them to that page */}
     </div>

@@ -1,5 +1,39 @@
 .home-page
-{
+{    
+    .welcome-header{
+        text-align: center;
+        margin:0px auto;
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+    position: relative;
+    .color-picker{
+        position: fixed;
+        top:7rem;
+        left: 2rem;
+        display: flex;
+        flex-direction: column;
+        .color-secondary{
+            background-color: var(--secondary);
+        }
+        .color-primary{
+            background-color: var(--primary);
+        }
+        div{
+            margin: 1rem;;
+            width:40px;
+            border-radius: 5px;     
+            -webkit-box-shadow: 0 2px 8px rgb(0,0,0);
+            -moz-box-shadow: 0 2px 8px rgb(0,0,0);
+            input{
+                width:15px;
+                border:none;
+                margin: .3rem;
+                outline: none;
+            }
+
+        }
+    }
     width: 85%;
     border-radius: 20px;
     margin: auto;
@@ -9,6 +43,7 @@
     .recipe-cards
     {
         display: flex;
+        margin-top: 5rem;;
         justify-content: space-around;
         flex-direction: row;
         flex-wrap: wrap;

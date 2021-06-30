@@ -3,6 +3,8 @@ import  {firestore} from '../../backend/firebase/firebase.utils';
 import {Link} from 'react-router-dom'
 import BlogCard from '../../components/displayCard/blog/blog.component';
 import './communityPage.styles.scss'
+import ReactTooltip from "react-tooltip";
+
 function CommunityPage() {
     // const user = useContext(UserContext)
     const [pageBlogs, setPageBlogs] = useState("")
@@ -14,7 +16,7 @@ function CommunityPage() {
         return date
     }
     const [date, setDate] = useState(obtainDate(new Date()))
-    const getBlogsFromFireBase = (date) =>
+    const getBlogsFromFireBase = (date,from='session') =>
     {
         console.log('passed date',date)
             const array = []
@@ -33,34 +35,50 @@ function CommunityPage() {
                         })
                         array.reverse()
                         setPageBlogs(array)
+                        if(from ==='session')
+                        sessionStorage.setItem('blogs',JSON.stringify(array))
+                        
                 })
     }
+    const handleSessionStorage=()=>{
+        if (!sessionStorage.getItem('blogs') || sessionStorage.getItem('blogs').length === 0)
+        {
+            console.log('getting from firebase')
+            getBlogsFromFireBase();
+        }
+
+        else{
+            console.log('getting from sessionStorage')
+            setPageBlogs(JSON.parse(sessionStorage.getItem('blogs')))
+        }
+    }
     useEffect(() => {
-        getBlogsFromFireBase()
+        handleSessionStorage(date)
     }, [])
     const handleChange = (e) =>{
-        console.log('date changed',e.target.value)
+        // console.log('date changed',e.target.value)
         setDate(e.target.value)
     }
     const submitForm = (e) =>{
         e.preventDefault();
-            getBlogsFromFireBase(date)
+        getBlogsFromFireBase(date,"form")
     }
 
     return (
         <div className = "community-page">
             <div className = 'community-page-write-div'>
-                <Link className = 'community-page-write' to='/community/write'>
+                <Link  data-tip data-for="share-recipes" className = 'community-page-write' to='/community/write'>
                     <h3> Share your recipes <i className="ri-ball-pen-fill"></i></h3>
                 </Link>
             </div>
             <div className='community-page-sidebar'>
-                get recipes by date
-                <form className='date-form'onSubmit = {submitForm}>
-                <input type='date' value={date} onChange={handleChange} min="2021-06-24" max ={obtainDate( new Date())}/>
-                <button type='submit'>fetch</button>
+                <form className='date-form' onSubmit = {submitForm}>
+                <input className='date-form-ele' type='date'
+                 data-tip data-for="fetch-blogs"
+                value={date} onChange={handleChange}
+                min="2021-06-24" max ={obtainDate( new Date())}/>
+                <button className='date-form-ele' type='submit'><i className="fas fa-search"></i></button>
                 </form>
-
             </div>
                 {/*  displaying already written recipe blogs */}
                 <div className = 'blog-displayer'>
@@ -70,6 +88,13 @@ function CommunityPage() {
                             )): null
                     }
                 </div>
+
+                <ReactTooltip id="share-recipes" place="top" effect="solid" >
+                    share your recipes with the world
+                </ReactTooltip>
+                <ReactTooltip id="fetch-blogs" place="left" effect="solid" >
+                    fetch blogs based on date
+                </ReactTooltip>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 .community-page{
     width:90%;
-    background-color: paleturquoise;
     margin:2rem auto;
     &-write{
         background:white;
@@ -8,23 +7,40 @@
         text-decoration: none;
         margin:auto;
         &-div{
+            padding:.6em;
+        -webkit-box-shadow: 0 0 8px rgb(0,0,0);
+        -moz-box-shadow: 0 0 8px rgb(0,0,0);
+        background: rgba(255, 255, 255, 0.473);
         width:30%;
-        border-radius: 20px;
-        margin: 0px auto;
-        border: 1px dashed black;
+        border-radius: 10px;
+        margin: 10px auto;
         }
     }
 .date-form{
+    width:80%;
+    margin: 10px auto;
+    color: rgb(0, 0, 0);
+    button{
+        border-radius: 10px;
+        font-size: .7rem;
+        padding: .9em;
+    }
+    input{
+        font-size: .6rem;
+        border-radius: 10px;
+    }
     input,button{
+        margin: .5rem;;
+        color: rgb(0, 0, 0);
         border: none;
         outline: none;
-        background-color: rgb(151, 142, 142);
-        padding:1em;
+        background-color: rgb(223, 217, 217);
+        padding:.8em;
     }
 }
 .blog-displayer{
-    background-color: palegreen;
-    width:60%;
+    padding:2em;
+    width:80%;
     margin: 1rem auto;
 }
 }

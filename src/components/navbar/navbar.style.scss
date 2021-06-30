@@ -1,11 +1,17 @@
 
 .navbar
 {
+    position:fixed;
+    top:0px;
+    z-index: 10;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgba(31, 73, 59, 0.473);
+    -webkit-box-shadow: 0 0 8px rgb(0,0,0);
+    -moz-box-shadow: 0 0 8px rgb(0,0,0);
+    backdrop-filter: blur( 8px );
+    background:rgba(255, 255, 255, 0.226);
     &-links{
         margin-top:2rem;
         // margin-right: 2rem;

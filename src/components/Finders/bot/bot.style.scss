@@ -26,13 +26,16 @@
     {
         width:80px;
         margin: 1.8rem;
+        -webkit-backdrop-filter: blur( 10px );
         i 
         {
+            -webkit-box-shadow: 0 0 8px rgb(0,0,0);
+                -moz-box-shadow: 0 0 8px rgb(0,0,0);
             padding: .6em;
             font-size: 2rem;;
             color:orangered;
             border-radius:50%;
-            background-color: rgba(128, 241, 241, 0.699);
+            background-color: rgba(66, 161, 161, 0.719);
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
     }

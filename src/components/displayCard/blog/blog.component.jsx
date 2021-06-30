@@ -15,15 +15,24 @@ function BlogCard({blog}) {
     }
     return (
         <div className = "blog-card" key = {blog.id}>
-                <p id='blog-title'>{blog.header}</p>
             <div className = 'blog-content'>
+                <p className='blog-title'>{blog.header}</p>
                 <div className='blog-content-l'>
                     <div className='blog-content-l-img'>
-                    { blog.files?<img src = {blog.files} alt = 'blogPIc'/>:<div>no image provided by the user</div>}
+                    { blog.files?<img src = {blog.files} alt = 'blogPIc'/>:<div className='no-imagediv'>
+                        <p>
+                            no image provided
+                        </p>
+                        <p>
+                    <i className="fas fa-image">
+                    </i>
+                        </p>
+                        </div>}
                     </div>
                     <div className='blog-content-l-header'>
                         {/* {console.log(blog.postedBy)} */}
-                        <p className = 'blog-author'>posted by : {blog.postedBy.displayName}</p>
+                        <p className = 'blog-author'>
+                            posted by : 
                         <Link
                             to={
                                 {
@@ -33,8 +42,11 @@ function BlogCard({blog}) {
                                     }
                                 }
                             }>
-                        Click here
+                        <span>
+                            {blog.postedBy.displayName}
+                        </span>
                             </Link>
+                                </p>
                         <p className = 'blog-author'>-on : {blog.date}</p>
                     </div>    
                 </div>

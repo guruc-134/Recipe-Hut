@@ -85,9 +85,9 @@ function Signup() {
             label='Confirm Password'
             required
           />
+        <p className='error-message'> {errorMessage} </p>
           <button class='sign-up-btn' type='submit'>SIGN UP</button>
         </form>
-        <p className='error-message'> {errorMessage} </p>
       </div>
     )
 }

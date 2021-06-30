@@ -3,7 +3,8 @@ import {firestore} from '../../backend/firebase/firebase.utils'
 import './card.style.scss'
 import { UserContext } from '../../context/userContext';
 import {Link} from 'react-router-dom'
-import RecipePage from '../../pages/recipePage/recipePage';
+import ReactTooltip from "react-tooltip";
+
 
 function Card({recipe,from,fromFavs,docId='search', index='rEciPeIndso0134'}) {
     const currentUser  = useContext(UserContext)
@@ -66,15 +67,26 @@ function Card({recipe,from,fromFavs,docId='search', index='rEciPeIndso0134'}) {
                     read more ...
                 </Link>
             </div>
-            <div className='card-buttons'>
+            <div className='card-buttons' data-tip data-for={`fav-${docId}-${index}`}>
                 { currentUser?(
-                    !fromFavs?(!recipeLiked?<button className = 'fav-recipe' onClick={addFav}>
-                   <i className="fa fa-heart small" aria-hidden="true"></i>
-                    </button>:<button className = 'fav-recipe' >
-                    <i className="fa fa-heart large" aria-hidden="true"></i>
-                    </button>):<p onClick ={removeFav}> <i className="far fa-trash-alt"></i></p>
+
+                    !fromFavs?(
+                        !recipeLiked?
+                        <button className = 'fav-recipe' onClick={addFav}>
+                            <i className="fa fa-heart small" aria-hidden="true"></i>
+                        </button>
+                        :<button className = 'fav-recipe' >
+                            <i className="fa fa-heart large" aria-hidden="true"></i>
+                        </button>)
+                        :<p onClick ={removeFav}> <i className="far fa-trash-alt"></i></p>
                     ) : null }
+            <ReactTooltip id={ `fav-${docId}-${index}`} place="bottom" effect="float" >
+                add to favourites
+            </ReactTooltip>
             </div>
+
+
+            {/*  tool tips */}
         </div>
     )
 }

@@ -6,7 +6,6 @@ import './signin.style.scss';
 function Signin() {
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
-
     const handleChange = (e) =>
     {
         const {value, name} = e.target;
@@ -27,6 +26,8 @@ function Signin() {
         catch (error)
         {
             console.log(error)
+            var errorbox = document.querySelector('.error-box')
+            if(errorbox) {errorbox.innerHTML = error.message}
         }
     }
     return (
@@ -51,6 +52,7 @@ function Signin() {
             label='password'
             required
         />
+        <p className='error-message'></p>
         <div className = 'buttons'>
         <button  type='submit'>
             Sign in

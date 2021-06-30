@@ -62,6 +62,7 @@ function App() {
   return (
     <div className="app">
       {/* { console.log('apikey',process.env.React_App_API_KEY)} */}
+      
       <Router>
       <Navbar currentUser={currentUser}/>
           <UserContext.Provider value ={providerValue}>
@@ -73,7 +74,7 @@ function App() {
         />
           <Route exact path ="/search" component = {SearchPage}/>
           <Route exact path='/profile/:userId' render = {() =>!currentUser?
-        (<Redirect to = '/'/>)
+        (<Redirect to = '/signin'/>)
         :
         (<ProfilePage/>) }
         />

@@ -1,10 +1,15 @@
 .blog-card{
-    background-color: rgba(241, 241, 199, 0.521);
+    background: rgba(255, 255, 255, 0.329);
+    box-shadow: 0 4px 22px 0 rgba(31, 58, 18, 0.37);
+    backdrop-filter: blur( 5.0px );
+    -webkit-backdrop-filter: blur( 5.0px );
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     width:60%;
     margin: 1rem auto;
     border-radius: 20px;
+    transition: all 1s ease;
     .blog-author{
-        background-color: pink;
         font-weight: 400;
         font-size: 1rem;
         color:rgb(124, 122, 122);
@@ -12,27 +17,40 @@
         margin:1rem;
     }
     .blog-content{
-        width: 100%;
-        background-color: teal;
-        // overflow: hidden;
-        #blog-title{
-            height: auto;
-            width: 100%;
-            background-color: pink;
-        }
+        width: 90%;
         white-space: pre-wrap;
         text-align: left;
         padding:1em;
-        // min-height: 200px;
+        .blog-title{
+            font-size: 1.4rem;;
+            font-weight: 600;
+            padding: .2em;
+            overflow-x:hidden;
+            width:90%;
+            margin: 1rem auto;
+        }
         &-l{
             width:100%;
             padding-top:1em;    
             display: flex;
-            background-color: maroon;
             justify-content: space-between;
             flex-direction: row;
             &-img{
                 flex:0.4;
+                .no-imagediv{
+                    background-color: rgba(255, 255, 255, 0.658);
+                    min-height: 10rem;
+                    border-radius: 10px;
+                    padding:1em;
+                    text-align: justify;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    p >i{
+                        color:rgba(63, 49, 49, 0.397);
+                        font-size:9rem;
+                    }
+                }
                 img{
                     width:100%;
                     min-height: 50%;
@@ -42,13 +60,32 @@
                 }
             }
             &-header{
-                // background-color: purple;
                 padding-left: 1em;
                 margin-left: 1em;
                 flex:0.6;
                 text-align: left;
+                .blog-author{
+                    a{
+                        color: black;
+                        span{
+                            text-decoration: underline;
+                            color: black;
+                        }
+                    }
+                    a:hover{
+                        font-weight: bold;
+                        transform: scale(1.1);
+                    }
+
+                }
             }
 
+        }
+        &-r{
+            font-size: 1.1rem;
+            width:80%;
+            margin:.2rem auto;
+            transition: all 1s ease;
         }
     }
     .read-more{

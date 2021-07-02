@@ -1,15 +1,16 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
 
 var firebaseConfig = {
-    apiKey: "AIzaSyDM5qlDNmlHcROMyMHbHxTATr45XgNJFPo",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "recipe-hut-134.firebaseapp.com",
     projectId: "recipe-hut-134",
     storageBucket: "recipe-hut-134.appspot.com",
-    messagingSenderId: "726025897399",
-    appId: "1:726025897399:web:f8d91beddf0274098e5432",
-    measurementId: "G-XMJL7X8Q38"
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_SENDER_ID,
+    appId:  process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId:process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 firebase.initializeApp(firebaseConfig);
 

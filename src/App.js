@@ -9,6 +9,8 @@ import ProfilePage from './pages/profile/profilePage';
 import CommunityPage from './pages/community/communityPage';
 import RecipePage from './pages/recipePage/recipePage';
 import Write from './pages/write/write.page';
+import Intro from './pages/intro/introPage';
+import Floater from './components/floaters/floater.component';
 
 import './sass/formInputs.scss'
 import {auth, createUserProfileDocument} from './backend/firebase/firebase.utils';
@@ -21,9 +23,10 @@ import {
 import SearchPage from './pages/search/search-page.component';
 import SigninSignup from './pages/signin-signout/signin-signup.component';
 import { UserContext } from './context/userContext';
-// const dotenv = require('dotenv')
-// dotenv.config()
-console.log('my env files',process.env.REACT_APP_NAME)
+import Game from './components/game/game'
+const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
+require('dotenv').config();
+
 function App() {
 
     const [currentUser,setCurrentUser] = useState({})
@@ -66,6 +69,8 @@ function App() {
       <Router>
       <Navbar currentUser={currentUser}/>
           <UserContext.Provider value ={providerValue}>
+          <Floater/>
+
         <Switch>
         <Route path ='/community/write' render = {() =>!currentUser?
         (<Redirect to = '/'/>)
@@ -83,14 +88,21 @@ function App() {
         :
         (<CommunityPage/>) }
         />
+        {/* <Route exact path='/community/game' render = {() =>!currentUser?
+                (<Redirect to = '/'/>)
+                :
+                (<Game/>) }
+                /> */}
+
           <Route exact path='/signin' render = {() =>currentUser?
         (<Redirect to = '/'/>)
         :
         (<SigninSignup/>) }
         />
+
           <Route path ="/:from/:recipeId" component = {RecipePage}/>
           <Route  path ="/" component = {HomePage}/>
-        </Switch>
+        </Switch>        
           </UserContext.Provider>
       </Router>
     </div>

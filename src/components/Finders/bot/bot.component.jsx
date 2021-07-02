@@ -1,13 +1,12 @@
 import SpeechRecognition from "../../../backend/SR_VS/sr_vs";
 import React ,{useState} from 'react'
 import {firestore} from '../../../backend/firebase/firebase.utils'
+import Chef from '../chef/chef.component'
 import ReactDOM from "react-dom";
 import axios from 'axios'
 import './bot.style.scss'
-const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
-'cc548ac21e2642999689cdff7acb3468',
-'8e743479e9f9467795afffbb26844379',
-'c7a232f614b84f2bb1df4d3d7a3bc567 ']
+const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
+
 
 function Bot() {
     const [diffX, setDiffX] = useState(0)
@@ -94,7 +93,6 @@ function Bot() {
                 if(answer)
                 {
                     document.querySelector('.chef-answer').style.boxShadow ="0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-                    document.querySelector('.chef-answer').style.border ="3px  solid black";
                     document.querySelector('.chef-answer').style.backgroundColor ="rgba(223, 185, 185, 0.733)";
                 }
 
@@ -135,6 +133,7 @@ function Bot() {
                 <div onClick={findFact}>
                     <i className="ri-repeat-2-line"></i>
                 </div>
+                {/* <Chef/> */}
                 <form className ='chef-form'>
                 <SpeechRecognition setQuestion = {setQuestion} shallStop = {!chefBtn} />
                     <input className ='chef-form-inp' onChange ={e =>setQuestion(e.target.value)} placeholder='nutrition related question' value = {question}/>

@@ -12,9 +12,14 @@ const navbar = ({currentUser}) => {
     return (
         <div className='navbar'>
             {/* <div className='header'>
-                <NavLink className='navbar-links-link' to = '/home'><img className="navbar-header-logo" src={`${process.env.PUBLIC_URL}/logo_RH.png`} alt="page_logo"></img></Link>                
+                <NavLink className='navbar-links-link' to = '/home'><img className="navbar-header-logo" src={`${process.env.PUBLIC_URL}/logo_RH.png`} alt="page_logo"></img></NavLink>                
             </div> */}
+
+                <h1>Recipe Hut</h1>            
             <div className='navbar-links'>
+                    {/* <NavLink className='navbar-links' data-tip data-for="intro" activeStyle={selected}  to = '/intro'>
+                    <i class="fas fa-info navbar-links-link"></i>
+                    </NavLink> */}
                 <NavLink className='navbar-links' data-tip data-for="home" activeStyle={selected}  to = '/home'>
                     <i className="ri-home-3-line navbar-links-link"></i>
                     </NavLink>

@@ -5,14 +5,14 @@
     -webkit-backdrop-filter: blur( 5.0px );
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    width:60%;
+    width:80%;
     margin: 1rem auto;
     border-radius: 20px;
     transition: all 1s ease;
     .blog-author{
         font-weight: 400;
         font-size: 1rem;
-        color:rgb(124, 122, 122);
+        color:rgb(49, 45, 45);
         text-align: right;
         margin:1rem;
     }
@@ -21,6 +21,7 @@
         white-space: pre-wrap;
         text-align: left;
         padding:1em;
+        font-weight: 600;
         .blog-title{
             font-size: 1.4rem;;
             font-weight: 600;
@@ -89,6 +90,89 @@
         }
     }
     .read-more{
-        color:rgb(124, 122, 122);
+        color:rgb(255, 253, 253);
+    }
+    .blog-reactions{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.3rem;
+        padding:1rem;
+        margin-left: 1rem ;
+        color:rgba(48, 47, 47, 0.726);
+    }
+    .blog-reactions-close{
+        text-align: right;
+    }
+    .blog-comment-input{
+        width: 80%;
+        display: none;
+        .blog-comment-form{
+            width: 80%;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+        textarea{
+            width:80%;
+        }
+        textarea , button{
+            margin: 1rem;
+            text-align: center;
+            border-radius: 10px;
+            padding: .5em;
+            border:none;
+            outline:none;
+            resize: none;
+        };
+    }
+    .comments-box{
+        max-height: 30vh;
+        overflow-y: scroll;
+        -webkit-box-shadow: 0 0 2px rgb(0,0,0);
+        -moz-box-shadow: 0 0 2px rgb(0,0,0);
+        background: rgba(255, 255, 255, 0.473);
+        border-radius: 10px;
+        margin: 1rem;
+        white-space: pre-wrap;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar {
+            width: .4rem;
+            height:6px;
+            }
+            &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+
+            background: rgba(29, 28, 28, 0.473);
+            -webkit-backdrop-filter: blur( 3px );
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.596);
+            }
+            &::-webkit-scrollbar-track {
+            background: transparent
+            }
+        .comment-content{
+            text-align: justify;
+            font-size: .9rem;
+            padding: .4em;
+            background-color: white;
+            margin:.6rem;
+            border-radius:10px;
+          
+            a{
+                text-align: right;
+                color:black !important;
+
+            }
+        }
+    }
+    .liked{
+        transform: scale(1.05);
+        color: rgb(52, 114, 231);
     }
 }

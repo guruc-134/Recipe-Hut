@@ -3,18 +3,14 @@ import axios from 'axios';
 import '../../../backend/SR_VS/sr_vs'
 import SpeechRecognition from "../../../backend/SR_VS/sr_vs";
 import './chef.style.scss'
-const APIKEY = ['8ab5fa53ef8f45d3a3d5c00e6966c9a3',
-'cc548ac21e2642999689cdff7acb3468',
-'8e743479e9f9467795afffbb26844379',
-'c7a232f614b84f2bb1df4d3d7a3bc567',
-'4a5b12ec6f3d4159b4b160e8808f4601',
-'9a0f78a9a9fb4e1ba5857d871f42f1a8']
+// console.log('my env files',)
+const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
+
 
 function Chef() {
     const [chefResponse, setChefResponse] = useState({});
     const [question,setQuestion] = useState("")
     const [chefBtn,setChefBtn] = useState(false)
-
     const handleChefQuestion = (e) =>
     {
         e.preventDefault();

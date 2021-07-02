@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import BlogCard from '../../components/displayCard/blog/blog.component';
 import './communityPage.styles.scss'
 import ReactTooltip from "react-tooltip";
-
+import Loader from '../../components/loader/loader.component'
 function CommunityPage() {
     // const user = useContext(UserContext)
     const [pageBlogs, setPageBlogs] = useState("")
@@ -18,20 +18,17 @@ function CommunityPage() {
     const [date, setDate] = useState(obtainDate(new Date()))
     const getBlogsFromFireBase = (date,from='session') =>
     {
-        console.log('passed date',date)
             const array = []
-            console.log('fetching from firebase')
             var today = obtainDate(new Date())
             var searchDate = today 
             if(date != null)
             searchDate = date
-            console.log('searchDate',searchDate)
             firestore.collection('blogs').doc('daily_blogs').collection(searchDate).get()
             .then( blogList =>
                 {
                     blogList.docs.map( item =>
                         {
-                            array.push({id:item.id, ...item.data()})
+                            array.push({['fbId']:item.id, ...item.data()})
                         })
                         array.reverse()
                         setPageBlogs(array)
@@ -63,9 +60,14 @@ function CommunityPage() {
         e.preventDefault();
         getBlogsFromFireBase(date,"form")
     }
-
+   
     return (
         <div className = "community-page">
+            {/* <div className='game-div'>
+            <Link  data-tip data-for="Game" className = 'community-page-game' to='/community/game'>
+                   Game
+                </Link>
+            </div> */}
             <div className = 'community-page-write-div'>
                 <Link  data-tip data-for="share-recipes" className = 'community-page-write' to='/community/write'>
                     <h3> Share your recipes <i className="ri-ball-pen-fill"></i></h3>
@@ -83,9 +85,9 @@ function CommunityPage() {
                 {/*  displaying already written recipe blogs */}
                 <div className = 'blog-displayer'>
                     {
-                        pageBlogs?(pageBlogs.map( blog=> 
+                        pageBlogs.length>0?(pageBlogs.map( blog=> 
                             <BlogCard blog={blog} key={blog.id}/>
-                            )): null
+                            )):<h2> There are no blogs for this day</h2>
                     }
                 </div>
 

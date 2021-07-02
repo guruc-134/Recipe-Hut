@@ -1,0 +1,120 @@
+// slider-intro effects
+
+.slider-intro {
+    width: 80%;
+    height:70%;
+    padding: 2em;;
+    margin:.5rem auto;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  .slides-intro {
+
+      background-color: pink;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    
+  }
+  .slides-intro::-webkit-scrollbar {
+    width: 1rem;
+    height:6px;
+  }
+  .slides-intro::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    
+    background: rgba(255, 255, 255, 0.473);
+    -webkit-backdrop-filter: blur( 3px );
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.596);
+  }
+  .slides-intro::-webkit-scrollbar-track {
+    background: transparent
+  }
+  .slides-intro > div {
+    //   using this property to prevent the scroll bar from being in the middle
+
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width:100%;
+    margin: 2rem;
+    background: rgba(255, 255, 255, 0.473);
+    -webkit-backdrop-filter: blur( 3px );
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.596);
+    border-radius: 10px;
+    transform-origin: center center;
+    transition: transform 0.5s;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .ri-youtube-fill{
+      color:red;
+      text-decoration: none;
+
+  }
+  .slider-intro{
+      .tags{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.3rem;
+        }
+        a{
+        text-decoration: none;
+        color:black;
+        padding: .6em;
+        i{
+              display: inline-flex;
+              padding:.6em;
+              background: rgba(255, 255, 255, 0.473);
+              box-shadow: 0 2px 10px 0 rgba(31, 58, 18, 0.37);
+              backdrop-filter: blur( 5.0px );
+              -webkit-backdrop-filter: blur( 3px );
+              border-radius: 10px;
+              border: 1px solid rgba(255, 255, 255, 0.596);
+              text-decoration: none;
+              align-items: center;
+              justify-content: center;
+              border-radius: 10px;
+              margin:1rem;
+              position: relative;
+            }
+        }
+    }
+  .slider-intro > a:active {
+    top: 10px;
+  }
+
+  @media screen and (max-width:800px){
+    .searchPage{
+
+    }
+.slider-intro{
+  width:80%;
+    .tags{
+        a{
+            font-size: 1.6rem;
+        }
+    }
+}  
+}
+
+@media screen and (max-width:1100px){
+  .slider-intro{
+    width:70%;
+      .tags{
+          a{
+              font-size: 1.8rem;
+          }
+      }
+  }  
+}

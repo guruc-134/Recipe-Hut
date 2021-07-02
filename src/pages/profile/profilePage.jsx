@@ -6,6 +6,7 @@ import { UserContext } from '../../context/userContext';
 import Card from '../../components/displayCard/card.component';
 import {auth} from '../../backend/firebase/firebase.utils'
 import ReactTooltip from "react-tooltip";
+import BlogCard from '../../components/displayCard/blog/blog.component';
 
 const ProfilePage = (params) => {
     const user = useContext(UserContext)
@@ -15,6 +16,7 @@ const ProfilePage = (params) => {
     const [incomingUser,setIncomingUser] = useState() 
     const [favs,setFavs] = useState([])
     const [history,setHistory] = useState([])
+    const [blogs,setBlogs] = useState([])
     const extractDetails = () =>{
         var queryString = handle.userId.split("-")
         firestore.doc(`/users/${queryString[1]}`).get()
@@ -49,6 +51,22 @@ const ProfilePage = (params) => {
                     
                 })
                 setHistory(arr)
+        })
+    }
+
+    const getBlogs = () =>{
+        const arr = []
+        firestore.collection(`/users/${user.id}/myBlogs`).get()
+        .then((snapshot) =>
+        {
+            // eslint-disable-next-line array-callback-return
+            snapshot.docs.map( item =>
+                {
+                    arr.push({id:item.id, ...item.data()})
+                    
+                })
+                console.log(arr)
+                setBlogs(arr)
         })
     }
     const hideFavItems = () =>
@@ -127,7 +145,7 @@ const ProfilePage = (params) => {
             <div className = 'profile-details'>
             <span className={`${user.isAdmin?"admin-tag":"user-tag"}`}>{user.isAdmin?"Admin":"User"}</span>
                     <h3><span>Name:</span>{user?user.displayName:'login' }</h3>
-                    <h3><span>Display Name:</span> Cherry</h3>
+                    <hr/>
                     <h3><span>Email:</span> {user? user.email : 'login' }</h3>
             </div>
                 <div>
@@ -180,6 +198,16 @@ const ProfilePage = (params) => {
                 </div>
                 </div>):null
             }
+                {/* <h3 onClick={getBlogs}>Blogs</h3> */}
+            {/* <div className='user-blogs-displayer'>  
+                {
+                    blogs?<div>
+                        {blogs.map(item =>(
+                            <BlogCard blog={item} key={item.id}/>
+                        ))}
+                    </div>:null
+                }
+            </div> */}
                 <ReactTooltip id="see-favs" place="bottom" effect="solid" >
                     view
                 </ReactTooltip>

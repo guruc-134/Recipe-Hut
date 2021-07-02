@@ -1,4 +1,13 @@
 .profile{
+    width: 90%;
+    margin: auto;
+    position: relative;
+    min-height: 70vh;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.315);
+    -webkit-backdrop-filter: blur( 3px );
+    -webkit-box-shadow: 0 0 10px rgb(0,0,0);
+    -moz-box-shadow: 0 0 10px rgb(0,0,0);
     .user-tag,.admin-tag{
         background: rgba(255, 255, 255, 0.315);
         position: absolute;
@@ -24,15 +33,6 @@
         text-decoration: underline;
         text-transform: capitalize;
     }
-    min-height: 80vh;
-    width: 90%;
-    margin: 2rem auto;
-    position: relative;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.315);
-    -webkit-backdrop-filter: blur( 3px );
-    -webkit-box-shadow: 0 0 10px rgb(0,0,0);
-    -moz-box-shadow: 0 0 10px rgb(0,0,0);
     &-details{
         width:80%;
         margin:1rem auto;
@@ -78,7 +78,7 @@
             margin: 1rem auto;
             flex-direction: row;
             flex-wrap: wrap;
-            max-height: 70vh;
+            max-height: 100vh;
             overflow-y: scroll;
            &::-webkit-scrollbar {
                 width: 6px;
@@ -177,6 +177,12 @@
                     }
                 }
             }
+        }
+        .user-blogs-displayer{
+            width:60%;
+            margin: auto;
+            height: 100vh;
+            overflow-y: scroll;
         }
 
 

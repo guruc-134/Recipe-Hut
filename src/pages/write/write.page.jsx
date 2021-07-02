@@ -35,7 +35,6 @@ function Write() {
         var yyyy = today.getFullYear();
         today = yyyy +'-' + mm +'-' + dd;
         var todayDisplay = dd+'-' + mm + '-' + yyyy
-        console.log(today)
         var blogObject = {
             header:blogHeader,
             content:blogContent,
@@ -44,6 +43,7 @@ function Write() {
             date:todayDisplay
         }
         firestore.collection('blogs').doc('daily_blogs').collection(today).add(blogObject)
+        firestore.collection(`users/${user.id}/myBlogs`).add(blogObject)
         resetStates()
         // setPageBlogs( previous => previous.push(blogContent))
     }

@@ -1,12 +1,16 @@
 import React, { useState,useEffect,  useContext } from 'react'
 import Bot from '../../components/Finders/bot/bot.component';
 import Card from '../../components/displayCard/card.component'
+import Container from '../../components/loader/loader.component'
 import './homePage.style.scss'
 import '../../sass/pagination.styles.scss'
 import { UserContext } from '../../context/userContext';
 
 import  {firestore} from '../../backend/firebase/firebase.utils';
 import ReactPaginate from 'react-paginate';
+import SpeechSynthesis from '../../backend/SR_VS/speechSynthesis';
+import Loader from '../../components/loader/loader.component'
+
 
 // import axios from 'axios'
 // import '../../backend/spoonacular/recipes'
@@ -94,7 +98,10 @@ const HomePage = () => {
     }
     return (
         <div className='home-page'>
-            {user?<h3 className='welcome-header'>Welcome {user.displayName}</h3>:null}
+            {/* <Container/> */}
+            {/* {user?
+            // <SpeechSynthesis gender ={"female"} textInput ={user.displayName} />:null} */}
+            {user?<h1 className='welcome-header'>Welcome {user.displayName}</h1>:null}
         {/* <BlankBar/> */}
             <div className='color-picker'>
                 <div class='color-primary'>
@@ -110,7 +117,7 @@ const HomePage = () => {
             <div className='recipe-cards'>
             {
                 homeRecipes?
-                displayItems: <h3> Bringing recipes</h3>
+                displayItems: <Loader/>
             } 
             </div>
         { homeRecipes.length>1?

@@ -1,20 +1,11 @@
 import React, { useState,useEffect } from 'react'
 import Card from '../../components/displayCard/card.component';
-import RecipeByIngredient from '../../components/Finders/recipeByIngredent-finder/recipeByIngredient.component';
 import RecipeFinder from '../../components/Finders/recipeFinder/recipe-finder.component'
 import VideoFinder from '../../components/Finders/videoFinder/video-finder.component'
 import ReactTooltip from "react-tooltip";
 import VideoCard from '../../components/displayCard/video/VideoCard.component';
 import ReactPaginate from 'react-paginate';
 import '../../sass/pagination.styles.scss'
-
-// import Cookies from '../../Icons/Cookies'
-// import Burger from '../../Icons/Burger'
-// import Ramen from '../../Icons/Ramen'
-// import Salads from '../../Icons/Salads'
-// import Steak from '../../Icons/Steak'
-
-
 
 import './search-page.style.scss';
 function SearchPage() {
@@ -51,8 +42,8 @@ function SearchPage() {
             <div class="slider">
                 {/*  put tool tip */}
                 <div className='tags'>
-                <a  href="#name" ><i data-tip data-for="name" class="ri-input-method-fill"></i></a>
-                <a href="#video"><i  data-tip data-for="video" class="ri-youtube-fill"></i></a>
+                <a  href="#name" ><i data-tip data-for="name" className="ri-input-method-fill"></i></a>
+                <a href="#video"><i  data-tip data-for="video" className="ri-youtube-fill"></i></a>
                 {/* <a href="#ingredients"><i className="fas fa-utensils"></i></a> */}
                 </div>
 

@@ -3,7 +3,9 @@ import './VideoCard.style.scss';
 function VideoCard({recipe}) {
     return (
         <div className='video-card'>
-            {console.log(recipe)}
+            {recipe?
+            <div>
+
             <h3> {recipe.shortTitle}</h3>
             <iframe  class='video-container'
             src={`https://www.youtube.com/embed/${recipe.youTubeId}`} 
@@ -11,6 +13,8 @@ function VideoCard({recipe}) {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             >
              </iframe>
+                </div>
+             :null}
         </div>
     )
 }

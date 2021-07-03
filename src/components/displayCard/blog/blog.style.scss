@@ -55,7 +55,6 @@
                 img{
                     width:100%;
                     min-height: 50%;
-                    max-height: 80%;
                     border: 1px solid black;
                     border-radius: 10px;
                 }
@@ -89,10 +88,65 @@
             transition: all 1s ease;
         }
     }
+    .likes_by_displayer_closer{
+
+    }
+    .likes_by_opener{
+        color: rgba(48, 116, 48, 0.719);
+    }
+    .likes_by_displayer{
+        display: none;
+        .close-btn{
+            i{
+                color: rgba(201, 10, 10, 0.685);
+            }
+        }
+        i:hover{
+            transform: scale(1.1) !important;
+        }
+        background-color: white;
+        position: absolute;
+
+        right:4rem;
+        bottom: 10px;
+        box-shadow: 0 2px 8px 0 rgba(18, 19, 18, 0.37);
+        border-radius: 5px;
+        overflow-y: scroll;
+        padding: .4em;
+        height: 5rem;
+        &::-webkit-scrollbar {
+            width: 5px;
+            height:6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.473);
+            -webkit-backdrop-filter: blur( 3px );
+            border-radius: 10px;
+            border: 1px solid rgba(255, 252, 252, 0.596);
+          }
+         &::-webkit-scrollbar-track {
+            background: transparent
+          }
+        a{
+            font-size: 1.3rem;
+            color:black !important;
+            text-decoration: none;
+        }
+        i{
+            color: rgb(52, 114, 231);
+        }
+    }
+
+    .close-btn{
+        text-align: right;
+    }
     .read-more{
         color:rgb(255, 253, 253);
     }
     .blog-reactions{
+        user-select: none;
+            cursor: pointer;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -104,10 +158,12 @@
     }
     .blog-reactions-close{
         text-align: right;
+        font-weight: 600;
+        font-size: 1.3rem;
     }
     .blog-comment-input{
-        width: 80%;
         display: none;
+        width: 80%;
         .blog-comment-form{
             width: 80%;
             margin: auto;
@@ -167,12 +223,38 @@
             a{
                 text-align: right;
                 color:black !important;
-
+                font-weight: 600;
             }
         }
     }
     .liked{
-        transform: scale(1.05);
+        transition: all 1s linear;
+        transform: scale(1.2);
         color: rgb(52, 114, 231);
+        cursor: no-drop;
+        animation: liked 1s ;
+    }
+}
+@keyframes liked {
+    0%{
+        transform: scale(1);
+    }
+    20%{
+        transform: scale(1.2);
+    }
+    40%{
+        transform: scale(1.46);
+    }
+    50%{
+        transform: scale(2);
+    }
+    70%{
+        transform: scale(1.46);
+    }
+    90%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
     }
 }

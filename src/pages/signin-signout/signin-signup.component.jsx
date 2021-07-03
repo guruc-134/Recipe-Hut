@@ -65,7 +65,7 @@ function SigninSignout() {
             <nav className='signin-signup-nav'>
                 <div onClick ={showComponent1} className='animate__animated'>
                 <h2>
-                    Signin
+                    Sign in
                 </h2>
                 </div>
                 <div onClick = {showComponent2}  className='animate__animated'>

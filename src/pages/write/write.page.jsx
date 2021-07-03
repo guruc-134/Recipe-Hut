@@ -25,7 +25,7 @@ function Write() {
     const submitPost = (e) =>
     {
         e.preventDefault();
-        if (blogContent === "" || blogContent === undefined || blogFile === "")
+        if (blogContent === "" || blogContent === undefined || blogFile === "" ||blogFile === undefined)
         {
             console.log('not a valid input')
         }
@@ -42,8 +42,9 @@ function Write() {
             postedBy:user,
             date:todayDisplay
         }
+        console.log(blogObject)
         firestore.collection('blogs').doc('daily_blogs').collection(today).add(blogObject)
-        firestore.collection(`users/${user.id}/myBlogs`).add(blogObject)
+        // firestore.collection(`users/${user.id}/myBlogs`).add(blogObject)
         resetStates()
         // setPageBlogs( previous => previous.push(blogContent))
     }
@@ -96,7 +97,7 @@ function Write() {
         const type = image.type;
 
         if (
-           type.startsWith("image/")
+           type.startsWith("image/png") || type.startsWith("image/jpeg")
         ) {
             return upload(image);
         } else {

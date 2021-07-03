@@ -46,13 +46,14 @@ function Card({recipe,from,fromFavs,docId='search', index='rEciPeIndso0134'}) {
     return (
         // add a read out summary button which uses speech synthesis to 
         <div className='card'>
-            <div className='card-1'>
+            
+            {recipe?<div className='card-1'>
                 {/* {console.log('this is a recipe obj',recipe,docId,recipe.id)} */}
                 <div>
                     <img className = 'recipe-image' alt='recipe-logo' src ={recipe.image}></img>
                 </div>
-            </div>
-            <div className='card-2'>
+            </div>:null}
+            {recipe?<div className='card-2'>
                 <h1>{recipe.title}</h1>
             <p className='summary'>
                 {/* {recipe.summary} */}
@@ -66,7 +67,7 @@ function Card({recipe,from,fromFavs,docId='search', index='rEciPeIndso0134'}) {
                     }>
                     read more ...
                 </Link>
-            </div>
+            </div>:null}
             <div className='card-buttons' data-tip data-for={`fav-${docId}-${index}`}>
                 { currentUser?(
 
@@ -88,8 +89,8 @@ function Card({recipe,from,fromFavs,docId='search', index='rEciPeIndso0134'}) {
 
             {/*  tool tips */}
         </div>
-    )
-}
+        )
+    }
 
 export default Card
 

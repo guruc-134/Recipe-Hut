@@ -23,10 +23,10 @@ function Floater() {
     return (
         <div className='floater-div'>
             <Cookies className='floater-icon icon1'/>
-            <Vegetable className='floater-icon icon5'/>
-            <Burger className='floater-icon icon2'/>
+            <Vegetable className='floater-icon icon2'/>
+            <Burger className='floater-icon icon4'/>
             <Ramen className='floater-icon icon3'/>
-            <Salads className='floater-icon icon4'/>
+            {/* <Salads className='floater-icon icon5'/> */}
             {/* <Steak className='floater-icon icon5'/> */}
             {/* <HealthyFruit className='floater-icon icon6'/>
             <Sausage className='floater-icon icon15'/>

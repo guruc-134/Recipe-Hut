@@ -12,6 +12,7 @@ function SearchPage() {
     const [recipe, setRecipe] = useState([]);
     const [isVideo,setIsVideo] = useState(false)
     const [pageNumber, setPageNumber] = useState(0)
+    const [pageState,setPageState] = useState('name')
     const   itemsPerPage = 10
     var slide = 0
     const pagesVisited = pageNumber * itemsPerPage
@@ -20,7 +21,7 @@ function SearchPage() {
     const displayItems = recipe.slice(pagesVisited, pagesVisited + itemsPerPage)
     .map( item =>
         (
-        item.found?
+        item && item.found?
         <Card from={'search'} key = {item.id} recipe = {item}/>:null))
 
     const changePage = ({selected}) =>
@@ -29,6 +30,10 @@ function SearchPage() {
     }
 
     //  video search result cards
+    const updateState = (e) =>{
+        console.log(e.target.className.split('-')[1])
+        setPageState(e.target.className.split('-'[1]))
+    }
     const displayVideoItems = recipe.slice(pagesVisited,pagesVisited+itemsPerPage)
     .map(item=>(
         <VideoCard key ={item.id} recipe ={item.object}/>
@@ -42,8 +47,8 @@ function SearchPage() {
             <div class="slider">
                 {/*  put tool tip */}
                 <div className='tags'>
-                <a  href="#name" ><i data-tip data-for="name" className="ri-input-method-fill"></i></a>
-                <a href="#video"><i  data-tip data-for="video" className="ri-youtube-fill"></i></a>
+                <a  onClick ={updateState}href="#name" ><i data-tip data-for="name" className="ri-input-method-fill"></i></a>
+                <a onClick ={updateState} href="#video"><i  data-tip data-for="video" className="ri-youtube-fill"></i></a>
                 {/* <a href="#ingredients"><i className="fas fa-utensils"></i></a> */}
                 </div>
 
@@ -81,25 +86,6 @@ function SearchPage() {
                     }
                 </div>:null}
             </div>
-                {/* <div className='bouncing-icons bouncing-icons-up'>
-                <Burger className='svg burger'/>
-                </div>
-                <div className ='bouncing-icons bouncing-icons-down'>
-                <Cookies className = 'svg cookies'/>
-                </div>
-                <div className='bouncing-icons bouncing-icons-up'>
-                <Burger className='svg burger'/>
-                </div>
-                <div className ='bouncing-icons bouncing-icons-down'>
-                <Ramen className= 'svg ramen'/>
-                </div>
-                <div className='bouncing-icons bouncing-icons-up'>
-                <Burger className='svg burger'/>
-                </div>
-                <div className ='bouncing-icons bouncing-icons-down'>
-                <Ramen className= 'svg ramen'/>
-                </div> */}
-
                 {/* tooltips */}
                 <ReactTooltip id="name" place="top" effect="solid" >
                     get recipe articles

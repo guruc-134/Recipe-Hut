@@ -6,7 +6,6 @@ import './communityPage.styles.scss'
 import ReactTooltip from "react-tooltip";
 import Loader from '../../components/loader/loader.component'
 function CommunityPage() {
-    // const user = useContext(UserContext)
     const [pageBlogs, setPageBlogs] = useState("")
     const obtainDate = (date) =>{
         var dd = String(date.getDate()).padStart(2, '0');
@@ -16,12 +15,12 @@ function CommunityPage() {
         return date
     }
     const [date, setDate] = useState(obtainDate(new Date()))
-    const getBlogsFromFireBase = (date,from='session') =>
+    const getBlogsFromFireBase = (date,from) =>
     {
             const array = []
             var today = obtainDate(new Date())
             var searchDate = today 
-            if(date != null)
+            if(date !=='today')
             searchDate = date
             firestore.collection('blogs').doc('daily_blogs').collection(searchDate).get()
             .then( blogList =>
@@ -32,8 +31,8 @@ function CommunityPage() {
                         })
                         array.reverse()
                         setPageBlogs(array)
-                        if(from ==='session')
-                        sessionStorage.setItem('blogs',JSON.stringify(array))
+                        // if(from ==='session')
+                        // sessionStorage.setItem('blogs',JSON.stringify(array))
                         
                 })
     }
@@ -41,33 +40,28 @@ function CommunityPage() {
         if (!sessionStorage.getItem('blogs') || sessionStorage.getItem('blogs').length === 0)
         {
             console.log('getting from firebase')
-            getBlogsFromFireBase();
+            getBlogsFromFireBase('today','session');
         }
-
         else{
             console.log('getting from sessionStorage')
             setPageBlogs(JSON.parse(sessionStorage.getItem('blogs')))
         }
     }
+    const submitForm = (e) =>{
+        e.preventDefault();
+        getBlogsFromFireBase(date,"form")
+    }
     useEffect(() => {
-        handleSessionStorage(date)
+        getBlogsFromFireBase("today","form")
+        // handleSessionStorage(date)
     }, [])
     const handleChange = (e) =>{
         // console.log('date changed',e.target.value)
         setDate(e.target.value)
     }
-    const submitForm = (e) =>{
-        e.preventDefault();
-        getBlogsFromFireBase(date,"form")
-    }
    
     return (
         <div className = "community-page">
-            {/* <div className='game-div'>
-            <Link  data-tip data-for="Game" className = 'community-page-game' to='/community/game'>
-                   Game
-                </Link>
-            </div> */}
             <div className = 'community-page-write-div'>
                 <Link  data-tip data-for="share-recipes" className = 'community-page-write' to='/community/write'>
                     <h3> Share your recipes <i className="ri-ball-pen-fill"></i></h3>

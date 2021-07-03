@@ -89,6 +89,7 @@ function RecipeFinder({setRecipe,setIsVideo}){
         {
             if(response.data.results)
             { 
+                setQuery("")
                 handleRecipes(response.data.results)
             }
         })

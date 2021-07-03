@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect} from 'react'
 import { useHistory,useLocation, useParams } from "react-router-dom";
 import './profilePage.style.scss'
-import {firestore} from '../../backend/firebase/firebase.utils';
+import {firestore, storage} from '../../backend/firebase/firebase.utils';
 import { UserContext } from '../../context/userContext';
 import Card from '../../components/displayCard/card.component';
 import {auth} from '../../backend/firebase/firebase.utils'
 import ReactTooltip from "react-tooltip";
 import BlogCard from '../../components/displayCard/blog/blog.component';
-
+//  for image upload
 const ProfilePage = (params) => {
     const user = useContext(UserContext)
     const handle  = useParams()
@@ -17,14 +17,50 @@ const ProfilePage = (params) => {
     const [favs,setFavs] = useState([])
     const [history,setHistory] = useState([])
     const [blogs,setBlogs] = useState([])
+    const [userPhoto, setUserPhoto] = useState("")
+
+    // image upload related code
+    const allInputs = {imgUrl: ''}
+    const [imageAsFile, setImageAsFile] = useState('')
+    const [imageAsUrl, setImageAsUrl] = useState(allInputs)
+    console.log(imageAsFile)
+    const handleImageAsFile = (e) => {
+         const image = e.target.files[0]
+         setImageAsFile(imageFile => (image))
+     }
+     const handleFireBaseUpload = (e) => {
+            e.preventDefault()
+            if(imageAsFile === '') {
+            console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
+            }
+            const uploadTask = storage.ref(`/userImages_images/${imageAsFile.name}`).put(imageAsFile)
+            uploadTask.on('state_changed', 
+            (snapShot) => {
+            console.log('this is a snapshot',snapShot)
+            }, (err) => {
+            console.log(err)
+            }, () => {
+            storage.ref('images').child(`${imageAsFile.name}`).getDownloadURL()
+            .then(fireBaseUrl => {
+                console.log('this is a url',{fireBaseUrl})
+                submitUserPic(fireBaseUrl)
+            })
+            })
+            
+      }
+  
+//   
     const extractDetails = () =>{
         var queryString = handle.userId.split("-")
         firestore.doc(`/users/${queryString[1]}`).get()
         .then(resp=>{
             setIncomingUser(resp.data())
         })
+         .catch(e=>{
+            console.log(e)
+        })
     }
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const getUserInfo = () =>{
         if(location.state !== undefined)
         setFromNav(location.state.fromNavbar)
@@ -52,6 +88,9 @@ const ProfilePage = (params) => {
                 })
                 setHistory(arr)
         })
+        .catch(e=>{
+            console.log(e)
+        })
     }
 
     const getBlogs = () =>{
@@ -67,6 +106,9 @@ const ProfilePage = (params) => {
                 })
                 console.log(arr)
                 setBlogs(arr)
+        })
+        .catch(e=>{
+            console.log(e)
         })
     }
     const hideFavItems = () =>
@@ -109,48 +151,120 @@ const ProfilePage = (params) => {
                 ))
                 setFavs(storeArr)
         })
+        .catch(e=>{
+            console.log(e)
+        })
+    }
+    const submitUserPic = (picUrl) =>{
+        closePictureForm()
+        firestore.doc(`users/${user.id}/`).set({...user,picture:picUrl})
+        // getUserInfo()
     }
     const signOut =()=>{
         // eslint-disable-next-line no-restricted-globals
         if(confirm("Are you sure, you want to logout"))
         auth.signOut()
     }
+    const closePictureForm = () =>{
+        var formContainer = document.querySelector('.useProfilePicture-form-container')
+        if(formContainer)
+        formContainer.style.display = 'none';
+    }
+    const openPictureForm = () =>{
+        var formContainer = document.querySelector('.useProfilePicture-form-container')
+        if(formContainer)
+        formContainer.style.display = 'block';
+    }
     useEffect(()=>{
-        // getuserDataFromFireStore()
-        // getSearchHistory()
         getUserInfo()
-    },[fromNav,location])
+    },[fromNav, location])
     return (
         <div className='profile'>
             <h1 className='heading-primary heading'> Profile</h1>
             {
-                
                 !fromNav?
-                
                 <div className = 'profile-details'>
-                    {
-                        incomingUser?<div>
+                        <div className='profile-picture'>
+                            {
+                                incomingUser && incomingUser.picture?
+                                <img src={incomingUser.picture} alt='profile_picture'/>:
+                                <div className='no-imagediv'>
+                                    <p>
+                                        no image provided
+                                    </p>
+                                    <p>
+                                <i className="fas fa-image">
+                                </i>
+                                    </p>
+                                    </div>
+                            }
+                            </div>
+                        <div>
+                            {
+                            incomingUser?
+                            <div>
                             <p>public profile view</p>
-                        <span className={`${incomingUser.isAdmin?"admin-tag":"user-tag"}`}>{incomingUser.isAdmin?"Admin":"User"}</span>
-                        <h3><span>Name:</span>{incomingUser.displayName}</h3>
-                        <h3><span>Display Name:</span> Cherry</h3>
-                        <h3><span>Email:</span> {incomingUser.email}</h3>
-                        </div>:null
-                        }
+                            <span className={`${incomingUser.isAdmin?"admin-tag":"user-tag"}`}>{incomingUser.isAdmin?"Admin":"User"}</span>
+                            <h3><span>Name:</span>{incomingUser.displayName}</h3>
+                            <h3><span>Email:</span> {incomingUser.email}</h3>
+                            </div>:null
+                            }
+                        </div>
+                        
                 </div>:null
-                
             }
             {fromNav?
             (<div>
+                {/* profile picture */}
+            
+            <div className='useProfilePicture-form-container'>
+                <div className='useProfilePicture-form'>
+                <p className='closer' onClick={closePictureForm}><i class="far fa-window-close"></i></p>
+                    <div>
+                        <div>
+                            <p>Preview</p>
+                           { imageAsFile?
+                            <img src={URL.createObjectURL(imageAsFile)} alt=" tag" width="100" />:null}
+                            {/* <img alt='imgPreview' class='previewImage' src={userPhoto}></img> */}
+                        </div>
+                    </div>
+                    <form onSubmit={handleFireBaseUpload}>
+                    <input 
+                        accept='image/*'
+                        type="file"
+                        onChange={handleImageAsFile}
+                        id="userPhoto" name='userPhoto'
+                        />
+                            <button type='submit' children="upload"></button>
+                    </form>
+                </div>
+            </div>
+
+            {/* end of profile picture upload */}
+            {/* self profile details view */}
             <div className = 'profile-details'>
-            <span className={`${user.isAdmin?"admin-tag":"user-tag"}`}>{user.isAdmin?"Admin":"User"}</span>
+            <div className='profile-picture self-picture'>
+                {console.log(user)}
+                {user && user.picture?
+                    <img src={user.picture} alt='profile_picture'/>:<p>no image uploaded</p>
+                }
+                <div className='edit-btn' onClick={openPictureForm}>
+                <i class="fas fa-user-edit"></i>
+                </div>
+            </div>
+            <div>
+                <span className={`${user.isAdmin?"admin-tag":"user-tag"}`}>{user.isAdmin?"Admin":"User"}</span>
                     <h3><span>Name:</span>{user?user.displayName:'login' }</h3>
-                    <hr/>
                     <h3><span>Email:</span> {user? user.email : 'login' }</h3>
             </div>
+            </div>
+
+{/* signout */}
                 <div>
                 <span className='signOut' onClick= {signOut}> <i class="fas fa-sign-out-alt"></i> Sign out</span>
                 </div>
+
+
                 <div className ='profile-favourites' onClick={getuserDataFromFireStore}>
                     <h3 className='favs-heading'>
                         <i data-tip data-for="see-favs" onClick ={showFavItems} className="fas fa-heart"></i>
@@ -169,7 +283,6 @@ const ProfilePage = (params) => {
                             }
                     </div>:<p>List of all your favourite items</p>}
                 </div>
-
 
                 <div className = 'searchHistory' onClick = {getSearchHistory}>
                     <h3>

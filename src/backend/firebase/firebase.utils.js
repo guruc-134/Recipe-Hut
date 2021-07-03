@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage'
 const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
 
 var firebaseConfig = {
@@ -44,7 +45,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) =>
 
 
 export const auth = firebase.auth();
-
+export const storage = firebase.storage();
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();

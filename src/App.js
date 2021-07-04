@@ -12,6 +12,8 @@ import Write from './pages/write/write.page';
 import Intro from './pages/intro/introPage';
 import Floater from './components/floaters/floater.component';
 
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'
 import './sass/formInputs.scss'
 import {auth, createUserProfileDocument} from './backend/firebase/firebase.utils';
 import {
@@ -23,8 +25,7 @@ import {
 import SearchPage from './pages/search/search-page.component';
 import SigninSignup from './pages/signin-signout/signin-signup.component';
 import { UserContext } from './context/userContext';
-import Game from './components/game/game'
-const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
+toast.configure()
 require('dotenv').config();
 
 function App() {
@@ -33,12 +34,13 @@ function App() {
     const providerValue = useMemo( () => (
       currentUser
     ),[currentUser])
-
   var unsubscribeFromAuth = null;
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
-    unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth =>
-      {
+  try{
+
+    useEffect(() => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps 
+      unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth =>
+        {
         if(userAuth)
         {
           const userRef = await createUserProfileDocument(userAuth);
@@ -51,17 +53,20 @@ function App() {
                 }
               )
             });
-            console.log('the current user is',currentUser)
+          }
+          else 
+          {
+            setCurrentUser(userAuth )
+          }
+        })
+        return () => {
+          unsubscribeFromAuth()
         }
-        else 
-        {
-          setCurrentUser(userAuth )
-        }
-      })
-    return () => {
-      unsubscribeFromAuth()
-    }
-  }, []) 
+        }, []) 
+      }
+      catch(e){
+        console.error( e);
+      }
   return (
     <div className="app">
       {/* { console.log('apikey',process.env.React_App_API_KEY)} */}
@@ -78,6 +83,7 @@ function App() {
         (<Write/>) }
         />
           <Route exact path ="/search" component = {SearchPage}/>
+          <Route  path ="/intro" component = {Intro}/>
           <Route exact path='/profile/:userId' render = {() =>!currentUser?
         (<Redirect to = '/signin'/>)
         :
@@ -88,12 +94,6 @@ function App() {
         :
         (<CommunityPage/>) }
         />
-        {/* <Route exact path='/community/game' render = {() =>!currentUser?
-                (<Redirect to = '/'/>)
-                :
-                (<Game/>) }
-                /> */}
-
           <Route exact path='/signin' render = {() =>currentUser?
         (<Redirect to = '/'/>)
         :

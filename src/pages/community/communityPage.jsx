@@ -4,7 +4,10 @@ import {Link} from 'react-router-dom'
 import BlogCard from '../../components/displayCard/blog/blog.component';
 import './communityPage.styles.scss'
 import ReactTooltip from "react-tooltip";
-import Loader from '../../components/loader/loader.component'
+// import Loader from '../../components/loader/loader.component'
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure()
 function CommunityPage() {
     const [pageBlogs, setPageBlogs] = useState("")
     const obtainDate = (date) =>{
@@ -25,9 +28,9 @@ function CommunityPage() {
             firestore.collection('blogs').doc('daily_blogs').collection(searchDate).get()
             .then( blogList =>
                 {
-                    blogList.docs.map( item =>
+                    blogList.docs.forEach( item =>
                         {
-                            array.push({['fbId']:item.id, ...item.data()})
+                            array.push({'fbId':item.id, ...item.data()})
                         })
                         array.reverse()
                         setPageBlogs(array)
@@ -35,18 +38,22 @@ function CommunityPage() {
                         // sessionStorage.setItem('blogs',JSON.stringify(array))
                         
                 })
+                .catch(e=>{
+                    toast.error('sorry for the inconvinence, backend capacity exceeded for today, tryout other features or come back tomorrow', 
+                   {position: toast.POSITION.TOP_RIGHT})
+                })
     }
-    const handleSessionStorage=()=>{
-        if (!sessionStorage.getItem('blogs') || sessionStorage.getItem('blogs').length === 0)
-        {
-            console.log('getting from firebase')
-            getBlogsFromFireBase('today','session');
-        }
-        else{
-            console.log('getting from sessionStorage')
-            setPageBlogs(JSON.parse(sessionStorage.getItem('blogs')))
-        }
-    }
+    // const handleSessionStorage=()=>{
+    //     if (!sessionStorage.getItem('blogs') || sessionStorage.getItem('blogs').length === 0)
+    //     {
+    //         console.log('getting from firebase')
+    //         getBlogsFromFireBase('today','session');
+    //     }
+    //     else{
+    //         console.log('getting from sessionStorage')
+    //         setPageBlogs(JSON.parse(sessionStorage.getItem('blogs')))
+    //     }
+    // }
     const submitForm = (e) =>{
         e.preventDefault();
         getBlogsFromFireBase(date,"form")
@@ -54,6 +61,7 @@ function CommunityPage() {
     useEffect(() => {
         getBlogsFromFireBase("today","form")
         // handleSessionStorage(date)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const handleChange = (e) =>{
         // console.log('date changed',e.target.value)
@@ -72,7 +80,7 @@ function CommunityPage() {
                 <input className='date-form-ele' type='date'
                  data-tip data-for="fetch-blogs"
                 value={date} onChange={handleChange}
-                min="2021-06-24" max ={obtainDate( new Date())}/>
+                min="2021-07-05" max ={obtainDate( new Date())}/>
                 <button className='date-form-ele' type='submit'><i className="fas fa-search"></i></button>
                 </form>
             </div>
@@ -80,7 +88,7 @@ function CommunityPage() {
                 <div className = 'blog-displayer'>
                     {
                         pageBlogs.length>0?(pageBlogs.map( blog=> 
-                            <BlogCard blog={blog} key={blog.id}/>
+                            <BlogCard blog={blog} key={blog.fbId}/>
                             )):<h2> There are no blogs for this day</h2>
                     }
                 </div>

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Signin from '../../components/signin/signin.component'
 import Signup from '../../components/signup/signup.component'
 import './signin-signup.style.scss'
-import {Link} from 'react-router-dom'
 import { useEffect } from 'react'
 
 function SigninSignout() {
@@ -12,7 +11,6 @@ function SigninSignout() {
         var door =document.querySelectorAll('.door')
         if (door)
         for(let i =0; i<door.length;i++) door[i].classList.add('animate__zoomOutLeft')
-        console.log('door opened')
         var line = document.querySelector('.line')
         if(line)
         line.classList.add('animate__fadeOutLeft')
@@ -48,12 +46,10 @@ function SigninSignout() {
     }
     const showComponent1 =() =>{
         openDoor()
-        console.log(timer)
         setTimeout(() => {  showSignin() }, timer);
     }
     const showComponent2 =() =>{
         openDoor()
-        console.log(timer)
         setTimeout(() => {  showSignup() }, timer);
     }
     useEffect(()=>{

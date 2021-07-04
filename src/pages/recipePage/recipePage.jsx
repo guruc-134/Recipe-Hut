@@ -4,14 +4,15 @@ import './recipePage.styles.scss';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 import Loader from '../../components/loader/loader.component';
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure()
 const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
-
+const APIKEY_USE = APIKEY[Math.floor(8*Math.random())]
 
 function RecipePage(props) {
     const [recipe,setRecipe] = useState("")
     const extractDetails = () =>{
-        console.log(props)
-        console.log(props.match.params.recipeId)   
         const [docId,recipeId,index] = props.match.params.recipeId.split('-')
         return {'docId':docId,'recipeId':recipeId,'index':index}
     }
@@ -19,26 +20,35 @@ function RecipePage(props) {
         var {docId,recipeId,index} = extractDetails()
         var recipeObject = {}
         if(docId==='search'){
-            // console.log(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?stepBreakdown=true&apiKey=${APIKEY[1]}`)
-            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?stepBreakdown=true&apiKey=${APIKEY[1]}`)
+            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?stepBreakdown=true&apiKey=${APIKEY_USE}`)
             .then(item=>{
                 var grpobj =[]
-               item.data[0].steps.map(result =>{
+               item.data[0].steps.forEach(result =>{
                     // console.log(result)
                     grpobj.push({ingredients:result.ingredients,step:result.step})
                 })
                 var image =`https://spoonacular.com/recipeImages/${recipeId}-312x231.jpg`;
                 recipeObject= {grpObj:grpobj,image:image}
             })
-            .catch(err=>console.log(err))
+            .catch((err)=>{
+                console.log(err)
+                toast.warning("your request could not be fetched", 
+                {position: toast.POSITION.BOTTOM_LEFT})
+            }
+                )
             //  summary 
-            // console.log(`https://api.spoonacular.com/recipes/${recipeId}/summary?apiKey=${APIKEY[1]}`)
-            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/summary?apiKey=${APIKEY[1]}`)
+            axios.get(`https://api.spoonacular.com/recipes/${recipeId}/summary?apiKey=${APIKEY_USE}`)
             .then(resp =>{
                 resp = resp.data
                 recipeObject = {id:resp.id,title:resp.title,summary:resp.summary,...recipeObject}
                 setRecipe(recipeObject)
             })
+            .catch((err)=>{
+                console.log(err)
+                toast.warning("your request could not be fetched", 
+                {position: toast.POSITION.BOTTOM_LEFT})
+            }
+                )
             // 
         }
         else{
@@ -57,6 +67,7 @@ function RecipePage(props) {
     },[recipe])
     useEffect(()=>{
         getRecipe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
         <div className='recipePage'>
@@ -78,16 +89,18 @@ function RecipePage(props) {
                 <h3> Recipe</h3>
                 <div className='recipe'>
                     {recipe.grpObj?
-                    recipe.grpObj.map(item=>{
+                    recipe.grpObj.map((item,index)=>{
                         return (
-                        <div className='steps'>
+                        <div className='steps' key={`${recipe.id}-steps-${index}`}>
                             <h4>
                                 <i className="fas fa-utensils"></i>
                                 Ingredients and Steps
                             </h4>
                                 {
-                                    item.ingredients.map( ingr =>(
-                                        <span>{ingr.name}</span>
+                                    item.ingredients.map( (ingr,ind) =>(
+                                        <span
+                                        key={`${recipe.id}-ingr-${ind}`}
+                                        >{ingr.name}</span>
                                     ) )
                                 }
                             <p>{item.step}</p>
@@ -98,9 +111,8 @@ function RecipePage(props) {
                     }
                 </div>
             </div>
-            :(
-            <setup_svg className='setup-svg'/>)
-            }
+            :(<Loader/>)
+                }
         </div>
     )
 }

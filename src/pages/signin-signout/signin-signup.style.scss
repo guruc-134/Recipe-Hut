@@ -2,7 +2,7 @@
 {
     width:95%;
     margin:auto;
-    margin-top:2rem ;
+    // margin-top:2rem ;
     min-height: 80vh;
     text-align: center;
     display: flex;
@@ -15,6 +15,9 @@
       flex-direction: row;
       justify-content: space-between;
       font-size: 1rem;
+      h2{
+        font-size: 1.5rem;
+      }
     }
     transition: all 1s ease;
 }
@@ -65,3 +68,10 @@ width: 90%;
   }
 }
 }
+@media only screen and (max-width: 600px)
+{
+  .signin-signup-nav{
+    flex-direction: column;
+  }
+}
+

@@ -9,7 +9,7 @@ $main-color: black;
 
 .group {
   position: relative;
-  margin: 45px 0;
+  margin: 2.5rem 0;
 
   .form-input {
     background: none;
@@ -19,10 +19,10 @@ $main-color: black;
     font-size: 1.3rem;
     padding: .8rem .8rem .8rem 4rem;
     display: block;
-    width: 80%;
+    width: 60%;
     border: none;
     border-bottom: 1px solid $sub-color;
-    margin: 1.8rem 0;
+    margin: 1.8rem auto;
 
     &:focus {
       outline: none;
@@ -43,7 +43,7 @@ $main-color: black;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
-    left: 5px;
+    left:16%;
     top: 10px;
     transition: 300ms ease all;
 

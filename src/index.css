@@ -8,12 +8,12 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
     /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
-    font-family:'Times New Roman', Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background:linear-gradient(to left,var(--primary),var(--secondary));
   margin:auto;
   width:100%;
+  width:100vw;
   height:100%
 }
 *{
@@ -27,8 +27,7 @@ code {
 
 @media only screen and (max-width:800px)
 {
-  
   :root{
-      font-size: 62.5% ;
+      font-size: calc(14px+ 5vw) ;
   }
 }

@@ -1,14 +1,16 @@
 import SpeechRecognition from "../../../backend/SR_VS/sr_vs";
 import React ,{useState} from 'react'
 import {firestore} from '../../../backend/firebase/firebase.utils'
-import Chef from '../chef/chef.component'
+import '../chef/chef.style.scss'
 import ReactDOM from "react-dom";
 import axios from 'axios'
 import './bot.style.scss'
+import SpeechSynthesis from '../../../backend/SR_VS/speechSynthesis';
+
 const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
-
-
+const APIKEY_USE = APIKEY[Math.floor(8*Math.random())]
 function Bot() {
+    
     const [diffX, setDiffX] = useState(0)
     const [diffY, setDiffY] = useState(0) 
     const [dragging, setDragging] = useState(false)
@@ -53,7 +55,7 @@ function Bot() {
         .then(response =>
             {
                 var Arr = []
-                response.docs.map(item =>{
+                response.docs.forEach(item =>{
                     Arr.push(item.data().fact)
                 })
                 setFactsStore(Arr)
@@ -84,7 +86,7 @@ function Bot() {
     {
         e.preventDefault();
         var query = question.split(' ').join('+')
-        axios.get(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY[1]}`)
+        axios.get(`https://api.spoonacular.com/recipes/quickAnswer?q=${query}&apiKey=${APIKEY_USE}`)
         .then(response =>
             {
                 var {answer,image} = response.data;
@@ -106,6 +108,7 @@ function Bot() {
         if(botDiv) botDiv.style.display="none"
         var botBtn = document.querySelector('.bot-btn')
         if(botBtn) botBtn.style.display = "inline-block"
+        setChefBtn(true)
     }
     const handleChefAnswerClose = () =>{
         var chefAns = document.querySelector('.chef-answer')
@@ -135,7 +138,7 @@ function Bot() {
                 </div>
                 {/* <Chef/> */}
                 <form className ='chef-form'>
-                <SpeechRecognition setQuestion = {setQuestion} shallStop = {!chefBtn} />
+                <SpeechRecognition setQuestion = {setQuestion} shallStop = {chefBtn} />
                     <input className ='chef-form-inp' onChange ={e =>setQuestion(e.target.value)} placeholder='nutrition related question' value = {question}/>
                     <button className ='chef-form-btn' type = 'submit' onClick={handleChefQuestion} >ask </button>
                 </form>
@@ -145,6 +148,7 @@ function Bot() {
                 { chefResponse.image?<img alt='chef-answer' className = 'chef-answer-img' src ={chefResponse.image}/>:null}
                     </div>
                     <div>
+                        <SpeechSynthesis gender ={"female"} textInput ={chefResponse.answer} />
                     <p className='chef-answer-txt'>{chefResponse.answer}</p>
                     </div>
                 </div>

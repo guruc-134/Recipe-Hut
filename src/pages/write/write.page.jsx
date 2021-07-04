@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom'
 
 function Write() {
     const user = useContext(UserContext)
-
     const [blogHeader, setPostHeader] = useState("")
     const [blogContent, setBlogContent] = useState("")
     const [blogFile, setBlogFile] = useState("")
@@ -40,10 +39,18 @@ function Write() {
             content:blogContent,
             files:blogFile,
             postedBy:user,
-            date:todayDisplay
+            displayDate:todayDisplay,
+            date:today
         }
         console.log(blogObject)
-        firestore.collection('blogs').doc('daily_blogs').collection(today).add(blogObject)
+        if(blogObject)
+            firestore.collection('blogs').doc('daily_blogs').collection(today).add(blogObject)
+            .then(()=>{
+                console.log('sucess write')
+            })
+            .catch((e)=>{
+                console.log('failed',e)
+            })
         // firestore.collection(`users/${user.id}/myBlogs`).add(blogObject)
         resetStates()
         // setPageBlogs( previous => previous.push(blogContent))
@@ -78,7 +85,7 @@ function Write() {
     // 
     // drag and drop files 
     const droparea = document.querySelector(".droparea");
-    const preview = document.querySelector(".previewImage");
+    //const preview = document.querySelector(".previewImage"); 
     if(droparea)
     {
         droparea.addEventListener("dragover", (e) => {
@@ -118,13 +125,14 @@ function Write() {
     return (
         <div>
             <div className='write-blog'>
-            <Link to="/community" class="link"> <i class="ri-arrow-left-circle-fill"></i> </Link>  
+            <Link to="/community" className="link"> <i className="ri-arrow-left-circle-fill"></i> </Link>  
                 <form onSubmit={submitPost}>
                     <div>
                         <input 
-                        minlength ='5'
-                        maxlength = '100'
-                        required class='input-heading'
+                        minLength ='5'
+                        maxLength = '100'
+                        required 
+                        className='input-heading'
                         name='heading' type='text' 
                         value={blogHeader} onChange={handleChange} 
                         placeholder='Blog heading'></input>
@@ -132,12 +140,12 @@ function Write() {
                     <div>
                         <textarea 
                         required 
-                        class='input-content'
+                        className='input-content'
                         name='blogContent' 
                         type='text' placeholder='paragraph' 
                         onChange={handleChange} 
-                        minlength ='10'
-                        maxlength = '1500'
+                        minLength ='10'
+                        maxLength = '1500'
                         value={blogContent}></textarea>
                     </div>
                     <div className='fileContainer'>
@@ -145,11 +153,11 @@ function Write() {
                             {blogFile?
                             <div>
                                 <p>preview</p>
-                                <img alt='imgPreview' class='previewImage' src={blogFile}></img>
+                                <img alt='imgPreview' className='previewImage' src={blogFile}></img>
                             </div>
                             :null}
                         </div>
-                        <div class="droparea">
+                        <div className="droparea">
                             <p>
                             <label htmlFor='blogFile'>
                                 Drop the image here or click to select an Image

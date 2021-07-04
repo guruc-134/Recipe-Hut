@@ -5,16 +5,15 @@
     background-color:rgba(228, 138, 138, 0.623);
     border-radius: 30px;
     margin: 2rem auto;
-    padding:40px;
+    padding:3rem;
 
     width:50%;
-    // glass
     color: black;
-    margin: 40px auto;
+    margin: 3rem auto;
     background-color: rgba(255, 255, 255, 0.438);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 15px;
-    padding: 32px;
+    padding: 2.4rem;
     backdrop-filter: blur(10px);
     .title
     {
@@ -52,7 +51,6 @@
 @media only screen and (max-width: 800px)
 {
     .sign-in{
-        font-size: 1.4rem;
         width: 80%;
         backdrop-filter: blur(0px);
         form{

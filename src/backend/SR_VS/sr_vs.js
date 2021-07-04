@@ -1,6 +1,7 @@
-import React  from 'react'
+import React , {useEffect} from 'react'
 
-function SpeechRecognition({setQuestion}) {
+function SpeechRecognition({setQuestion,shallStop}) {
+
     var recognizing;
     const sr = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new sr()
@@ -33,7 +34,16 @@ function SpeechRecognition({setQuestion}) {
             if(mic) mic.src="https://img.icons8.com/material-sharp/24/000000/block-microphone.png"
         }
     }
-    
+    if(recognizing)
+    {setTimeout(()=>{
+        console.log('stopping voice recog')
+        recognition.stop()
+    },10000)}
+    useEffect(() => {
+        toggleStartStop()
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [shallStop])
 return (
     <div className= 'speech-recognition' onClick={toggleStartStop}>
         <img className = "mic" src="https://img.icons8.com/material/24/000000/microphone--v1.png" alt = 'microphone' />

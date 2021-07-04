@@ -86,7 +86,7 @@ function Signup() {
             required
           />
         <p className='error-message'> {errorMessage} </p>
-          <button class='sign-up-btn' type='submit'>SIGN UP</button>
+          <button className='sign-up-btn' type='submit'>SIGN UP</button>
         </form>
       </div>
     )

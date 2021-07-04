@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { auth,signInWithGoogle } from '../../backend/firebase/firebase.utils';
-import CustomButton from '../../components/customButton/custom-button.component'
 import FormInput from '../../components/form-input/form-input.component';
 import './signin.style.scss';
 function Signin() {

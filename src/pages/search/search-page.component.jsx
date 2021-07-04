@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState} from 'react'
 import Card from '../../components/displayCard/card.component';
 import RecipeFinder from '../../components/Finders/recipeFinder/recipe-finder.component'
 import VideoFinder from '../../components/Finders/videoFinder/video-finder.component'
@@ -12,9 +12,7 @@ function SearchPage() {
     const [recipe, setRecipe] = useState([]);
     const [isVideo,setIsVideo] = useState(false)
     const [pageNumber, setPageNumber] = useState(0)
-    const [pageState,setPageState] = useState('name')
     const   itemsPerPage = 10
-    var slide = 0
     const pagesVisited = pageNumber * itemsPerPage
     var pageCount = Math.ceil(recipe.length / itemsPerPage)
     //  recipe search result cards
@@ -22,18 +20,13 @@ function SearchPage() {
     .map( item =>
         (
         item && item.found?
-        <Card from={'search'} key = {item.id} recipe = {item}/>:null))
+        <Card from={'search'} key = {item.id} keyValue = {item.id} recipe = {item}/>:null))
 
     const changePage = ({selected}) =>
     {
         setPageNumber(selected)
     }
 
-    //  video search result cards
-    const updateState = (e) =>{
-        console.log(e.target.className.split('-')[1])
-        setPageState(e.target.className.split('-'[1]))
-    }
     const displayVideoItems = recipe.slice(pagesVisited,pagesVisited+itemsPerPage)
     .map(item=>(
         <VideoCard key ={item.id} recipe ={item.object}/>
@@ -44,15 +37,14 @@ function SearchPage() {
                 {/* //  find by name */}
                 <div className='slider-body'>
 
-            <div class="slider">
+            <div className="slider">
                 {/*  put tool tip */}
                 <div className='tags'>
-                <a  onClick ={updateState}href="#name" ><i data-tip data-for="name" className="ri-input-method-fill"></i></a>
-                <a onClick ={updateState} href="#video"><i  data-tip data-for="video" className="ri-youtube-fill"></i></a>
-                {/* <a href="#ingredients"><i className="fas fa-utensils"></i></a> */}
+                <a  href="#name" ><i data-tip data-for="name" className="ri-input-method-fill"></i></a>
+                <a  href="#video"><i  data-tip data-for="video" className="ri-youtube-fill"></i></a>
                 </div>
 
-                <div class="slides">
+                <div className="slides">
                     <div id="name">    
                     <RecipeFinder recipe={recipe}
                     setRecipe={setRecipe}

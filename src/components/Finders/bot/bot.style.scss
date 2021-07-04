@@ -1,10 +1,10 @@
 .bot{
     transition: all 0.2s ease;
     // min-width: fit-content;
-    cursor:grab;
     min-height:fit-content;
-    width: 40%;
+    width: fit-content;
     display: flex;
+    z-index: 2;
     justify-content: flex-end;
     text-align: right;
     bottom:10px;
@@ -27,6 +27,8 @@
     {
         width:80px;
         margin: 1.8rem;
+    cursor:grab;
+
         -webkit-backdrop-filter: blur( 10px );
         i 
         {

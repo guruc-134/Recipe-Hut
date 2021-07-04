@@ -1,26 +1,24 @@
 import React, { useState,useEffect,  useContext } from 'react'
 import Bot from '../../components/Finders/bot/bot.component';
 import Card from '../../components/displayCard/card.component'
-import Container from '../../components/loader/loader.component'
+// import Container from '../../components/loader/loader.component'
 import './homePage.style.scss'
 import '../../sass/pagination.styles.scss'
 import { UserContext } from '../../context/userContext';
 
 import  {firestore} from '../../backend/firebase/firebase.utils';
 import ReactPaginate from 'react-paginate';
-import SpeechSynthesis from '../../backend/SR_VS/speechSynthesis';
+// import SpeechSynthesis from '../../backend/SR_VS/speechSynthesis';
 import Loader from '../../components/loader/loader.component'
+// import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'
 
-
-// import axios from 'axios'
-// import '../../backend/spoonacular/recipes'
 const HomePage = () => {
     const user = useContext(UserContext)
-
     const [homeRecipes,setHomeRecipes] = useState([])
     const [pageNumber, setPageNumber] = useState(0)
     const [docId, setDocId] = useState("")
-    const [index,setIndex] = useState(3)
+    var index =  Math.floor(6*Math.random())
     const   itemsPerPage = 12;
     const pagesVisited = pageNumber * itemsPerPage
     // function  for pagination
@@ -38,7 +36,8 @@ const HomePage = () => {
     }
     const markArray =(arr) =>{
         var newArr = []
-        arr.map((ele,index)=>{
+        arr.forEach((ele,index)=>{
+            // eslint-disable-next-line no-useless-computed-key
             newArr.push({['ind']:index,['ele']:ele})
         })
         return newArr
@@ -54,7 +53,6 @@ const HomePage = () => {
                     var dd = doc.data()
                     array= dd.recipeResults
                     array = markArray(array)
-                    console.log(array)
                     setHomeRecipes(shuffle(array))
                     sessionStorage.setItem('homePageRecipes',JSON.stringify(shuffle(array)))
                     sessionStorage.setItem('docId',JSON.stringify(doc.id))
@@ -66,12 +64,10 @@ const HomePage = () => {
     const handleSessionStorage = () =>{
         if (!sessionStorage.getItem('homePageRecipes') || sessionStorage.getItem('homePageRecipes').length === 0)
         {
-            console.log('getting from firebase')
             getRecipesFromFireStore(index);
         }
 
         else{
-            console.log('getting from sessionStorage')
             setHomeRecipes(JSON.parse(sessionStorage.getItem('homePageRecipes')))
             setDocId(JSON.parse(sessionStorage.getItem('docId')))
         }
@@ -98,18 +94,18 @@ const HomePage = () => {
     }
     return (
         <div className='home-page'>
-            {/* <Container/> */}
-            {/* {user?
-            // <SpeechSynthesis gender ={"female"} textInput ={user.displayName} />:null} */}
+            {/* <Container/>
+            {user?
+            <SpeechSynthesis gender ={"female"} textInput ={user.displayName} />:null} */}
             {user?<h1 className='welcome-header'>Welcome {user.displayName}</h1>:null}
         {/* <BlankBar/> */}
             <div className='color-picker'>
-                <div class='color-primary'>
-                    <input class='color-primary' onChange={handlePrimaryColorColor} type="color" />
+                <div className='color-primary'>
+                    <input className='color-primary' onChange={handlePrimaryColorColor} type="color" />
                 </div>
 
-                <div class='color-secondary'>
-                    <input  class='color-secondary' onChange={handleSecondaryColorColor}  type="color" />
+                <div className='color-secondary'>
+                    <input  className='color-secondary' onChange={handleSecondaryColorColor}  type="color" />
                 </div>
             </div>
 

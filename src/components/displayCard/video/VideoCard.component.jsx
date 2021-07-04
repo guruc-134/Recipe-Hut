@@ -1,8 +1,8 @@
 import React from 'react'
 import './VideoCard.style.scss';
-function VideoCard({recipe}) {
+function VideoCard({recipe,keyValue}) {
     return (
-        <div className='video-card'>
+        <div className='video-card' key={keyValue}>
             {recipe?
             <div>
 

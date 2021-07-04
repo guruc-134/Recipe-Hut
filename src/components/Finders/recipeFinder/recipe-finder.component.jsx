@@ -3,17 +3,17 @@ import './recipe-finder.style.scss'
 import {firestore} from '../../../backend/firebase/firebase.utils'
 import axios from 'axios'
 import { UserContext } from '../../../context/userContext';
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure()
 
 const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
-
-
+const APIKEY_USE = APIKEY[Math.floor(8*Math.random())]
 function RecipeFinder({setRecipe,setIsVideo}){
     const [query,setQuery] = useState('')
     const user = useContext(UserContext)
-    const [number,setNumber] = useState(30)
+    var number = 30;
     const baseUrl = 'https://api.spoonacular.com';
-    // setNumber(10)
-    // inputs 
     const handleInputChange = (e)=>
     {
         setQuery(e.target.value)
@@ -26,11 +26,14 @@ function RecipeFinder({setRecipe,setIsVideo}){
         date = `${dd}-${mm}-${yyyy}`
         return date
     }
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
     const handleRecipes = (responseObjects)=>
     {
         // console.log('handle Recipes input ---',responseObjects)
         var recipeResults = []
-        responseObjects.map((object) =>
+        responseObjects.forEach((object) =>
             {
                 var recipeObject = {
                     id:object.id,
@@ -70,7 +73,7 @@ function RecipeFinder({setRecipe,setIsVideo}){
                 recipeResults = [{title:'we could not find any results for this query',found:false}]
                 // console.log(recipeResults)
             }
-            setRecipe(recipeResults)
+            setRecipe(shuffle(recipeResults))
             setIsVideo(false)
     }
 
@@ -83,8 +86,7 @@ function RecipeFinder({setRecipe,setIsVideo}){
             const timeStamp = new Date()
             firestore.collection(`/users/${user.id}/searchHistory`).add({timeStamp:timeStamp,query:query,searchedOn:searchedOn,icon:"ri-input-method-fill"})
         }
-        // console.log(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
-        axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY[0]}&number=${number}`)
+        axios.get(`${baseUrl}/recipes/complexSearch?query=${query}&addRecipeInformation=true&apiKey=${APIKEY_USE}&number=${number}`)
         .then((response) =>
         {
             if(response.data.results)
@@ -93,7 +95,12 @@ function RecipeFinder({setRecipe,setIsVideo}){
                 handleRecipes(response.data.results)
             }
         })
-        .catch((err)=>console.log(err))
+        .catch((err)=>{
+            console.log(err)
+            toast.warning("your request could not be fetched", 
+            {position: toast.POSITION.BOTTOM_LEFT})
+        }
+            )
     };
     return (
         <div className='recipe-finder'>
@@ -107,7 +114,7 @@ function RecipeFinder({setRecipe,setIsVideo}){
                 placeholder='enter the name of the dish'
                 value = {query}></input>
             <button className = 'form-btn' onClick={findRecipes}>
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
             </button>
             </form>
         </div>

@@ -7,7 +7,7 @@ function SpeechSynthesis({gender = "female",textInput=""}) {
     msg.volume = 1;
     msg.pitch = 1; 
     msg.lang = 'en-US';
-    msg.text = "Welcome" + textInput;
+    msg.text =  textInput;
     if(gender === 'male')
         {  msg.voice = voices[20]; 
         msg.rate = .7; 

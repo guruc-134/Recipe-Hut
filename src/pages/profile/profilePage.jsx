@@ -1,12 +1,15 @@
 import React, { useState, useContext, useEffect} from 'react'
-import { useHistory,useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import './profilePage.style.scss'
 import {firestore, storage} from '../../backend/firebase/firebase.utils';
 import { UserContext } from '../../context/userContext';
 import Card from '../../components/displayCard/card.component';
 import {auth} from '../../backend/firebase/firebase.utils'
 import ReactTooltip from "react-tooltip";
-import BlogCard from '../../components/displayCard/blog/blog.component';
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'
+toast.configure()
+
 //  for image upload
 const ProfilePage = (params) => {
     const user = useContext(UserContext)
@@ -16,14 +19,8 @@ const ProfilePage = (params) => {
     const [incomingUser,setIncomingUser] = useState() 
     const [favs,setFavs] = useState([])
     const [history,setHistory] = useState([])
-    const [blogs,setBlogs] = useState([])
-    const [userPhoto, setUserPhoto] = useState("")
-
-    // image upload related code
-    const allInputs = {imgUrl: ''}
     const [imageAsFile, setImageAsFile] = useState('')
-    const [imageAsUrl, setImageAsUrl] = useState(allInputs)
-    console.log(imageAsFile)
+    // const [imageAsUrl, setImageAsUrl] = useState(allInputs)
     const handleImageAsFile = (e) => {
          const image = e.target.files[0]
          setImageAsFile(imageFile => (image))
@@ -31,25 +28,27 @@ const ProfilePage = (params) => {
      const handleFireBaseUpload = (e) => {
             e.preventDefault()
             if(imageAsFile === '') {
-            console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
+            toast.warning(`not an image, the image file is a ${typeof(imageAsFile)}`, 
+            {position: toast.POSITION.BOTTOM_LEFT})
             }
-            const uploadTask = storage.ref(`/userImages_images/${imageAsFile.name}`).put(imageAsFile)
+            const uploadTask = storage.ref(`/userImages_images/${user.id}-${imageAsFile.name}`).put(imageAsFile)
             uploadTask.on('state_changed', 
             (snapShot) => {
-            console.log('this is a snapshot',snapShot)
+            // console.log('this is a snapshot',snapShot)
             }, (err) => {
             console.log(err)
             }, () => {
-            storage.ref('images').child(`${imageAsFile.name}`).getDownloadURL()
+            storage.ref('userImages_images').child(`${user.id}-${imageAsFile.name}`).getDownloadURL()
             .then(fireBaseUrl => {
-                console.log('this is a url',{fireBaseUrl})
                 submitUserPic(fireBaseUrl)
+            })
+            .catch(e=>{
+                toast.error('sorry for the inconvenience, image could not be placed in firebase.storage() --> refresh or try again later', 
+                {position: toast.POSITION.TOP_RIGHT})
             })
             })
             
       }
-  
-//   
     const extractDetails = () =>{
         var queryString = handle.userId.split("-")
         firestore.doc(`/users/${queryString[1]}`).get()
@@ -57,7 +56,8 @@ const ProfilePage = (params) => {
             setIncomingUser(resp.data())
         })
          .catch(e=>{
-            console.log(e)
+            toast.error('sorry for the inconvinence, backend capacity exceeded for today, tryout other features or come back tomorrow', 
+           {position: toast.POSITION.TOP_RIGHT})
         })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,9 +68,6 @@ const ProfilePage = (params) => {
             if(incomingUser && user)
           {  var ans = incomingUser.id === user.id
             setFromNav(ans)}
-            else{
-                setFromNav(false)
-            }
         }
         extractDetails()
     }
@@ -89,26 +86,9 @@ const ProfilePage = (params) => {
                 setHistory(arr)
         })
         .catch(e=>{
-            console.log(e)
-        })
-    }
-
-    const getBlogs = () =>{
-        const arr = []
-        firestore.collection(`/users/${user.id}/myBlogs`).get()
-        .then((snapshot) =>
-        {
-            // eslint-disable-next-line array-callback-return
-            snapshot.docs.map( item =>
-                {
-                    arr.push({id:item.id, ...item.data()})
-                    
-                })
-                console.log(arr)
-                setBlogs(arr)
-        })
-        .catch(e=>{
-            console.log(e)
+            // console.log('backend capacity exceeded for today, tryout other features or come back tomorrow',e)
+            toast.error('sorry for the inconvinence, backend capacity exceeded for today, tryout other features or come back tomorrow', 
+           {position: toast.POSITION.TOP_RIGHT})
         })
     }
     const hideFavItems = () =>
@@ -152,6 +132,8 @@ const ProfilePage = (params) => {
                 setFavs(storeArr)
         })
         .catch(e=>{
+            toast.error('sorry for the inconvenience, user data can not be fetched', 
+            {position: toast.POSITION.TOP_RIGHT})
             console.log(e)
         })
     }
@@ -177,9 +159,11 @@ const ProfilePage = (params) => {
     }
     useEffect(()=>{
         getUserInfo()
-    },[fromNav, location])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     return (
         <div className='profile'>
+
             <h1 className='heading-primary heading'> Profile</h1>
             {
                 !fromNav?
@@ -219,13 +203,13 @@ const ProfilePage = (params) => {
             
             <div className='useProfilePicture-form-container'>
                 <div className='useProfilePicture-form'>
-                <p className='closer' onClick={closePictureForm}><i class="far fa-window-close"></i></p>
+                <p className='closer' onClick={closePictureForm}><i className="far fa-window-close"></i></p>
                     <div>
                         <div>
                             <p>Preview</p>
                            { imageAsFile?
                             <img src={URL.createObjectURL(imageAsFile)} alt=" tag" width="100" />:null}
-                            {/* <img alt='imgPreview' class='previewImage' src={userPhoto}></img> */}
+                            {/* <img alt='imgPreview' className='previewImage' src={userPhoto}></img> */}
                         </div>
                     </div>
                     <form onSubmit={handleFireBaseUpload}>
@@ -244,24 +228,24 @@ const ProfilePage = (params) => {
             {/* self profile details view */}
             <div className = 'profile-details'>
             <div className='profile-picture self-picture'>
-                {console.log(user)}
                 {user && user.picture?
                     <img src={user.picture} alt='profile_picture'/>:<p>no image uploaded</p>
                 }
                 <div className='edit-btn' onClick={openPictureForm}>
-                <i class="fas fa-user-edit"></i>
+                <i className="fas fa-user-edit"></i>
                 </div>
             </div>
             <div>
                 <span className={`${user.isAdmin?"admin-tag":"user-tag"}`}>{user.isAdmin?"Admin":"User"}</span>
                     <h3><span>Name:</span>{user?user.displayName:'login' }</h3>
                     <h3><span>Email:</span> {user? user.email : 'login' }</h3>
+
             </div>
             </div>
 
 {/* signout */}
                 <div>
-                <span className='signOut' onClick= {signOut}> <i class="fas fa-sign-out-alt"></i> Sign out</span>
+                <span className='signOut' onClick= {signOut}> <i className="fas fa-sign-out-alt"></i> Sign out</span>
                 </div>
 
 
@@ -311,16 +295,6 @@ const ProfilePage = (params) => {
                 </div>
                 </div>):null
             }
-                {/* <h3 onClick={getBlogs}>Blogs</h3> */}
-            {/* <div className='user-blogs-displayer'>  
-                {
-                    blogs?<div>
-                        {blogs.map(item =>(
-                            <BlogCard blog={item} key={item.id}/>
-                        ))}
-                    </div>:null
-                }
-            </div> */}
                 <ReactTooltip id="see-favs" place="bottom" effect="solid" >
                     view
                 </ReactTooltip>

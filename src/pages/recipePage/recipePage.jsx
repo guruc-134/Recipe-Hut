@@ -79,7 +79,7 @@ function RecipePage(props) {
             <div>
                 <div className='headerDiv'>
                 <h1>{recipe.title}</h1>
-                <img src = {recipe.image} alt='recipeImg'></img>
+                <img src = {recipe.image} alt='recipeImg' width="200"></img>
                 </div>
 
                 <div>

@@ -5,7 +5,7 @@ import '../chef/chef.style.scss'
 import ReactDOM from "react-dom";
 import axios from 'axios'
 import './bot.style.scss'
-import SpeechSynthesis from '../../../backend/SR_VS/speechSynthesis';
+// import SpeechSynthesis from '../../../backend/SR_VS/speechSynthesis';
 
 const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
 const APIKEY_USE = APIKEY[Math.floor(8*Math.random())]
@@ -145,10 +145,10 @@ function Bot() {
                 <div className='chef-answer'>
                     <span className='chef-answer-close' onClick={handleChefAnswerClose}>X</span>
                     <div>
-                { chefResponse.image?<img alt='chef-answer' className = 'chef-answer-img' src ={chefResponse.image}/>:null}
+                { chefResponse.image?<img alt='chef-answer' className = 'chef-answer-img' width ="40" src ={chefResponse.image}/>:null}
                     </div>
                     <div>
-                        <SpeechSynthesis gender ={"female"} textInput ={chefResponse.answer} />
+                        {/* <SpeechSynthesis gender ={"female"} textInput ={chefResponse.answer} /> */}
                     <p className='chef-answer-txt'>{chefResponse.answer}</p>
                     </div>
                 </div>

@@ -171,7 +171,7 @@ const ProfilePage = (params) => {
                         <div className='profile-picture'>
                             {
                                 incomingUser && incomingUser.picture?
-                                <img src={incomingUser.picture} alt='profile_picture'/>:
+                                <img src={incomingUser.picture} alt='profile_picture' width="150"/>:
                                 <div className='no-imagediv'>
                                     <p>
                                         no image provided
@@ -229,7 +229,7 @@ const ProfilePage = (params) => {
             <div className = 'profile-details'>
             <div className='profile-picture self-picture'>
                 {user && user.picture?
-                    <img src={user.picture} alt='profile_picture'/>:<p>no image uploaded</p>
+                    <img src={user.picture} alt='profile_picture' width="150"/>:<p>no image uploaded</p>
                 }
                 <div className='edit-btn' onClick={openPictureForm}>
                 <i className="fas fa-user-edit"></i>

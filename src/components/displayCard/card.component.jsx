@@ -50,7 +50,7 @@ function Card({recipe,from,fromFavs,docId='search', index='rEciPeIndso0134'}) {
             {recipe?<div className='card-1'>
                 {/* {console.log('this is a recipe obj',recipe,docId,recipe.id)} */}
                 <div>
-                    <img className = 'recipe-image' alt='recipe-logo' src ={recipe.image}></img>
+                    <img className = 'recipe-image' alt='recipe-logo' src ={recipe.image} width="100"></img>
                 </div>
             </div>:null}
             {recipe?<div className='card-2'>

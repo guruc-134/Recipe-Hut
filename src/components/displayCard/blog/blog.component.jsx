@@ -137,7 +137,7 @@ function BlogCard({blog}) {
                 <p className='blog-title'>{blog.header}</p>
                 <div className='blog-content-l'>
                     <div className='blog-content-l-img'>
-                    { blog.files?<img src = {blog.files} alt = 'blogPIc'/>:<div className='no-imagediv'>
+                    { blog.files?<img src = {blog.files} width ="100" alt = 'blogPIc'/>:<div className='no-imagediv'>
                         <p>
                             no image provided
                         </p>

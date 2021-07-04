@@ -12,7 +12,7 @@ function Intro() {
                 </a>
             </div>
             <div className='pageLogo'>
-                <img src={`${process.env.PUBLIC_URL}/logo_RH.png`} alt='recipeHut' />
+                <img src={`${process.env.PUBLIC_URL}/logo_RH.png`} alt='recipeHut' width="100" />
             </div>
             <br></br>
                 <h2>

@@ -38,6 +38,7 @@
             flex-direction: row;
             &-img{
                 flex:0.4;
+                transition: all .3s ease-in-out;
                 .no-imagediv{
                     background-color: rgba(255, 255, 255, 0.658);
                     min-height: 10rem;
@@ -57,6 +58,12 @@
                     min-height: 50%;
                     border: 1px solid black;
                     border-radius: 10px;
+                transition: all .3s ease-in-out;
+
+                    &:hover{
+                        transform: scale(1.1);
+                        box-shadow: 0 4px 22px 0 rgba(0, 0, 0, 0.37);
+                    }
                 }
             }
             &-header{
@@ -88,11 +95,11 @@
             transition: all 1s ease;
         }
     }
-    .likes_by_displayer_closer{
-
-    }
     .likes_by_opener{
         color: rgba(48, 116, 48, 0.719);
+        &:hover{
+            animation: spin 1s ease;
+        }
     }
     .likes_by_displayer{
         display: none;
@@ -100,6 +107,7 @@
             i{
                 color: rgba(201, 10, 10, 0.685);
             }
+            
         }
         i:hover{
             transform: scale(1.1) !important;
@@ -177,9 +185,12 @@
             width:80%;
         }
         textarea , button{
+            background-color: rgba(255, 255, 255, 0.61);
             margin: 1rem;
             text-align: center;
+            color:black;
             border-radius: 10px;
+            box-shadow: 0 2px 8px 0 rgba(18, 19, 18, 0.37);
             padding: .5em;
             border:none;
             outline:none;
@@ -256,5 +267,35 @@
     }
     100%{
         transform: scale(1);
+    }
+}
+@keyframes spin {
+    30%{
+        transform: skewY(10deg) scale(1.2);
+    }
+    70%{
+        transform: skewY(-10deg) scale(1.2)
+    }
+    
+}
+
+@media only screen and (max-width:800px) {
+    .blog-card{
+        width: 100%;
+    max-width: 100vw;;
+    backdrop-filter: blur( 2.0px );
+    }
+    .blog-comment-input{
+        width: 100%;
+        max-width: 100vw;;
+    }
+    .blog-comment-form{
+        display: flex;
+        // width: 100%;
+        flex-direction: column  !important;
+    textarea , button{
+        display: block;
+    width: 100% !important;
+    }
     }
 }

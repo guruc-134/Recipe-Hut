@@ -4,11 +4,14 @@ import {Link} from 'react-router-dom'
 import { UserContext } from '../../../context/userContext';
 import  {firestore} from '../../../backend/firebase/firebase.utils';
 import ReactDOM from "react-dom";
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'
 function BlogCard({blog}) {
     const [readMsg, setReadMsg] = useState("read more")
     const user = useContext(UserContext)
     const [blogComments,setBlogComments] = useState(null)
-    const [comment,setComment] = useState("")
+    // const [comment,setComment] = useState("")
+    var comment;
     const [likes,setLikes] = useState(new Set())
     const [didLike,setDidLike] = useState(false)
 
@@ -20,12 +23,16 @@ function BlogCard({blog}) {
     }
     const postComment = (e) =>{
         e.preventDefault()
+        if(comment.length>3)
+        {e.preventDefault()
         firestore.collection(`blogs/daily_blogs/${blog.date}/${blog.fbId}/comments`).add({comment:comment, by:user,on: new Date()})
-        setComment("")
-        getCommentsFromFb()
+        // setComment("")
+        e.target.children[0].value =""
+        getCommentsFromFb()}
     }
     const handleCommentChange = (e) =>{
-        setComment(e.target.value)
+        // setComment(e.target.value)
+        comment = e.target.value
     }
     const closeLikesDisplay = () =>{
         var likesBox = document.querySelector(`#likes_by_displayer-${blog.fbId}`)
@@ -62,6 +69,10 @@ function BlogCard({blog}) {
             setBlogComments(arr)
 
         })
+        .catch(e=>{
+            toast('sorry for the inconvinence, backend capacity exceeded for today, tryout other features or come back tomorrow', 
+           {position: toast.POSITION.TOP_RIGHT})
+        })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const getLikes = () =>{
@@ -76,25 +87,52 @@ function BlogCard({blog}) {
              })
 
         })
+        .catch(e=>{
+            toast('sorry for the inconvinence, backend capacity exceeded for today, tryout other features or come back tomorrow', 
+           {position: toast.POSITION.TOP_RIGHT})
+        })
     }
     const addLike =() =>{
         getLikes()
         var ss = new Set()
         firestore.collection(`blogs/daily_blogs/${blog.date}/${blog.fbId}/likes`).get()
         .then(resp=>{
-            resp.docs.map(item => {
+            resp.docs.forEach(item => {
                 ss.add(item.data().id)
             })
             if(!ss.has(user.id))
                 firestore.collection(`blogs/daily_blogs/${blog.date}/${blog.fbId}/likes`).add({id:user.id})
             
         })
+        .catch(e=>{
+            toast('sorry for the inconvinence, backend capacity exceeded for today, tryout other features or come back tomorrow', 
+           {position: toast.POSITION.TOP_RIGHT})
+        })
+    }
+    const deleteBlog = () =>{
+        console.log('requested for deletion of ',blog.fbId)
+        firestore.doc(`blogs/daily_blogs/${blog.date}/${blog.fbId}`).delete()
+        .then((e)=>
+        {
+            console.log('successfully removed element')
+        }
+        )
+        .catch((e)=>{
+            console.log('deleting not possible')
+        })
     }
     useEffect(()=>{
         getLikes()
-    },[likes])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     return (
         <div className = "blog-card" key = {blog.fbId}>
+            {
+                user.isAdmin?(
+                    <div className='blog-delete-admin-btn' onClick={deleteBlog}>
+                        <i className="fas fa-trash-alt"></i>
+                    </div>):null
+            }
             <div className = 'blog-content'>
                 <p className='blog-title'>{blog.header}</p>
                 <div className='blog-content-l'>
@@ -126,7 +164,7 @@ function BlogCard({blog}) {
                         </span>
                             </Link>
                                 </p>
-                        <p className = 'blog-author'>-on : {blog.date}</p>
+                        <p className = 'blog-author'>-on : {blog.displayDate}</p>
                     </div>    
                 </div>
                 <div className='blog-content-r'>
@@ -159,12 +197,12 @@ function BlogCard({blog}) {
                     </div>
                     <div>
                         <div className="likes_by_opener" id={`likes_by_opener-${blog.fbId}`} onClick = {openLikesDisplay}>
-                        <i class="fas fa-box-open"></i>
+                        <i className="fas fa-box-open"></i>
                         </div>
-                    <div className={`btn-like-${blog.fbId}`} onClick={addLike}>
+                    <div className={`btn-like-${blog.fbId}`} >
                         {
                             !didLike?
-                            <i className="fas fa-thumbs-up"></i>:
+                            <i className="fas fa-thumbs-up" onClick={addLike}></i>:
                             <i className="fas fa-thumbs-up liked"></i>
                         }
                         <span>{likes.size}</span>
@@ -172,11 +210,11 @@ function BlogCard({blog}) {
                     </div>
                     <div className="likes_by_displayer" id={`likes_by_displayer-${blog.fbId}`}>
                             <p onClick = {closeLikesDisplay} className='close-btn' id={`close-likesbtn-${blog.fbId}`}>
-                            <i class="far fa-window-close"></i>
+                            <i className="far fa-window-close"></i>
                             </p>
                            { 
-                           [...likes].map(userId=>(
-                               <p>
+                           [...likes].map((userId,index)=>(
+                               <p key = {`${blog.fbId}-likes-${index}`}>
 
                                 <Link
                                     to={
@@ -186,7 +224,7 @@ function BlogCard({blog}) {
                                                 fromNavbar:false
                                             }
                                         }
-                                    }><i class="ri-map-pin-user-fill"></i></Link>
+                                    }><i className="ri-map-pin-user-fill"></i></Link>
                                 </p>
                                 ))
                                 }
@@ -196,13 +234,13 @@ function BlogCard({blog}) {
                 <div className="blog-comment-input" id= {`blog-comment-input-${blog.fbId}`}>
                     <div className='blog-reactions-close' id={`blog-reactions-close-${blog.fbId}`} onClick={closeCommentBox}>
                        <p className='close-btn'>
-                       <i class="far fa-window-close"></i>
+                       <i className="far fa-window-close"></i>
                         </p>
                     </div>
                     <div className='comments-box' id={`comments-box-${blog.fbId}`}>
                         { blogComments?
-                            blogComments.map(cmt=>(
-                                <div className='comment-content'>
+                            blogComments.map((cmt,index)=>(
+                                <div className='comment-content' key = {`${blog.fbId}-comments-${index}`}>
                                     <p className='comment-text'>{cmt.comment}</p>
                                     <div>
                                     { cmt.by?
@@ -225,14 +263,14 @@ function BlogCard({blog}) {
                             )):null
                         }
                     <form onSubmit ={postComment} className='blog-comment-form'>
-                        <textarea minLength='5' maxLength='100'
+                        <textarea id ={`textArea_comment${blog.fbId}`} minLength='5' maxLength='100'
                             rows='3'
                             placeholder="give your feed back about the blog"
                             value={comment}
                             onChange={handleCommentChange}
                         >
                         </textarea>
-                        <button type='submit'><i class="fas fa-share"></i></button>
+                        <button type='submit'><i className="fas fa-share"></i></button>
                     </form>
                     </div>
                 </div>

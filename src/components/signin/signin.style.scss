@@ -19,33 +19,44 @@
     {
         margin: 10px 0;
     }
+
     .buttons
     {
-        display:flex;
-        justify-content: space-between;
         button{
             color:white;
             padding: 0.3em;
             border-radius: 5px;
             min-width: 30%;
+            margin: 1rem;
             &:first-child{
                 font-size: 1.2rem;
                 background-color:black;
                 box-shadow: 0 2px 12px 0 rgba(31, 58, 18, 0.37);
 
             }
-            &:last-child{
-                img{
-                    width: 1.4rem;
-                }
-                    background:white;
-                box-shadow: 0 2px 12px 0 rgba(31, 58, 18, 0.37);
-                
-            }
             outline: none;
             border: none;
         }
     }
+        .sign-inUsingGoogle{
+            width: 60%;
+            margin: 1rem auto;
+            min-width: 30%;
+            outline: none;
+            border: none;
+            padding: 0.3em;
+        img{
+            width: 1.4rem;
+        }
+            background:white;
+                box-shadow: 0 2px 12px 0 rgba(31, 58, 18, 0.37);
+        
+    }
+}
+.error-message
+{
+    font-size: .8rem;
+    color: tomato;
 }
 
 @media only screen and (max-width: 800px)
@@ -68,10 +79,6 @@
         margin: .4rem;
     }
 }
-}
-.error-message
-{
-    color: tomato;
 }
 
 @media only screen and (min-width: 1400px)

@@ -24,8 +24,8 @@ function Signin() {
         }
         catch (error)
         {
-            console.log(error)
-            var errorbox = document.querySelector('.error-box')
+            // console.log(error)
+            var errorbox = document.querySelector('.error-message')
             if(errorbox) {errorbox.innerHTML = error.message}
         }
     }
@@ -56,11 +56,12 @@ function Signin() {
         <button  type='submit'>
             Sign in
         </button>
-        <button  onClick = {signInWithGoogle}>
-        <img  src="https://image.flaticon.com/icons/png/512/281/281764.png" alt="google"/>
-        </button>
         </div>
         </form>
+        <p>or signin using google account</p>
+        <button   className='sign-inUsingGoogle' onClick = {signInWithGoogle}>
+        <img  src="https://image.flaticon.com/icons/png/512/281/281764.png" alt="google"/>
+        </button>
     </div>  
     )
 }

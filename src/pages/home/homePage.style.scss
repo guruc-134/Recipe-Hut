@@ -8,11 +8,12 @@
     }
     position: relative;
     .color-picker{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         position: fixed;
         top:7rem;
         left: calc(8px + 3vw);
-        display: flex;
-        flex-direction: column;
         .color-secondary{
             background-color: var(--secondary);
         }
@@ -22,7 +23,8 @@
         div{
             margin: 1rem;;
             width:40px;
-            border-radius: 5px;     
+            border-radius: 5px;    
+            box-shadow: 0 2px 8px rgb(0,0,0); 
             -webkit-box-shadow: 0 2px 8px rgb(0,0,0);
             -moz-box-shadow: 0 2px 8px rgb(0,0,0);
             input{

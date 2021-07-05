@@ -2,7 +2,11 @@ import React, {useState} from 'react'
 import FormInput from '../../components/form-input/form-input.component';
 import {auth, createUserProfileDocument} from '../../backend/firebase/firebase.utils'
 import './signup.style.scss'
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'
 function Signup() {
+  toast("try not using an actual mail, there is a new feature coming up for this page for now you can use any email with valid format😅", 
+  {position: toast.POSITION.TOP_RIGHT})
   const [errorMessage, setErrorMessage] = useState("")
     const [userDetails,setUserDetails] = useState(
       {
@@ -52,6 +56,7 @@ function Signup() {
         <h1>welcome {displayName}</h1>
         <h2 className='title'>I do not have a account</h2>
         <span>Sign up with your email and password</span>
+        <span className='tip-msg'>try not using actual email, this section still needs to be improved</span>
         <form className='sign-up-form' onSubmit={handleSubmit}>
           <FormInput
             type='text'

@@ -89,9 +89,6 @@ function Intro() {
                                     <span>Remix icons</span>
                             </div>
                     </div>
-                    <div>
-
-                    </div>
                 </div>
                 </div>
                 <ReactTooltip id="1" place="bottom" effect="solid" >

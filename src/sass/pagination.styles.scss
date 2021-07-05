@@ -3,16 +3,19 @@
   z-index: 5;
     width: 80%;
     height: 40px;
-    margin: 1rem auto;
+    margin: 2rem auto;
     list-style: none;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     font-weight: 600;
+    font-size: 1.2rem;
     
     a {
       padding: 10px;
       border: 1px solid black;
       margin: 8px;
+      margin-bottom: 1rem;
       border-radius: 5px;
       color: #000000;
       cursor: pointer;
@@ -37,4 +40,14 @@
     color: rgba(255, 255, 255, 0.719);
     background-color: rgba(34, 33, 33, 0.911);
 
+  }
+  @media only screen and (max-width:480px){
+    .paginationBtns {
+      height: 20px;
+      padding: .3em;
+      font-size: .8rem;
+      a{
+        padding: 5px;
+      }
+    }
   }

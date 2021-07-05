@@ -227,6 +227,12 @@ const ProfilePage = (params) => {
             {/* end of profile picture upload */}
             {/* self profile details view */}
             <div className = 'profile-details'>
+            <div>
+                <span className={`${user.isAdmin?"admin-tag":"user-tag"}`}>{user.isAdmin?"Admin":"User"}</span>
+                    <h3><span>Name:</span>{user?user.displayName:'login' }</h3>
+                    <h3><span>Email:</span> {user? user.email : 'login' }</h3>
+
+            </div>
             <div className='profile-picture self-picture'>
                 {user && user.picture?
                     <img src={user.picture} alt='profile_picture' width="150"/>:<p>no image uploaded</p>
@@ -234,12 +240,6 @@ const ProfilePage = (params) => {
                 <div className='edit-btn' onClick={openPictureForm}>
                 <i className="fas fa-user-edit"></i>
                 </div>
-            </div>
-            <div>
-                <span className={`${user.isAdmin?"admin-tag":"user-tag"}`}>{user.isAdmin?"Admin":"User"}</span>
-                    <h3><span>Name:</span>{user?user.displayName:'login' }</h3>
-                    <h3><span>Email:</span> {user? user.email : 'login' }</h3>
-
             </div>
             </div>
 

@@ -69,18 +69,18 @@ function Intro() {
                                     <span>User Authentication</span>
                                     <span>Speech Recognition</span>
                                     <span>Session Storage</span>
-                                    <span>React Toastify</span>
+                                    <span>Toastification</span>
                                     <span>React Hooks</span>
                                     <span>React Router DOM</span>
                                     <span>Pagination</span>
-                                    <span>REST API's</span>
+                                    <span>REST API</span>
                                     <span>Axios</span>
                                     <span>React Dom</span>
                                     <span>React Tooltip</span>
-                                    <span>React Loading</span>
                                     <span>Css Animations</span>
                                     <span>SVG components</span>
                                     <span>File transfer</span>
+                                    <span>React Loading</span>
                                     <span>Font Awesome</span>
                                     <span>Remix icons</span>
                             </div>

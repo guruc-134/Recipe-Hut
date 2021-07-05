@@ -9,11 +9,13 @@
     -webkit-box-shadow: 0 0 10px rgb(0,0,0);
     -moz-box-shadow: 0 0 10px rgb(0,0,0);
     backdrop-filter: blur( 3px );
+    padding-bottom: 3rem;
 
     transition: all 1s ease-in-out;
     .profile-details{
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         div{
             padding: .2em;
             margin: 1rem;
@@ -117,9 +119,13 @@
         width:80%;
         margin:1rem auto;
         text-align: left;
+        border-bottom: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         h3{
             padding:.5rem;
-            font-size: 1rem;
+            font-size: 1.3rem;
             span{
                 text-decoration: underline;
                 text-transform: capitalize;
@@ -130,7 +136,7 @@
     &-favourites
     {
         width:80%;
-        margin: 1rem auto;
+        margin: 1rem;
         h3
         {
             font-size: 1.2rem;
@@ -180,9 +186,8 @@
     }
         .searchHistory{
         padding:1rem 0 1rem 0;
-
             width:80%;
-            margin: 1rem auto;
+            margin: 1rem;
             h3
             {
                 font-size: 1.2rem;
@@ -270,10 +275,24 @@
         .signOut{
             position: absolute;
             padding: 1em;
-            top:2rem;
+            top:0rem;
             right:1rem;
             padding: 1em;
             text-align:right;
             font-size: 1.2rem
         }
+}
+
+@media only screen and (max-width: 700px) {
+
+.profile{
+    &-details
+    {
+        flex-direction: column-reverse !important;
+        h3{
+            font-size: 1rem !important;
+        }
+    }
+
+}
 }

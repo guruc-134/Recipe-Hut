@@ -112,8 +112,9 @@
 
     h1{
         text-decoration: underline;
-        font-size: 1.3rem;
+        font-size: 1.6rem;
         text-transform: capitalize;
+        margin:1em;
     }
     &-details{
         width:80%;
@@ -286,11 +287,37 @@
 @media only screen and (max-width: 700px) {
 
 .profile{
+    .useProfilePicture-form{
+        form{
+            input,button{
+                width:80%;
+                margin:.4rem;
+            }
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .signOut{
+        margin-top: 1rem;
+    }
+    h1{
+        font-size: 1.3rem !important;
+    }
+    i{
+        font-size: 1rem !important;
+    }
+    h3{
+        font-size: 1rem !important;
+    }
     &-details
     {
         flex-direction: column-reverse !important;
-        h3{
-            font-size: 1rem !important;
+        
+    
+    }
+    .profile-picture{
+        img{
+            width: calc(20px + 20vw);
         }
     }
 

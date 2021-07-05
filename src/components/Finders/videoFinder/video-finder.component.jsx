@@ -49,6 +49,7 @@ function VideoFinder({setRecipe,setIsVideo}) {
                 setIsVideo(true)
                 setVidQuery("")
             })
+        })
             .catch((err)=>{
                 console.log(err)
                 toast.warning("your request could not be fetched", 
@@ -56,7 +57,6 @@ function VideoFinder({setRecipe,setIsVideo}) {
             }
                 )
 
-        })
     }
     return (
         <div className='video-finder'>

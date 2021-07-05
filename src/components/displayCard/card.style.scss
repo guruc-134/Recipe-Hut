@@ -109,15 +109,14 @@
 }
 @media only screen and (max-width: 600px) {
     .card{
-        margin: 1rem auto;
-        width: 80%;
+        margin: 1rem !important;
+        width:100%;
         justify-content: center;
         &-1{
-            width: 100%;
+            width: 80%;
             .recipe-image{
-                min-width: 130px;
                 width: 80%;
-                margin:10px auto;
+                margin:auto;
             }
             &-buttons{
                 width: 80%;
@@ -129,7 +128,21 @@
      }
 @media only screen and (max-width:480px){
     .card{
-        width: 60%;
-        margin: 1rem auto;
+        width: 80% !important;
+        margin: 1rem;
+        &-1{
+            div{
+                width: 80%;
+                margin: auto;
+                .recipe-image{
+                    width: 80% !important;
+                    margin:10px auto;
+                }
+            }
+            &-buttons{
+                width: 80%;
+                margin: auto;
+            }
+        }
     }
 } 

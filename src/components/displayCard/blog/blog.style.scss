@@ -54,7 +54,7 @@
                     }
                 }
                 img{
-                    width:100%;
+                    width:80%;
                     min-height: 50%;
                     border: 1px solid black;
                     border-radius: 10px;
@@ -281,9 +281,20 @@
 
 @media only screen and (max-width:800px) {
     .blog-card{
-        width: 100%;
-    max-width: 100vw;;
-    backdrop-filter: blur( 2.0px );
+        width: 95%;
+        margin: 1rem auto;
+        max-width: 100vw;;
+        backdrop-filter: blur( 2.0px );
+        font-size: 1rem !important;
+        img{
+            width: 100% !important;
+        }
+    }
+    .blog-author{
+        font-size: .8rem !important;;
+    }
+    .blog-content{
+        font-size: 1rem !important;
     }
     .blog-comment-input{
         width: 100%;

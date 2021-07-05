@@ -27,27 +27,29 @@ const ProfilePage = (params) => {
      }
      const handleFireBaseUpload = (e) => {
             e.preventDefault()
-            if(imageAsFile === '') {
+            if(imageAsFile === '' || imageAsFile === undefined) {
             toast.warning(`not an image, the image file is a ${typeof(imageAsFile)}`, 
             {position: toast.POSITION.BOTTOM_LEFT})
             }
-            const uploadTask = storage.ref(`/userImages_images/${user.id}-${imageAsFile.name}`).put(imageAsFile)
-            uploadTask.on('state_changed', 
-            (snapShot) => {
-            // console.log('this is a snapshot',snapShot)
-            }, (err) => {
-            console.log(err)
+            else{
+
+                const uploadTask = storage.ref(`/userImages_images/${user.id}-${imageAsFile.name}`).put(imageAsFile)
+                uploadTask.on('state_changed', 
+                (snapShot) => {
+                    // console.log('this is a snapshot',snapShot)
+                }, (err) => {
+                    console.log(err)
             }, () => {
-            storage.ref('userImages_images').child(`${user.id}-${imageAsFile.name}`).getDownloadURL()
-            .then(fireBaseUrl => {
+                storage.ref('userImages_images').child(`${user.id}-${imageAsFile.name}`).getDownloadURL()
+                .then(fireBaseUrl => {
                 submitUserPic(fireBaseUrl)
             })
             .catch(e=>{
                 toast.error('sorry for the inconvenience, image could not be placed in firebase.storage() --> refresh or try again later', 
                 {position: toast.POSITION.TOP_RIGHT})
             })
-            })
-            
+        })
+    }   
       }
     const extractDetails = () =>{
         var queryString = handle.userId.split("-")

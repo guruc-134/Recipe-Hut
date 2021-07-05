@@ -7,7 +7,7 @@ function Intro() {
         <div className='intro'>
             <div className='star-repo'>
                 If you liked the experience, consider staring the repository
-                <a href='https://github.com/guruc-134/Recipe-Hut'>
+                <a href='https://github.com/guruc-134/Recipe-Hut' target='_blank' rel='noreferrer'>
                 <i className="fas fa-star"></i>
                 </a>
             </div>
@@ -31,6 +31,7 @@ function Intro() {
                         <h2>User Perspective</h2>
                         <div className='keywords user_perspective_keywords'>
                             <span>Sign in to Recipe Hut</span>
+                            <span>Install it into your device and get offline support</span>
                             <span> Create account</span>
                             <span>Set up your profile</span>
                             <span>Get Random Recipes Feed</span>
@@ -62,18 +63,21 @@ function Intro() {
                             <h4> These are some keywords that you might find interesting </h4>
                             <div className='developer-keywords keywords'>
                                     <span>React</span>
-                                    <span>Sass</span>
+                                    <span>Progressive Web application</span>
                                     <span>Firebase</span>
                                     <span>Firestore</span>
+                                    <span>Lighthouse</span>
                                     <span>Glassmorphism</span>
                                     <span>User Authentication</span>
                                     <span>Speech Recognition</span>
                                     <span>Session Storage</span>
                                     <span>Toastification</span>
                                     <span>React Hooks</span>
+                                    <span>Service Worker</span>
                                     <span>React Router DOM</span>
                                     <span>Pagination</span>
                                     <span>REST API</span>
+                                    <span>Sass</span>
                                     <span>Axios</span>
                                     <span>React Dom</span>
                                     <span>React Tooltip</span>

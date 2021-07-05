@@ -14,7 +14,7 @@ const navbar = ({currentUser}) => {
                 <NavLink className='navbar-links-link' to = '/home'><img className="navbar-header-logo" src={`${process.env.PUBLIC_URL}/logo_RH.png`} alt="page_logo"></img></NavLink>                
             </div> */}
 
-                    <NavLink className='navbar-links' data-tip data-for="intro" activeStyle={selected}  to = '/intro'>
+                    <NavLink className='navbar-links intro' data-tip data-for="intro" activeStyle={selected}  to = '/intro'>
                     <i className="fas fa-info navbar-links-link"></i>
                     </NavLink>
                 <h1>Recipe Hut</h1>            

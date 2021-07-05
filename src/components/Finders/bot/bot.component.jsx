@@ -8,7 +8,7 @@ import './bot.style.scss'
 // import SpeechSynthesis from '../../../backend/SR_VS/speechSynthesis';
 
 const APIKEY = process.env.REACT_APP_API_KEY.split(" ")
-const APIKEY_USE = APIKEY[Math.floor(8*Math.random())]
+const APIKEY_USE = APIKEY[Math.floor(7*Math.random())]
 function Bot() {
     
     const [diffX, setDiffX] = useState(0)

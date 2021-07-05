@@ -1,14 +1,12 @@
 .floater-icon{
     z-index: -100;
     position: fixed;
-    padding: 1em;
-    margin: 1rem;;
     width: 5rem;
     opacity: .8;
 }
 //  selected icons
 .icon1{
-    width:calc(40px + 14vw);
+    width:calc(30px + 12vw);
     position: fixed;
     top:1rem;
     left:1rem;
@@ -16,15 +14,15 @@
 .icon2{
     
     
-    width:calc(40px + 14vw);
+    width:calc(30px + 12vw);
     position: fixed;
     top:1.4rem;
-    right:1.3rem;
+    right:3rem;
 }
 .icon3{
     
     
-    width:calc(40px + 14vw);
+    width:calc(30px + 12vw);
     position: fixed;
     left:2rem;
     bottom:2rem;
@@ -32,14 +30,14 @@
 .icon4{
     
     
-    width:calc(40px + 14vw);
+    width:calc(30px + 12vw);
     position: fixed;
     bottom: 3rem;
     right:5rem;
 }
 .icon10{
     
-    width:calc(40px + 14vw);
+    width:calc(30px + 12vw);
     
     position: fixed;
     bottom:.6rem;
@@ -48,7 +46,7 @@
 .icon5{
     
     
-    width:calc(40px + 14vw);
+    width:calc(30px + 12vw);
     position: fixed;
     bottom:.5rem
 }

@@ -10,7 +10,7 @@
     .color-picker{
         position: fixed;
         top:7rem;
-        left: 2rem;
+        left: calc(8px + 3vw);
         display: flex;
         flex-direction: column;
         .color-secondary{

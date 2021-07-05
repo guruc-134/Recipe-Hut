@@ -22,12 +22,12 @@ body {
 }
 code {
   /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace; */
+  monospace; */
 }
+/* :root{
+    font-size: calc(14px+ 5vw) ;
+} */
 
-@media only screen and (max-width:800px)
+/* @media only screen and (max-width:800px)
 {
-  :root{
-      font-size: calc(14px+ 5vw) ;
-  }
-}
+} */

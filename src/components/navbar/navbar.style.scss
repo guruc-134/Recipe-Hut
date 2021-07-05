@@ -53,6 +53,12 @@
     .navbar{
         width: 100%;
     max-width: 100vw;;
-    font-size: 1.3 !important;
+    h1{
+        font-size: 1.4rem;
     }
+    &-links{
+        &-link
+        {
+    font-size: 1.3rem !important;
+    }}}
 }

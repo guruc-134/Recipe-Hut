@@ -95,3 +95,5 @@
  {lost few points in accessibility for not placing lables for colorpicker and navbar tags, which was intentional }</p>
  </div>
  
+ <div> 
+ <h3> Some pictures of the project </h3>

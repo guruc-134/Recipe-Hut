@@ -11,7 +11,7 @@
  <p> Using the profile section they can setup their profile </p>
  <p> Users can read daily blogs posted by other users and give feedback in the form of likes and comments  💌 . Users can make use of the write section to share their recipes 🥙🥗, any other relevant information in the form of blogs </p>
 <p> This application is available as a <em> <a href ='https://recipe-hut.netlify.app' target="_blank"> </em> website <a/> which is responsive to the desktop/laptop, tablet and mobile devices . This application can also be downloaded as an app on your devices by using google chromes " install app " feature </p>
- 
+ <span> apk file is provided in the repo, just in case its required </span>
 <h2> Overview </h2>
  <ul>
   <li>
@@ -77,10 +77,12 @@
   </ul>
    <ul>
     Some additional features
+   <li> Glassmorphic Ui </li>
    <li>css-animation-effects </li>
+    <li> Svg Components </li>
    <li>responsive-web-design </li>
    <li> Pagination </li>
-    <li> Toastification </li>
+   <li> Toastification </li>
   </ul>
  </div>
 

@@ -1,5 +1,5 @@
 <img src='./public/logo_RH.png' width='225'/>
-<h2 id='intro'> Introduction </h2>
+<h2 id='intro'> 🛡️ Introduction 🛡️ </h2>
 <p> Recipe Hut is a <em><a href='#PWAs'>Progressive Web Application</a> </em>, which provides a social media platform for food enthusiasts, who like to explore new recipes and share their knowledge with others by writing blogs</p>
 <p> User will be provided with a random feed of recipes on their home screen, they can also search for recipes of their choice using natural language, the response of which can be obtained in two ways
  <ul>
@@ -15,19 +15,19 @@
 <h2> Overview </h2>
  <ul>
   <li>
-    <a href ='#intro'> Introduction </a>
+    <a href ='#intro'> Introduction 🛡️ </a>
   </li>
   <li>
-   <a href ='#PWAs'> What are Progressive Web Applications ?</a>
+   <a href ='#PWAs'> What are Progressive Web Applications ? 🤔</a>
   </li>
   <li>
-   <a href ='#features'> Features </a>
+   <a href ='#features'> Features ✨</a>
   </li>
   <li>
-     <a href ='#tech_stack'>Languages,tools and tech-features of the project </a>
+     <a href ='#tech_stack'>Languages,tools and tech-features of the project 🛠️ </a>
   </li>
   <li> 
-   <a href='#lighthouse_report'>Lighthouse report </a>
+   <a href='#lighthouse_report'>Lighthouse report 🏘️</a>
  </ul>
  
 <div id ='PWAs'>
@@ -41,7 +41,7 @@
 
 <!--   features-->
 <div id='features'>
- <h3> Features </h3>
+ <h3> ✨ Features ✨</h3>
  <ul>
    <li>Signin using google </li>
    <li>Sign in using email and password</li>
@@ -63,7 +63,7 @@
 </div>
 
  <div id='tech_stack'>
- <h3> Languages,tools and tech-features of the project </h3>
+ <h3>🛠️ Languages,tools and tech-features of the project 🛠️ </h3>
   <ul>
    <li> Reactjs </li>
    <li> Firebase </li>
@@ -88,7 +88,7 @@
 
 <!-- report  -->
  <div id='lighthouse_report'>
- <h3> Lighthouse report </h3>
+ <h3> 🏘️ Lighthouse report 🏘️</h3>
  <p>This application has recieved the following report from light house</p>
  <img src='Readme_assets/lighthouse_report_recipeHut.jpg' width='300' />
  <p>

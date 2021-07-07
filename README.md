@@ -28,6 +28,10 @@
   </li>
   <li> 
    <a href='#lighthouse_report'>Lighthouse report 🏘️</a>
+   </li>
+   <li> 
+   <a href='#pictures'>Various views 🖼️</a>
+   </li>
  </ul>
  
 <div id ='PWAs'>
@@ -95,5 +99,11 @@
  {lost few points in accessibility for not placing lables for colorpicker and navbar tags, which was intentional }</p>
  </div>
  
- <div> 
- <h3> Some pictures of the project </h3>
+ <div id='pictures'> 
+ <h3> 🖼️ Some pictures of the project 🖼️ </h3>
+   <img src='Readme_assets/rh_laptopView.png' width='400' />
+   <img src='Readme_assets/rh_tabView.png' width='200' />
+  <img src='Readme_assets/rh_mobileView.png' width='100' />
+
+
+ </div>

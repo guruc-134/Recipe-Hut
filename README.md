@@ -31,7 +31,7 @@
  </ul>
  
 <div id ='PWAs'>
-  <h3> 📱🌐 Progressive Web Application 🌐📱 </h3>
+  <h2> 📱🌐 Progressive Web Application 🌐📱 </h2>
   <img src='Readme_assets/Pwapic.png' width='350' />
   <p> In simple words , Progressive Web Apps (PWAs) are web applications that are regular web pages or websites, but can appear to the user like 
       traditional applications or native mobile applications. The application type attempts to combine features offered by most modern browsers with the benefits of a 
@@ -41,7 +41,7 @@
 
 <!--   features-->
 <div id='features'>
- <h3> ✨ Features ✨</h3>
+ <h2> ✨ Features ✨</h2>
  <ul>
    <li>Signin using google </li>
    <li>Sign in using email and password</li>
@@ -63,7 +63,7 @@
 </div>
 
  <div id='tech_stack'>
- <h3>🛠️ Languages,tools and tech-features of the project 🛠️ </h3>
+ <h2>🛠️ Languages,tools and tech-features of the project 🛠️ </h2>
   <ul>
    <li> Reactjs </li>
    <li> Firebase </li>
@@ -88,7 +88,7 @@
 
 <!-- report  -->
  <div id='lighthouse_report'>
- <h3> 🏘️ Lighthouse report 🏘️</h3>
+ <h2> 🏘️ Lighthouse report 🏘️</h2>
  <p>This application has recieved the following report from light house</p>
  <img src='Readme_assets/lighthouse_report_recipeHut.jpg' width='300' />
  <p>

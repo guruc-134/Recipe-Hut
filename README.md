@@ -31,7 +31,7 @@
  </ul>
  
 <div id ='PWAs'>
-  <h3> Progressive Web Application </h3>
+  <h3> 📱🌐 Progressive Web Application 🌐📱 </h3>
   <img src='Readme_assets/Pwapic.png' width='350' />
   <p> In simple words , Progressive Web Apps (PWAs) are web applications that are regular web pages or websites, but can appear to the user like 
       traditional applications or native mobile applications. The application type attempts to combine features offered by most modern browsers with the benefits of a 
